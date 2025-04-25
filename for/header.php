@@ -6,10 +6,6 @@ header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 
-
-
-
-
 ?>
 
 
@@ -117,7 +113,7 @@ $latitude = "$tr[latitude]";
         <header id="header" dir="rtl">
     <!-- Navbar -->
     <nav data-aos="zoom-out" data-aos-delay="800" class="navbar navbar-expand">
-        <div class="container header">
+        <div class="container header" style="display: flex;flex-direction: row-reverse;">
             <!-- Navbar Brand -->
             <?php
             $rt = mysqli_query($con, "SELECT ufile FROM logo WHERE id=1");
@@ -126,8 +122,8 @@ $latitude = "$tr[latitude]";
             ?>
 
             <a class="navbar-brand" href="index.php">
-                <img class="navbar-brand-regular" src="../dashboard/uploads/logo/<?php echo $ufile; ?>" alt="شعار" style="border-radius: 50%; background: white; max-height: 40px;">
-                <img class="navbar-brand-sticky" src="../dashboard/uploads/logo/<?php echo $ufile; ?>" alt="شعار ثابت" style="border-radius: 50%; background: white; max-height: 40px;">
+                <!-- <img class="navbar-brand-regular" src="../dashboard/uploads/logo/<?php echo $ufile; ?>" alt="شعار" style="border-radius: 50%; background: white; max-height: 40px;"> -->
+                <!-- <img class="navbar-brand-sticky" src="../dashboard/uploads/logo/<?php echo $ufile; ?>" alt="شعار ثابت" style="border-radius: 50%; background: white; max-height: 40px;"> -->
             </a>
 
             <div class="ml-auto"></div>

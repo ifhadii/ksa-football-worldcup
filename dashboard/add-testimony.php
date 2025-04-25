@@ -2,41 +2,40 @@
 <?php include"sidebar.php";?>
 
 <!-- ============================================================== -->
-<!-- Start right Content here -->
+<!-- بدء المحتوى الأيمن هنا -->
 <!-- ============================================================== -->
 <div class="main-content">
  <div class="page-content">
        <div class="container-fluid">
 
-                    <!-- start page title -->
+                    <!-- بدء عنوان الصفحة -->
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                <h4 class="mb-sm-0">Add Testimony</h4>
+                                <h4 class="mb-sm-0">إضافة شهادة</h4>
 
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
-                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Testimony</a></li>
-                                        <li class="breadcrumb-item active">Add</li>
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">الشهادات</a></li>
+                                        <li class="breadcrumb-item active">إضافة</li>
                                     </ol>
                                 </div>
 
                             </div>
                         </div>
                     </div>
-                    <!-- end page title -->
-
+                    <!-- نهاية عنوان الصفحة -->
 
                     <div class="row">
 
-                        <!--end col-->
+                        <!-- نهاية العمود -->
                         <div class="col-xxl-9">
                             <div class="card mt-xxl-n5">
                                 <div class="card-header">
                                     <ul class="nav nav-tabs-custom rounded card-header-tabs border-bottom-0" role="tablist">
                                         <li class="nav-item">
                                             <a class="nav-link active" data-bs-toggle="tab" href="#personalDetails" role="tab" aria-selected="false">
-                                                <i class="fas fa-home"></i> New Testimony
+                                                <i class="fas fa-home"></i> شهادة جديدة
                                             </a>
                                         </li>
 
@@ -47,7 +46,7 @@
 
 
                                 <?php
-           $status = "OK"; //initial status
+           $status = "OK"; // الحالة الأولية
 $msg="";
            if(ISSET($_POST['save'])){
 $namex = mysqli_real_escape_string($con,$_POST['name']);
@@ -55,14 +54,14 @@ $message = mysqli_real_escape_string($con,$_POST['message']);
 $position = mysqli_real_escape_string($con,$_POST['position']);
 
  if ( strlen($namex) < 1 ){
-$msg=$msg."Name must contain a Character.<BR>";
+$msg=$msg."يجب أن يحتوي الاسم على حرف واحد على الأقل.<BR>";
 $status= "NOTOK";}
  if ( strlen($position) < 1 ){
-$msg=$msg."Position must contain a Character.<BR>";
+$msg=$msg."يجب أن يحتوي المنصب على حرف واحد على الأقل.<BR>";
 $status= "NOTOK";}
 
 if ( strlen($message) < 10 ){
-  $msg=$msg."Testimony Message Must Be More Than 10 Char Length.<BR>";
+  $msg=$msg."يجب أن تكون رسالة الشهادة أكثر من 10 أحرف.<BR>";
   $status= "NOTOK";}
 
 
@@ -70,8 +69,8 @@ if ( strlen($message) < 10 ){
 $uploads_dir = 'uploads/testimony';
 
         $tmp_name = $_FILES["ufile"]["tmp_name"];
-        // basename() may prevent filesystem traversal attacks;
-        // further validation/sanitation of the filename may be appropriate
+        // basename() قد يمنع هجمات التصفح عبر نظام الملفات;
+        // قد يكون التحقق الإضافي من اسم الملف مناسبًا
         $name = basename($_FILES["ufile"]["name"]);
         $random_digit=rand(0000,9999);
         $new_file_name=$random_digit.$name;
@@ -88,18 +87,18 @@ $qf=mysqli_query($con,"INSERT INTO testimony (name, message, position,ufile) VAL
 		if($qf){
 		    	$errormsg= "
 <div class='alert alert-success alert-dismissible alert-outline fade show'>
-                 Testimony has been added successfully.
+                 تم إضافة الشهادة بنجاح.
                   <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                   </div>
- "; //printing error if found in validation
+ "; // طباعة الخطأ إذا تم العثور عليه في التحقق
 
 		}
         else{
             $errormsg= "
             <div class='alert alert-danger alert-dismissible alert-outline fade show'>
-                       Some Technical Glitch Is There. Please Try Again Later Or Ask Admin For Help.
+                       هناك مشكلة تقنية. يرجى المحاولة مرة أخرى لاحقًا أو طلب المساعدة من المسؤول.
                        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-                       </div>"; //printing error if found in validation
+                       </div>"; // طباعة الخطأ إذا تم العثور عليه في التحقق
 
         }
 	}
@@ -107,22 +106,21 @@ $qf=mysqli_query($con,"INSERT INTO testimony (name, message, position,ufile) VAL
         elseif ($status!=="OK") {
             $errormsg= "
 <div class='alert alert-danger alert-dismissible alert-outline fade show'>
-                     ".$msg." <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button> </div>"; //printing error if found in validation
+                     ".$msg." <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button> </div>"; // طباعة الخطأ إذا تم العثور عليه في التحقق
 
 
     }
     else{
 			$errormsg= "
       <div class='alert alert-danger alert-dismissible alert-outline fade show'>
-                 Some Technical Glitch Is There. Please Try Again Later Or Ask Admin For Help.
+                 هناك مشكلة تقنية. يرجى المحاولة مرة أخرى لاحقًا أو طلب المساعدة من المسؤول.
                  <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-                 </div>"; //printing error if found in validation
+                 </div>"; // طباعة الخطأ إذا تم العثور عليه في التحقق
 
 
 		}
            }
            ?>
-
 
 
                                 <div class="card-body p-4">
@@ -138,19 +136,19 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
                                                 <div class="row">
                                               <div class="col-lg-6">
                                                         <div class="mb-3">
-                                                            <label for="firstnameInput" class="form-label"> Client's Name</label>
-                                                            <input type="text" class="form-control"  name="name" placeholder="Enter Clients Name">
+                                                            <label for="firstnameInput" class="form-label">اسم العميل</label>
+                                                            <input type="text" class="form-control"  name="name" placeholder="أدخل اسم العميل">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6">
                                                         <div class="mb-3">
-                                                            <label for="firstnameInput" class="form-label">Position</label>
-                                                            <input type="text" class="form-control"  name="position" placeholder="Enter Client's Position">
+                                                            <label for="firstnameInput" class="form-label">المنصب</label>
+                                                            <input type="text" class="form-control"  name="position" placeholder="أدخل منصب العميل">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6">
                                                         <div class="mb-3">
-                                                            <label for="firstnameInput" class="form-label">Testimony</label>
+                                                            <label for="firstnameInput" class="form-label">الشهادة</label>
                                                             <textarea class="form-control"  name="message" rows="2"></textarea>
                                                         </div>
                                                     </div>
@@ -159,38 +157,35 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 
                                                     <div class="col-lg-6">
                                                         <div class="mb-3">
-                                                            <label for="firstnameInput" class="form-label">Photo</label>
+                                                            <label for="firstnameInput" class="form-label">الصورة</label>
                                                             <input type="file" class="form-control" name="ufile" >
                                                         </div>
                                                     </div>
-                                                    <!--end col-->
+                                                    <!-- نهاية العمود -->
                                                     <div class="col-lg-12">
                                                         <div class="hstack gap-2 justify-content-end">
-                                                            <button type="submit" name="save" class="btn btn-primary">Add Testimony</button>
+                                                            <button type="submit" name="save" class="btn btn-primary">إضافة شهادة</button>
 
                                                         </div>
                                                     </div>
-                                                    <!--end col-->
+                                                    <!-- نهاية العمود -->
                                                 </div>
-                                                <!--end row-->
+                                                <!-- نهاية الصف -->
                                             </form>
                                         </div>
-                                        <!--end tab-pane-->
+                                        <!-- نهاية تبويب التفاصيل الشخصية -->
 
-                                        <!--end tab-pane-->
-
-                                        <!--end tab-pane-->
+                                        <!-- نهاية تبويب -->
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!--end col-->
+                        <!-- نهاية العمود -->
                     </div>
 
 
                 </div>
-                <!-- container-fluid -->
+                <!-- حاوية السائل -->
             </div>
-            <!-- End Page-content -->
-
+            <!-- نهاية المحتوى -->
             <?php include"footer.php";?>
