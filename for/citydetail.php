@@ -9,10 +9,9 @@ $todo = mysqli_real_escape_string($con, $_GET["id"]);
             <div class="col-12">
                 <!-- Breamcrumb Content -->
                 <div class="breadcrumb-content d-flex flex-column align-items-center text-center">
-                    <h2 class="text-white text-uppercase mb-3">تفاصييل المدينه </h2>
+                    <h2 class="text-white text-uppercase mb-3">تفاصيل المدينه </h2>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a class="text-uppercase text-white" href="index.php">الرئيسيه</a></li>
-
                         <li class="breadcrumb-item text-white active">المدينه</li>
                     </ol>
                 </div>
@@ -33,33 +32,106 @@ $ufile = "$tr[ufile]";
 ?>
 
 
-<!-- ***** About Area Start ***** -->
-<section class="section about-area ptb_100">
+
+
+
+<!-- ***** About Area Start *****-->
+
+<!-- <section class="section about-area ptb_100"> -->
     <div class="container">
         <div class="row justify-content-between align-items-center">
             <div class="col-12 col-lg-6">
-                <!-- About Thumb -->
                 <div class="about-thumb text-center">
-                    <img src="../dashboard/uploads/services/<?php print $ufile; ?>" alt="img">
+                    <!-- <img src="../dashboard/uploads/services/<?php print $ufile; ?>" alt="img"> -->
                 </div>
             </div>
             <div class="col-12 col-lg-6">
                 <!-- About Content -->
-                <div class="about-content section-heading text-center text-lg-left pl-md-4 mt-5 mt-lg-0 mb-0">
-                    <h2 class="mb-3"><?php echo $city_title; ?></h2>
-
+                <div class="about-content section-heading text-center text-lg-left pl-md-4 mt-5 mt-lg-0 mb-0 ">
+                    <!-- <h2 class="mb-3"><?php echo $city_title; ?></h2> -->
                     <!-- ✅ عرض التفاصيل مع دعم HTML والصور -->
                     <div class="summernote-content">
                         <?php echo $city_detail; ?>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
-</section>
+<!-- </section> -->
+
+
 <!-- ***** About Area End ***** -->
 
+<!-- ***** City Cards Area Start ***** -->
+<section class="section city-cards-area ptb_100">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-center mb-5">الأماكن السياحية في <?php echo $city_title; ?></h2>
+            </div>
+        </div>
+        
+        <div class="row">
+            <?php
+            // Fetch city cards for this city
+            $cards_query = mysqli_query($con, "SELECT * FROM city_cards WHERE city_id='$todo' ORDER BY id ASC");
+            
+            if(mysqli_num_rows($cards_query) > 0) {
+                while($card = mysqli_fetch_array($cards_query)) {
+                    $place_name = $card['place_name'];
+                    $place_description = $card['place_description'];
+                    $place_image = $card['place_image'];
+                    ?>
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <?php if(!empty($place_image)) { ?>
+                                <img src="../dashboard/uploads/services/<?php echo $place_image; ?>" class="card-img-top" alt="<?php echo $place_name; ?>">
+                            <?php } ?>
+                            <div class="card-body">
+                                <h5 class="card-title"><?php echo $place_name; ?></h5>
+                                <p class="card-text"><?php echo $place_description; ?></p>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                }
+            } else {
+                echo '<div class="col-12 text-center"><p>لا توجد أماكن سياحية مسجلة لهذه المدينة بعد.</p></div>';
+            }
+            ?>
+        </div>
+    </div>
+</section>
+<!-- ***** City Cards Area End ***** -->
 
 <!--====== Call To Action Area End ======-->
 <?php include "footer.php"; ?>
+
+<style>
+.city-cards-area {
+    background-color: #f8f9fa;
+    padding: 60px 0;
+}
+.card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+.card:hover {
+    transform: translateY(-10px);
+}
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+.card-body {
+    padding: 20px;
+}
+.card-title {
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #333;
+}
+</style>
