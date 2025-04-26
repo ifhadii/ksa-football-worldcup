@@ -3,16 +3,16 @@ include "header.php";
 $todo = mysqli_real_escape_string($con, $_GET["id"]);
 ?>
 <!-- ***** Breadcrumb Area Start ***** -->
-<section class="section breadcrumb-area overlay-dark d-flex align-items-center">
-    <div class="container">
-        <div class="row">
+<section class="section breadcrumb-area d-flex align-items-center" style="background: rgb(16 36 18);">
+    <div class="container" >
+        <div class="row" >
             <div class="col-12">
                 <!-- Breamcrumb Content -->
-                <div class="breadcrumb-content d-flex flex-column align-items-center text-center">
-                    <h2 class="text-white text-uppercase mb-3">تفاصيل المدينه </h2>
+                <div class="breadcrumb-content d-flex flex-column align-items-center text-center" >
+                    <h2 class="text-white text-uppercase mb-3">تفاصيل المدينة </h2>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a class="text-uppercase text-white" href="index.php">الرئيسيه</a></li>
-                        <li class="breadcrumb-item text-white active">المدينه</li>
+                        <li class="breadcrumb-item text-white active">المدينة</li>
                     </ol>
                 </div>
             </div>
@@ -100,43 +100,53 @@ $ufile = "$tr[ufile]";
             }
             ?>
         </div>
-
-        <!-- hotels -->
-
-       <!-- hotels -->
-
-<div class="row">
-    <?php
-    // Fetch city cards for this city
-    $cards_query = mysqli_query($con, "SELECT * FROM city_hotels WHERE city_id='$todo' ORDER BY id ASC");
-
-    if(mysqli_num_rows($cards_query) > 0) {
-        while($card = mysqli_fetch_array($cards_query)) {
-            $place_name = $card['hotel_name'];
-            $place_description = $card['description'];
-            $place_image = $card['image'];
-            ?>
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <?php if(!empty($place_image)) { ?>
-                        <img src="<?php echo $place_image; ?>" class="card-img-top" alt="<?php echo $place_name; ?>">
-                    <?php } ?>
-                    <div class="card-body">
-                        <h5 class="card-title"><?php echo $place_name; ?></h5>
-                        <p class="card-text"><?php echo $place_description; ?></p>
-                    </div>
-                </div>
-            </div>
-            <?php
-        }
-    }
-    ?>
-</div>
-
-
     </div>
 </section>
 <!-- ***** City Cards Area End ***** -->
+
+
+
+<!-- ***** Hotels Area Start ***** -->
+<section class="section city-hotels-area ptb_100">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-center mb-5">الفنادق في <?php echo $city_title; ?></h2>
+            </div>
+        </div>
+        <div class="row">
+            <?php
+            $hotels_query = mysqli_query($con, "SELECT * FROM city_hotels WHERE city_id='$todo' ORDER BY id ASC");
+            if (mysqli_num_rows($hotels_query) > 0) {
+                while ($hotel = mysqli_fetch_array($hotels_query)) {
+                    $hotel_name = $hotel['hotel_name'];
+                    // $hotel_description = $hotel['hotel_description'];
+                    // $hotel_image = $hotel['hotel_image'];
+                    ?>
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <?php if (!empty($hotel_image)) { ?>
+                                <img src="../dashboard/uploads/services/<?php echo $hotel_image; ?>" class="card-img-top" alt="<?php echo $hotel_name; ?>">
+                            <?php } ?>
+                            <div class="card-body">
+                                <h5 class="card-title"><?php echo $hotel_name; ?></h5>
+                                <!-- <p class="card-text"><?php echo $hotel_description; ?></p> -->
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                }
+            } else {
+                echo '<div class="col-12 text-center"><p>لا توجد فنادق مسجلة لهذه المدينة بعد.</p></div>';
+            }
+            ?>
+        </div>
+    </div>
+</section>
+<!-- ***** Hotels Area End ***** -->
+
+
+
 
 <!--====== Call To Action Area End ======-->
 <?php include "footer.php"; ?>
@@ -168,4 +178,11 @@ $ufile = "$tr[ufile]";
     margin-bottom: 15px;
     color: #333;
 }
+
+
+.city-hotels-area {
+    background-color: #ffffff;
+    padding: 60px 0;
+}
+
 </style>

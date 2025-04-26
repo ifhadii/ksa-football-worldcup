@@ -78,7 +78,6 @@
     <!-- حقوق -->
     <div class="text-center pt-3">
       <p class="mb-1" style="font-size: 14px;">&copy; <?php echo date('Y'); ?> جميع الحقوق محفوظة - KSAWelcomeCup</p>
-      <p class="mb-0" style="font-size: 13px;">صنع بإبداع بواسطة طلاب جامعة الإمام عبدالرحمن</p>
     </div>
   </div>
 </footer>

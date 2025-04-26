@@ -1,5 +1,5 @@
 <?php include "header.php"; ?>
-<section class="section breadcrumb-area overlay-dark d-flex align-items-center" style="direction: rtl; text-align: right;">
+<section class="section breadcrumb-area d-flex align-items-center" style="direction: rtl; text-align: right; background: rgb(16 36 18);">
     <div class="container">
         <div class="row">
             <div class="col-12">

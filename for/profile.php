@@ -1,6 +1,8 @@
-<?php include "header.php";?>
 
 <?php
+
+include "header.php";
+
 // Start session only if not already started
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -134,7 +136,6 @@ try {
     <style>
         body {
             font-family: 'Tajawal', sans-serif;
-            background-color: #f8f9fa;
             padding-top: 80px;
         }
         .profile-container {
@@ -173,7 +174,7 @@ try {
         }
     </style>
 </head>
-<body>
+<body style="background-color: rgb(16 36 18)";>
     <div class="container">
         <div class="profile-container">
             <div class="profile-header">
@@ -267,7 +268,10 @@ try {
             }
         });
     </script>
+
+
+<?php include "header.php"; ?>
+<?php include "footer.php"; ?>
 </body>
 </html>
 
-<?php include "footer.php";?>

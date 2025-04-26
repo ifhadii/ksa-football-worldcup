@@ -1,3 +1,4 @@
+<?php include "header.php";?>
 
 <?php
 // Database configuration
@@ -163,8 +164,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     </style>
 </head>
-<body>
-
+<body style="background-color: rgb(16 36 18)">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     <div class="container">
         <div class="form-container">
             <h2 class="form-title">نموذج إضافة شهادة جديدة</h2>

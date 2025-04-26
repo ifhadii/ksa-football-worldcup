@@ -1,149 +1,85 @@
 <?php
-// Start output buffering at the very start of your PHP file
+// Start output buffering
 ob_start();
 
-// Include the database connection or other necessary files
+// Include DB connection
 include "z_db.php";
 
-// Prevent browser caching
+// Prevent caching
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 
-// Start session if not already started
+// Start session
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Check if user is logged in and admin status
-$is_admin = false;
+// Admin flag
+$admin_chc = 0;
+
+// Check if user is logged in
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
-    
-    // First get the user's email or username from users table
-    $user_query = mysqli_query($con, "SELECT email, username FROM users WHERE id = '$user_id'");
-    
+
+    // Get user details
+    $user_query = mysqli_query($con, "SELECT email, username, admin_chc FROM users WHERE user_id = '$user_id'");
     if ($user_query && mysqli_num_rows($user_query) > 0) {
         $user_data = mysqli_fetch_assoc($user_query);
         $user_email = $user_data['email'];
         $user_username = $user_data['username'];
-        
-        // Check if either email or username exists in admin table
-        $admin_query = mysqli_query($con, "SELECT * FROM admin WHERE email = '$user_email' OR username = '$user_username'");
-        
-        if ($admin_query && mysqli_num_rows($admin_query) > 0) {
-            $is_admin = true;
-        }
     }
 }
 ?>
 
 <!doctype html>
 <html class="no-js" lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- SEO Meta Description -->
-    <meta name="description" content="">
-    <meta name="author" content="Themeland">
     
     <?php
-    // Fetching site settings from the database
-    $rr = mysqli_query($con, "SELECT * FROM siteconfig where id=1");
+    // Site settings
+    $rr = mysqli_query($con, "SELECT * FROM siteconfig WHERE id=1");
     $r = mysqli_fetch_array($rr);
-    $site_title = $r['site_title'];
-    $site_about = $r['site_about'];
-    $site_footer = $r['site_footer'];
-    $follow_text = $r['follow_text'];
     ?>
-    <!-- Title  -->
-    <title>KSA Welcome Cup - <?php echo $site_title; ?></title>
-
-    <!-- Favicon  -->
+    
+    <title>KSA Welcome Cup - <?= htmlspecialchars($r['site_title']) ?></title>
     <link rel="icon" href="assets/img/favicon.png">
-
-    <!-- ***** All CSS Files ***** -->
-    <!-- Style css -->
     <link rel="stylesheet" href="assets/css/style.css">
-
-    <!-- Responsive css -->
     <link rel="stylesheet" href="assets/css/responsive.css">
 </head>
 
 <body>
-        <!-- Preloader Area Start -->
-        <div id="preloader">
-            <div id="digimax-preloader" class="digimax-preloader">
-                <div class="preloader-animation">
-                    <div class="spinner"></div>
-                    <div class="loader">
-                        <span data-text-preloader="K" class="animated-letters">K</span>
-                        <span data-text-preloader="S" class="animated-letters">S</span>
-                        <span data-text-preloader="A" class="animated-letters">A</span>
-                        <span data-text-preloader="W" class="animated-letters">W</span>
-                        <span data-text-preloader="C" class="animated-letters">C</span>
-                    </div>
-                    <p class="fw-5 text-center text-uppercase">جارٍ التحميل</p>
-                </div>
-            </div>
-        </div>
-        <!-- Preloader Area End -->
-
-    <!-- Scroll To Top Area Start -->
-    <div id="scrollUp" title="Scroll To Top">
-        <i class="fas fa-arrow-up"></i>
-    </div>
-    <!-- Scroll To Top Area End -->
-
     <div class="main overflow-hidden">
-        <!-- Header Section -->
+        <!-- Header -->
         <header id="header" dir="rtl">
-            <!-- Navbar -->
             <nav class="navbar navbar-expand">
-                <div class="container header" style="display: flex;flex-direction: row-reverse;">
-                    <!-- Navbar Brand -->
-                    <?php
-                    // Fetch logo file from database
-                    $rt = mysqli_query($con, "SELECT ufile FROM logo WHERE id=1");
-                    $tr = mysqli_fetch_array($rt);
-                    $ufile = $tr['ufile'];
-                    ?>
-                    <a class="navbar-brand" href="index.php">
-                        <!-- You can uncomment the following if you want to show logo -->
-                        <!-- <img class="navbar-brand-regular" src="../dashboard/uploads/logo/<?php echo $ufile; ?>" alt="شعار" style="border-radius: 50%; background: white; max-height: 40px;"> -->
-                    </a>
+                <div class="container header" style="display: flex; flex-direction: row-reverse;">
+                    <a class="navbar-brand" href="index.php"></a>
 
                     <div class="ml-auto"></div>
 
-                    <!-- Navbar Links -->
                     <ul class="navbar-nav items">
-                        <li class="nav-item">
-                            <a class="nav-link" href="home">الرئيسية</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="about" class="nav-link">نتائج المباريات</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="services" class="nav-link">أماكن الاستضافة والملاعب</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="event" class="nav-link">الفعاليات</a>
-                        </li>
+                        <li class="nav-item"><a class="nav-link" href="home">الرئيسية</a></li>
+                        <li class="nav-item"><a href="about" class="nav-link">نتائج المباريات</a></li>
+                        <li class="nav-item"><a href="services" class="nav-link">أماكن الاستضافة والملاعب</a></li>
+                        <li class="nav-item"><a href="event" class="nav-link">الفعاليات</a></li>
 
                         <?php if (isset($_SESSION['user_id'])): ?>
+
                             <li class="nav-item">
-                                <?php if ($is_admin): ?>
-                                    <a href="http://localhost/Project/dashboard/" class="nav-link">لوحة التحكم</a>
-                                <?php endif; ?>
-                                <a href="profile.php" class="nav-link">حسابي</a>
-                                <a href="user_testimony.php" class="nav-link">عطنا رايك</a>
+                                <!-- <a href="http://localhost/Project/dashboard/" class="nav-link">لوحة التحكم</a> -->
                             </li>
+                            
+                            <li class="nav-item"><a href="profile.php" class="nav-link">حسابي</a></li>
+                            <li class="nav-item"><a href="user_testimony.php" class="nav-link">عطنا رايك</a></li>
+
                         <?php endif; ?>
                     </ul>
 
-                    <!-- Navbar Toggler -->
+                    <!-- Toggler -->
                     <ul class="navbar-nav toggle">
                         <li class="nav-item">
                             <a href="#" class="nav-link" data-toggle="modal" data-target="#menu">
@@ -152,7 +88,7 @@ if (isset($_SESSION['user_id'])) {
                         </li>
                     </ul>
 
-                    <!-- Login Button -->
+                    <!-- Login/Logout -->
                     <ul class="navbar-nav action">
                         <li class="nav-item ml-3">
                             <?php if (isset($_SESSION['user_id'])): ?>
@@ -170,22 +106,8 @@ if (isset($_SESSION['user_id'])) {
             </nav>
         </header>
 
-        <!-- Custom CSS for logo -->
-        <style>
-            .navbar-brand img {
-                max-height: 40px;
-                height: auto;
-                width: auto;
-                border-radius: 50%;
-                background-color: white;
-                padding: 2px;
-                object-fit: cover;
-            }
-        </style>
     </div>
 
-    <!-- Additional Scripts -->
     <script src="assets/js/main.js"></script>
 </body>
-
 </html>
