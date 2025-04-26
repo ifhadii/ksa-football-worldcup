@@ -128,21 +128,54 @@ $latitude = "$tr[latitude]";
 
             <div class="ml-auto"></div>
 
-            <!-- Navbar Links -->
-            <ul class="navbar-nav items">
-                <li class="nav-item">
-                    <a class="nav-link" href="home">الرئيسية</a>
-                </li>
-                <li class="nav-item">
-                    <a href="about" class="nav-link"> نتائج المباريات</a>
-                </li>
-                <li class="nav-item">
-                    <a href="services" class="nav-link">أماكن الاستضافة والملاعب</a>
-                </li>
-                <li class="nav-item">
-                    <a href="event" class="nav-link">الفعاليات</a>
-                </li>
-            </ul>
+<!-- Navbar Links -->
+<ul class="navbar-nav items">
+    <li class="nav-item">
+        <a class="nav-link" href="home">الرئيسية</a>
+    </li>
+    <li class="nav-item">
+        <a href="about" class="nav-link"> نتائج المباريات</a>
+    </li>
+    <li class="nav-item">
+        <a href="services" class="nav-link">أماكن الاستضافة والملاعب</a>
+    </li>
+    <li class="nav-item">
+        <a href="event" class="nav-link">الفعاليات</a>
+    </li>
+    
+    <?php if (isset($_SESSION['user_id'])): ?>
+        <?php
+// Check if the logged-in user is an admin by verifying against the admin table
+$is_admin = false;
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+    
+    // First get the user's email or username from users table
+    $user_query = mysqli_query($con, "SELECT email, username FROM users WHERE id = '$user_id'");
+    
+    if ($user_query && mysqli_num_rows($user_query) > 0) {
+        $user_data = mysqli_fetch_assoc($user_query);
+        $user_email = $user_data['email'];
+        $user_username = $user_data['username'];
+        
+        // Check if either email or username exists in admin table
+        $admin_query = mysqli_query($con, "SELECT * FROM admin WHERE email = '$user_email' OR username = '$user_username'");
+        
+        if ($admin_query && mysqli_num_rows($admin_query) > 0) {
+            $is_admin = true;
+        }
+    }
+}
+?>
+        
+        <li class="nav-item">
+            <?php if ($is_admin): ?>
+                <a href="http://localhost/Project/dashboard/" class="nav-link">لوحة التحكم</a>
+            <?php endif; ?>
+            <a href="profile.php" class="nav-link">حسابي</a>
+        </li>
+    <?php endif; ?>
+</ul>
 
       
 

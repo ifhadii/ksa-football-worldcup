@@ -212,7 +212,6 @@ if(isset($_GET['delete_card'])) {
                                             </tr>';
                                             $card_count++;
                                         }
-                                        
                                         if($card_count == 1) {
                                             echo '<tr><td colspan="5" class="text-center">No cards added yet</td></tr>';
                                         }

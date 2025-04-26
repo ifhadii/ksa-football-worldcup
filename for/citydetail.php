@@ -100,6 +100,40 @@ $ufile = "$tr[ufile]";
             }
             ?>
         </div>
+
+        <!-- hotels -->
+
+       <!-- hotels -->
+
+<div class="row">
+    <?php
+    // Fetch city cards for this city
+    $cards_query = mysqli_query($con, "SELECT * FROM city_hotels WHERE city_id='$todo' ORDER BY id ASC");
+
+    if(mysqli_num_rows($cards_query) > 0) {
+        while($card = mysqli_fetch_array($cards_query)) {
+            $place_name = $card['hotel_name'];
+            $place_description = $card['description'];
+            $place_image = $card['image'];
+            ?>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <?php if(!empty($place_image)) { ?>
+                        <img src="<?php echo $place_image; ?>" class="card-img-top" alt="<?php echo $place_name; ?>">
+                    <?php } ?>
+                    <div class="card-body">
+                        <h5 class="card-title"><?php echo $place_name; ?></h5>
+                        <p class="card-text"><?php echo $place_description; ?></p>
+                    </div>
+                </div>
+            </div>
+            <?php
+        }
+    }
+    ?>
+</div>
+
+
     </div>
 </section>
 <!-- ***** City Cards Area End ***** -->
