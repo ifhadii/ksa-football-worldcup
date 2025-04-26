@@ -96,7 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 <style>
-    .modal-content {
+.modal-content {
         background-color: #1c1c1c;
         color: white;
         border-radius: 15px;
@@ -497,22 +497,23 @@ function showImage(imageSrc) {
                     $ufile = $ro['ufile'];
 
                     echo "
-                    <div class='single-review p-5'>
-                        <div class='review-content'>
+                    <div class='single-review p-5' dir='rtl'>
+                        <div class='review-content' dir='rtl'>
                             <div class='review-text'>
-                                <p>$message</p>
+                                <p dir='rtl'>$message</p>
                             </div>
                         </div>
                         <div class='reviewer media mt-3'>
                             <div class='reviewer-thumb'>
-                                <img class='avatar-lg radius-100' src='../dashboard/uploads/testimony/$ufile' alt='img'>
+                                <img class='avatar-lg radius-100' src='../dashboard/uploads/testimony/$ufile' alt=''>
                             </div>
-                            <div class='reviewer-meta media-body align-self-center ml-4'>
-                                <h5 class='reviewer-name color-primary mb-2'>$name</h5>
+                            <div class='reviewer-meta media-body align-self-center mr-4'>
+                                <h5 class='reviewer-name color-primary mb-2' dir='rtl'>$name</h5>
                                 <h6 class='text-secondary fw-6'>$position</h6>
                             </div>
                         </div>
                     </div>";
+                
                 }
                 ?>
             </div>

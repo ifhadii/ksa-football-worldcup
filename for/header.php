@@ -73,23 +73,23 @@ if (isset($_SESSION['user_id'])) {
 </head>
 
 <body>
-    <!-- Preloader Area Start -->
-    <div id="preloader">
-        <div id="digimax-preloader" class="digimax-preloader">
-            <div class="preloader-animation">
-                <div class="spinner"></div>
-                <div class="loader">
-                    <span data-text-preloader="K" class="animated-letters">K</span>
-                    <span data-text-preloader="S" class="animated-letters">S</span>
-                    <span data-text-preloader="A" class="animated-letters">A</span>
-                    <span data-text-preloader="W" class="animated-letters">W</span>
-                    <span data-text-preloader="C" class="animated-letters">C</span>
+        <!-- Preloader Area Start -->
+        <div id="preloader">
+            <div id="digimax-preloader" class="digimax-preloader">
+                <div class="preloader-animation">
+                    <div class="spinner"></div>
+                    <div class="loader">
+                        <span data-text-preloader="K" class="animated-letters">K</span>
+                        <span data-text-preloader="S" class="animated-letters">S</span>
+                        <span data-text-preloader="A" class="animated-letters">A</span>
+                        <span data-text-preloader="W" class="animated-letters">W</span>
+                        <span data-text-preloader="C" class="animated-letters">C</span>
+                    </div>
+                    <p class="fw-5 text-center text-uppercase">جارٍ التحميل</p>
                 </div>
-                <p class="fw-5 text-center text-uppercase">جارٍ التحميل</p>
             </div>
         </div>
-    </div>
-    <!-- Preloader Area End -->
+        <!-- Preloader Area End -->
 
     <!-- Scroll To Top Area Start -->
     <div id="scrollUp" title="Scroll To Top">
