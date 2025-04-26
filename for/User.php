@@ -18,14 +18,8 @@ class User {
                 throw new Exception("البريد الإلكتروني غير صالح");
             }
 
-            // Check if email exists
-            $check_sql = "SELECT email FROM users WHERE email = ?";
-            $check_stmt = $this->conn->prepare($check_sql);
-            $check_stmt->bind_param("s", $email);
-            $check_stmt->execute();
-            $check_stmt->store_result();
-            
-            if ($check_stmt->num_rows > 0) {
+            // Check if email exists in users or admin table
+            if ($this->emailExists($email)) {
                 throw new Exception("البريد الإلكتروني مسجل بالفعل");
             }
 
@@ -52,11 +46,34 @@ class User {
             return true;
         } catch (Exception $e) {
             error_log("User registration error: " . $e->getMessage());
-            throw $e; // Re-throw for handling in calling code
+            throw $e;
         }
     }
 
-    // User login
+    // Check if email exists in users or admin table
+    private function emailExists($email) {
+        // Check in users table
+        $check_sql = "SELECT email FROM users WHERE email = ?";
+        $check_stmt = $this->conn->prepare($check_sql);
+        $check_stmt->bind_param("s", $email);
+        $check_stmt->execute();
+        $check_stmt->store_result();
+        
+        if ($check_stmt->num_rows > 0) {
+            return true;
+        }
+
+        // Check in admin table
+        $check_sql = "SELECT email FROM admin WHERE email = ?";
+        $check_stmt = $this->conn->prepare($check_sql);
+        $check_stmt->bind_param("s", $email);
+        $check_stmt->execute();
+        $check_stmt->store_result();
+        
+        return $check_stmt->num_rows > 0;
+    }
+
+    // User or Admin login
     public function login($email, $password) {
         try {
             // Validate inputs
@@ -64,36 +81,84 @@ class User {
                 throw new Exception("البريد الإلكتروني وكلمة المرور مطلوبان");
             }
 
-            $sql = "SELECT * FROM users WHERE email = ?";
-            $stmt = $this->conn->prepare($sql);
-            
-            if (!$stmt) {
-                throw new Exception("خطأ في إعداد الاستعلام: " . $this->conn->error);
+            // First try admin login
+            $admin = $this->adminLogin($email, $password);
+            if ($admin) {
+                return ['user' => $admin, 'is_admin' => true];
             }
 
-            $stmt->bind_param("s", $email);
-            
-            if (!$stmt->execute()) {
-                throw new Exception("خطأ في تنفيذ الاستعلام: " . $stmt->error);
+            // Then try regular user login
+            $user = $this->userLogin($email, $password);
+            if ($user) {
+                return ['user' => $user, 'is_admin' => false];
             }
 
-            $result = $stmt->get_result();
-            
-            if ($result->num_rows === 0) {
-                throw new Exception("البريد الإلكتروني غير مسجل");
-            }
-
-            $user = $result->fetch_assoc();
-            
-            if (!password_verify($password, $user['password'])) {
-                throw new Exception("كلمة المرور غير صحيحة");
-            }
-
-            return $user;
+            throw new Exception("بيانات الدخول غير صحيحة");
         } catch (Exception $e) {
-            error_log("User login error: " . $e->getMessage());
-            throw $e; // Re-throw for handling in calling code
+            error_log("Login error: " . $e->getMessage());
+            throw $e;
         }
+    }
+
+    // Admin login
+    private function adminLogin($email, $password) {
+        $sql = "SELECT * FROM admin WHERE email = ?";
+        $stmt = $this->conn->prepare($sql);
+        
+        if (!$stmt) {
+            throw new Exception("خطأ في إعداد الاستعلام: " . $this->conn->error);
+        }
+
+        $stmt->bind_param("s", $email);
+        
+        if (!$stmt->execute()) {
+            throw new Exception("خطأ في تنفيذ الاستعلام: " . $stmt->error);
+        }
+
+        $result = $stmt->get_result();
+        
+        if ($result->num_rows === 0) {
+            return false;
+        }
+
+        $admin = $result->fetch_assoc();
+        
+        // Compare plain text password (as in your admin table)
+        if ($password !== $admin['password']) {
+            return false;
+        }
+
+        return $admin;
+    }
+
+    // User login
+    private function userLogin($email, $password) {
+        $sql = "SELECT * FROM users WHERE email = ?";
+        $stmt = $this->conn->prepare($sql);
+        
+        if (!$stmt) {
+            throw new Exception("خطأ في إعداد الاستعلام: " . $this->conn->error);
+        }
+
+        $stmt->bind_param("s", $email);
+        
+        if (!$stmt->execute()) {
+            throw new Exception("خطأ في تنفيذ الاستعلام: " . $stmt->error);
+        }
+
+        $result = $stmt->get_result();
+        
+        if ($result->num_rows === 0) {
+            return false;
+        }
+
+        $user = $result->fetch_assoc();
+        
+        if (!password_verify($password, $user['password'])) {
+            return false;
+        }
+
+        return $user;
     }
 
     // Get all users
