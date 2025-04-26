@@ -96,6 +96,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 <style>
+.single-review[dir='rtl'] .reviewer {
+    display: flex;
+    flex-direction: row-reverse; /* This makes the image come before the text */
+    text-align: right; /* Ensures that text is aligned to the right */
+}
+
+.single-review[dir='rtl'] .reviewer-meta {
+    text-align: right; /* Right-aligns the reviewer details */
+}
+
 .modal-content {
         background-color: #1c1c1c;
         color: white;
