@@ -1,7 +1,11 @@
 <?php
+// Start output buffering at the very start of your PHP file
+ob_start();
+
+// Include the database connection or other necessary files
 include "z_db.php";
 
-// منع كاش المتصفح
+// Prevent browser caching
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
@@ -41,44 +45,39 @@ if (isset($_SESSION['user_id'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- SEO Meta Description -->
     <meta name="description" content="">
     <meta name="author" content="Themeland">
+    
     <?php
+    // Fetching site settings from the database
     $rr = mysqli_query($con, "SELECT * FROM siteconfig where id=1");
     $r = mysqli_fetch_array($rr);
-    $site_title = "$r[site_title]";
-    $site_about = "$r[site_about]";
-    $site_footer = "$r[site_footer]";
-    $follow_text = "$r[follow_text]";
+    $site_title = $r['site_title'];
+    $site_about = $r['site_about'];
+    $site_footer = $r['site_footer'];
+    $follow_text = $r['follow_text'];
     ?>
     <!-- Title  -->
-    <title>KSA Welcome Cup - <?php print $site_title ?></title>
+    <title>KSA Welcome Cup - <?php echo $site_title; ?></title>
 
     <!-- Favicon  -->
     <link rel="icon" href="assets/img/favicon.png">
- 
-    <!-- ***** All CSS Files ***** -->
 
+    <!-- ***** All CSS Files ***** -->
     <!-- Style css -->
     <link rel="stylesheet" href="assets/css/style.css">
 
     <!-- Responsive css -->
     <link rel="stylesheet" href="assets/css/responsive.css">
-
 </head>
 
 <body>
-    <!--====== Preloader Area Start ======-->
+    <!-- Preloader Area Start -->
     <div id="preloader">
-        <!-- KSA Welcome Preloader -->
         <div id="digimax-preloader" class="digimax-preloader">
-            <!-- Preloader Animation -->
             <div class="preloader-animation">
-                <!-- Spinner -->
                 <div class="spinner"></div>
-                <!-- Loader -->
                 <div class="loader">
                     <span data-text-preloader="K" class="animated-letters">K</span>
                     <span data-text-preloader="S" class="animated-letters">S</span>
@@ -88,51 +87,32 @@ if (isset($_SESSION['user_id'])) {
                 </div>
                 <p class="fw-5 text-center text-uppercase">جارٍ التحميل</p>
             </div>
-
-            <!-- Loader Animation -->
-            <div class="loader-animation">
-                <div class="row h-100">
-                    <div class="col-3 single-loader p-0">
-                        <div class="loader-bg"></div>
-                    </div>
-                    <div class="col-3 single-loader p-0">
-                        <div class="loader-bg"></div>
-                    </div>
-                    <div class="col-3 single-loader p-0">
-                        <div class="loader-bg"></div>
-                    </div>
-                    <div class="col-3 single-loader p-0">
-                        <div class="loader-bg"></div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
+    <!-- Preloader Area End -->
 
-    <!--====== Preloader Area End ======-->
-
-    <!--====== Scroll To Top Area Start ======-->
+    <!-- Scroll To Top Area Start -->
     <div id="scrollUp" title="Scroll To Top">
         <i class="fas fa-arrow-up"></i>
     </div>
-    <!--====== Scroll To Top Area End ======-->
+    <!-- Scroll To Top Area End -->
 
     <div class="main overflow-hidden">
-        <!-- ***** Header Start ***** -->
+        <!-- Header Section -->
         <header id="header" dir="rtl">
             <!-- Navbar -->
-            <nav data-aos="zoom-out" data-aos-delay="800" class="navbar navbar-expand">
+            <nav class="navbar navbar-expand">
                 <div class="container header" style="display: flex;flex-direction: row-reverse;">
                     <!-- Navbar Brand -->
                     <?php
+                    // Fetch logo file from database
                     $rt = mysqli_query($con, "SELECT ufile FROM logo WHERE id=1");
                     $tr = mysqli_fetch_array($rt);
                     $ufile = $tr['ufile'];
                     ?>
-
                     <a class="navbar-brand" href="index.php">
+                        <!-- You can uncomment the following if you want to show logo -->
                         <!-- <img class="navbar-brand-regular" src="../dashboard/uploads/logo/<?php echo $ufile; ?>" alt="شعار" style="border-radius: 50%; background: white; max-height: 40px;"> -->
-                        <!-- <img class="navbar-brand-sticky" src="../dashboard/uploads/logo/<?php echo $ufile; ?>" alt="شعار ثابت" style="border-radius: 50%; background: white; max-height: 40px;"> -->
                     </a>
 
                     <div class="ml-auto"></div>
@@ -143,7 +123,7 @@ if (isset($_SESSION['user_id'])) {
                             <a class="nav-link" href="home">الرئيسية</a>
                         </li>
                         <li class="nav-item">
-                            <a href="about" class="nav-link"> نتائج المباريات</a>
+                            <a href="about" class="nav-link">نتائج المباريات</a>
                         </li>
                         <li class="nav-item">
                             <a href="services" class="nav-link">أماكن الاستضافة والملاعب</a>
@@ -151,7 +131,7 @@ if (isset($_SESSION['user_id'])) {
                         <li class="nav-item">
                             <a href="event" class="nav-link">الفعاليات</a>
                         </li>
-                        
+
                         <?php if (isset($_SESSION['user_id'])): ?>
                             <li class="nav-item">
                                 <?php if ($is_admin): ?>
@@ -189,16 +169,23 @@ if (isset($_SESSION['user_id'])) {
                 </div>
             </nav>
         </header>
-        <!-- ***** Header End ***** -->
 
+        <!-- Custom CSS for logo -->
         <style>
             .navbar-brand img {
                 max-height: 40px;
                 height: auto;
                 width: auto;
-                border-radius: 50%;         /* يجعلها دائرية */
-                background-color: white;    /* خلفية بيضاء */
-                padding: 2px;               /* مسافة بسيطة لتظهر الخلفية حول الصورة */
-                object-fit: cover;          /* لتناسب الشكل داخل الدائرة */
+                border-radius: 50%;
+                background-color: white;
+                padding: 2px;
+                object-fit: cover;
             }
         </style>
+    </div>
+
+    <!-- Additional Scripts -->
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>
