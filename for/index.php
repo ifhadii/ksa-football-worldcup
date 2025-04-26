@@ -1,6 +1,4 @@
 <?php
-ob_start(); // تشغيل التخزين المؤقت للخروج
-session_start();
 include "header.php";
 
 

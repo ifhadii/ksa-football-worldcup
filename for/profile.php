@@ -1,3 +1,5 @@
+<?php include "header.php";?>
+
 <?php
 // Start session only if not already started
 if (session_status() === PHP_SESSION_NONE) {
@@ -267,3 +269,5 @@ try {
     </script>
 </body>
 </html>
+
+<?php include "footer.php";?>
