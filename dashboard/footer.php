@@ -1,5 +1,5 @@
 
-  <footer class="footer text-center" >
+<footer class="footer text-center" >
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-6">

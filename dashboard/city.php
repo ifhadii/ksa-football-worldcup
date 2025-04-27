@@ -1,5 +1,5 @@
-<?php include"header.php";?>
-<?php include"sidebar.php";?>
+<?php include "header.php"; ?>
+<?php include "sidebar.php"; ?>
 
 <!-- ============================================================== -->
 <!-- بداية المحتوى الأيمن -->
@@ -45,11 +45,9 @@
                                     <?php
                                     $q = "SELECT * FROM city ORDER BY id DESC";
                                     $r123 = mysqli_query($con, $q);
-
                                     while ($ro = mysqli_fetch_array($r123)) {
-                                        $id = $ro['id'];
-                                        $city_title = $ro['city_title'];
-
+                                        $id = $ro["id"];
+                                        $city_title = $ro["city_title"];
                                         echo "<tr>
                                             <td>$city_title</td>
                                             <td>
@@ -86,4 +84,4 @@
         </div><!-- نهاية container-fluid -->
     </div><!-- نهاية Page-content -->
 
-<?php include"footer.php";?>
+<?php include "footer.php"; ?>

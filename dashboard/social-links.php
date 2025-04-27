@@ -1,5 +1,5 @@
-<?php include"header.php";?>
-<?php include"sidebar.php";?>
+<?php include "header.php"; ?>
+<?php include "sidebar.php"; ?>
 
 <!-- ============================================================== -->
 <!-- بداية المحتوى الأيمن -->
@@ -46,12 +46,10 @@
                                 <?php
                                 $q = "SELECT * FROM social ORDER BY id DESC";
                                 $r123 = mysqli_query($con, $q);
-
                                 while ($ro = mysqli_fetch_array($r123)) {
                                     $id = $ro["id"];
                                     $name = $ro["name"];
                                     $social_link = $ro["social_link"];
-
                                     echo "<tr>
                                         <td>$name</td>
                                         <td><a href='$social_link' target='_blank'>$social_link</a></td>
@@ -83,4 +81,4 @@
         </div><!-- نهاية الحاوية -->
     </div><!-- نهاية محتوى الصفحة -->
 
-<?php include"footer.php";?>
+<?php include "footer.php"; ?>

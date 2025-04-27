@@ -1,5 +1,5 @@
-<?php include"header.php";?>
-<?php include"sidebar.php";?>
+<?php include "header.php"; ?>
+<?php include "sidebar.php"; ?>
 
 <!-- ============================================================== -->
 <!-- Start right Content here -->
@@ -97,4 +97,4 @@
             </div>
             <!-- End Page-content -->
 
-            <?php include"footer.php";?>
+            <?php include "footer.php"; ?>

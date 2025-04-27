@@ -1,5 +1,5 @@
-<?php include"header.php";?>
-<?php include"sidebar.php";?>
+<?php include "header.php"; ?>
+<?php include "sidebar.php"; ?>
 
 <!-- ============================================================== -->
 <!-- Start right Content here -->
@@ -47,59 +47,75 @@
 
 
                                 <?php
-           $status = "OK"; //initial status
-$msg="";
-           if(ISSET($_POST['save'])){
-$phone1= mysqli_real_escape_string($con,$_POST['phone1']);
-$phone2 = mysqli_real_escape_string($con,$_POST['phone2']);
-$email1 = mysqli_real_escape_string($con,$_POST['email1']);
-$email2 = mysqli_real_escape_string($con,$_POST['email2']);
-$longitude = mysqli_real_escape_string($con,$_POST['longitude']);
-$latitude = mysqli_real_escape_string($con,$_POST['latitude']);
-
- if ( strlen($phone1) < 10 ){
-$msg=$msg."Phone field can not be empty.<BR>";
-$status= "NOTOK";}
- if ( strlen($email1) < 5 ){
-$msg=$msg."Email Field Must contain an email.<BR>";
-$status= "NOTOK";}
-
-
-
-
-if($status=="OK")
-{
-$qb=mysqli_query($con,"update sitecontact set phone1='$phone1', phone2='$phone2', email1='$email1',email2='$email2',longitude='$longitude',latitude='$latitude' where id=1");
-
-		if($qb){
-		    	$errormsg= "
+                                $status = "OK";
+                                //initial status
+                                $msg = "";
+                                if (isset($_POST["save"])) {
+                                    $phone1 = mysqli_real_escape_string(
+                                        $con,
+                                        $_POST["phone1"]
+                                    );
+                                    $phone2 = mysqli_real_escape_string(
+                                        $con,
+                                        $_POST["phone2"]
+                                    );
+                                    $email1 = mysqli_real_escape_string(
+                                        $con,
+                                        $_POST["email1"]
+                                    );
+                                    $email2 = mysqli_real_escape_string(
+                                        $con,
+                                        $_POST["email2"]
+                                    );
+                                    $longitude = mysqli_real_escape_string(
+                                        $con,
+                                        $_POST["longitude"]
+                                    );
+                                    $latitude = mysqli_real_escape_string(
+                                        $con,
+                                        $_POST["latitude"]
+                                    );
+                                    if (strlen($phone1) < 10) {
+                                        $msg =
+                                            $msg .
+                                            "Phone field can not be empty.<BR>";
+                                        $status = "NOTOK";
+                                    }
+                                    if (strlen($email1) < 5) {
+                                        $msg =
+                                            $msg .
+                                            "Email Field Must contain an email.<BR>";
+                                        $status = "NOTOK";
+                                    }
+                                    if ($status == "OK") {
+                                        $qb = mysqli_query(
+                                            $con,
+                                            "update sitecontact set phone1='$phone1', phone2='$phone2', email1='$email1',email2='$email2',longitude='$longitude',latitude='$latitude' where id=1"
+                                        );
+                                        if ($qb) {
+                                            $errormsg = "
 <div class='alert alert-success alert-dismissible alert-outline fade show'>
                   Contact Data Updated successfully.
                   <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                   </div>
  "; //printing error if found in validation
-
-		}
-	}
-
-        elseif ($status!=="OK") {
-            $errormsg= "
+                                        }
+                                    } elseif ($status !== "OK") {
+                                        $errormsg =
+                                            "
 <div class='alert alert-danger alert-dismissible alert-outline fade show'>
-                     ".$msg." <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button> </div>"; //printing error if found in validation
-
-
-    }
-    else{
-			$errormsg= "
+                     " .
+                                            $msg .
+                                            " <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button> </div>"; //printing error if found in validation
+                                    } else {
+                                        $errormsg = "
       <div class='alert alert-danger alert-dismissible alert-outline fade show'>
                  Some Technical Glitch Is There. Please Try Again Later Or Ask Admin For Help.
                  <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                  </div>"; //printing error if found in validation
-
-
-		}
-           }
-           ?>
+                                    }
+                                }
+                                ?>
 
 
 
@@ -108,31 +124,30 @@ $qb=mysqli_query($con,"update sitecontact set phone1='$phone1', phone2='$phone2'
                                         <div class="tab-pane active" id="personalDetails" role="tabpanel">
 
                                         <?php
-					 $query="SELECT * FROM sitecontact where id=1 ";
+                                        $query =
+                                            "SELECT * FROM sitecontact where id=1 ";
+                                        $result = mysqli_query($con, $query);
+                                        $i = 0;
+                                        while (
+                                            $row = mysqli_fetch_array($result)
+                                        ) {
+                                            $phone1 = "$row[phone1]";
+                                            $phone2 = "$row[phone2]";
+                                            $email1 = "$row[email1]";
+                                            $email2 = "$row[email2]";
+                                            $longitude = "$row[longitude]";
+                                            $latitude = "$row[latitude]";
+                                        }
+                                        ?>
 
 
- $result = mysqli_query($con,$query);
-$i=0;
-while($row = mysqli_fetch_array($result))
-{
-	$phone1="$row[phone1]";
-	$phone2="$row[phone2]";
-  $email1="$row[email1]";
-  $email2="$row[email2]";
-  $longitude="$row[longitude]";
-  $latitude="$row[latitude]";
-}
-  ?>
 
 
-
-
-                                      <?php
-if($_SERVER['REQUEST_METHOD'] == 'POST')
-						{
-						print $errormsg;
-						}
-   ?>
+                                      <?php if (
+                                          $_SERVER["REQUEST_METHOD"] == "POST"
+                                      ) {
+                                          print $errormsg;
+                                      } ?>
               <form action="" method="post" enctype="multipart/form-data">
                                                 <div class="row">
 
@@ -140,14 +155,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
                                             <div class="col-lg-6">
                                                 <div class="mb-3">
                                                             <label for="firstnameInput" class="form-label"> Phone</label>
-                                                            <input type="text" class="form-control" id="firstnameInput" name="phone1"  value="<?php print $phone1 ?>">
+                                                            <input type="text" class="form-control" id="firstnameInput" name="phone1"  value="<?php print $phone1; ?>">
                                                         </div>
                                                     </div>
 
                                                     <div class="col-lg-6">
                                                         <div class="mb-3">
                                                             <label for="firstnameInput" class="form-label"> Alternative Phone</label>
-                                                            <input type="text" class="form-control" id="firstnameInput" name="phone2"  value="<?php print $phone2 ?>">
+                                                            <input type="text" class="form-control" id="firstnameInput" name="phone2"  value="<?php print $phone2; ?>">
                                                         </div>
                                                     </div>
 
@@ -155,28 +170,28 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
                                                     <div class="col-lg-6">
                                                 <div class="mb-3">
                                                             <label for="firstnameInput" class="form-label"> Email</label>
-                                                            <input type="text" class="form-control" id="firstnameInput" name="email1"  value="<?php print $email1 ?>">
+                                                            <input type="text" class="form-control" id="firstnameInput" name="email1"  value="<?php print $email1; ?>">
                                                         </div>
                                                     </div>
 
                                                     <div class="col-lg-6">
                                                         <div class="mb-3">
                                                             <label for="firstnameInput" class="form-label"> Alternative Email</label>
-                                                            <input type="text" class="form-control" id="firstnameInput" name="email2"  value="<?php print $email2 ?>">
+                                                            <input type="text" class="form-control" id="firstnameInput" name="email2"  value="<?php print $email2; ?>">
                                                         </div>
                                                     </div>
 
                                                     <div class="col-lg-6">
                                                 <div class="mb-3">
                                                             <label for="firstnameInput" class="form-label">Map Longitude</label>
-                                                            <input type="text" class="form-control" id="firstnameInput" name="longitude"  value="<?php print $longitude ?>">
+                                                            <input type="text" class="form-control" id="firstnameInput" name="longitude"  value="<?php print $longitude; ?>">
                                                         </div>
                                                     </div>
 
                                                     <div class="col-lg-6">
                                                         <div class="mb-3">
                                                             <label for="firstnameInput" class="form-label"> Map Latitude</label>
-                                                            <input type="text" class="form-control" id="firstnameInput" name="latitude"  value="<?php print $latitude ?>">
+                                                            <input type="text" class="form-control" id="firstnameInput" name="latitude"  value="<?php print $latitude; ?>">
                                                         </div>
                                                     </div>
 
@@ -211,4 +226,4 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
             </div>
             <!-- End Page-content -->
 
-            <?php include"footer.php";?>
+            <?php include "footer.php"; ?>

@@ -1,13 +1,10 @@
 <?php
 include "header.php";
-$username = $_SESSION['username'];
+$username = $_SESSION["username"];
 ?>
 
 
-<?php 
-include "sidebar.php";
-
-?>
+<?php include "sidebar.php"; ?>
 <!-- ============================================================== -->
 <!-- Start right Content here -->
 <!-- ============================================================== -->
@@ -38,7 +35,9 @@ include "sidebar.php";
                             <div class="col-12">
                                 <div class="d-flex align-items-lg-center flex-lg-row flex-column">
                                     <div class="flex-grow-1">
-                                        <h4 class="fs-16 mb-1">Hello, <?php echo htmlspecialchars($username); ?></h4>
+                                        <h4 class="fs-16 mb-1">Hello, <?php echo htmlspecialchars(
+                                            $username
+                                        ); ?></h4>
                                         <p class="text-muted mb-0">Welcome to the Dashboard</p>
                                     </div>
                                 </div>
@@ -60,9 +59,16 @@ include "sidebar.php";
                                                 <p class="text-uppercase fw-semibold fs-12 text-muted mb-1">Total Cities</p>
                                                 <h3>
                                                 <?php
-                                                $result = mysqli_query($con, "SELECT count(city_title) FROM city");
-                                                $numrows = ($result) ? mysqli_fetch_row($result)[0] : 0;
-                                                echo $numrows
+                                                $result = mysqli_query(
+                                                    $con,
+                                                    "SELECT count(city_title) FROM city"
+                                                );
+                                                $numrows = $result
+                                                    ? mysqli_fetch_row(
+                                                        $result
+                                                    )[0]
+                                                    : 0;
+                                                echo $numrows;
                                                 ?>
                                                 </h3>
                                             </div>
@@ -84,9 +90,16 @@ include "sidebar.php";
                                                 <p class="text-uppercase fw-semibold fs-12 text-muted mb-1">Total Events</p>
                                                 <h3>
                                                 <?php
-                                                $result = mysqli_query($con, "SELECT count(id) FROM event");
-                                                $numrows = ($result) ? mysqli_fetch_row($result)[0] : 0;
-                                                echo $numrows
+                                                $result = mysqli_query(
+                                                    $con,
+                                                    "SELECT count(id) FROM event"
+                                                );
+                                                $numrows = $result
+                                                    ? mysqli_fetch_row(
+                                                        $result
+                                                    )[0]
+                                                    : 0;
+                                                echo $numrows;
                                                 ?>
                                                 </h3>
                                             </div>
@@ -109,9 +122,16 @@ include "sidebar.php";
                                                 <p class="text-uppercase fw-semibold fs-12 text-muted mb-1">Total Blogs</p>
                                                 <h3>
                                                 <?php
-                                                $result = mysqli_query($con, "SELECT count(id) FROM event");
-                                                $numrows = ($result) ? mysqli_fetch_row($result)[0] : 0;
-                                                echo $numrows
+                                                $result = mysqli_query(
+                                                    $con,
+                                                    "SELECT count(id) FROM testimony"
+                                                );
+                                                $numrows = $result
+                                                    ? mysqli_fetch_row(
+                                                        $result
+                                                    )[0]
+                                                    : 0;
+                                                echo $numrows;
                                                 ?>
                                                 </h3>
                                             </div>

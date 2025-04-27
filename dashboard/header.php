@@ -6,28 +6,12 @@ header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 
-
-
 include "z_db.php";
-
 
 session_start();
 // Check, if username session is NOT set then this page will jump to login page
 
-if (!isset($_SESSION['username'])) {
-        print "
-				<script language='javascript'>
-					window.location = 'login.php';
-				</script>
-			";
-}
-
-// Check, if username session is NOT set then this page will jump to login page
-if (isset($_SESSION['username'])) {
-
- $username = $_SESSION['username'];
-}
- else {
+if (!isset($_SESSION["username"])) {
     print "
 				<script language='javascript'>
 					window.location = 'login.php';
@@ -35,6 +19,16 @@ if (isset($_SESSION['username'])) {
 			";
 }
 
+// Check, if username session is NOT set then this page will jump to login page
+if (isset($_SESSION["username"])) {
+    $username = $_SESSION["username"];
+} else {
+    print "
+				<script language='javascript'>
+					window.location = 'login.php';
+				</script>
+			";
+}
 ?>
 
 
@@ -147,12 +141,16 @@ if (isset($_SESSION['username'])) {
                                 aria-haspopup="true" aria-expanded="false">
                                 <span class="d-flex align-items-center">
                                     <span class="text-start me-xl-2">
-                                        <span class="d-none d-xl-inline-block me-1 fw-medium user-name-text"><?php echo htmlspecialchars($username); ?></span>
+                                        <span class="d-none d-xl-inline-block me-1 fw-medium user-name-text"><?php echo htmlspecialchars(
+                                            $username
+                                        ); ?></span>
                                     </span>
                                 </span>
                             </button>
                             <div class="dropdown-menu dropdown-menu-start">
-                                <h6 class="dropdown-header">مرحباً <?php echo htmlspecialchars($username); ?>!</h6>
+                                <h6 class="dropdown-header">مرحباً <?php echo htmlspecialchars(
+                                    $username
+                                ); ?>!</h6>
                                 <a class="dropdown-item" href="logout">
                                     <i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i>
                                     <span class="align-middle">تسجيل الخروج</span>

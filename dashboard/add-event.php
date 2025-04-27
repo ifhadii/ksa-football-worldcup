@@ -41,38 +41,48 @@
                         <?php
                         $status = "OK";
                         $msg = "";
-
-                        if (isset($_POST['save'])) {
-                            $port_title = mysqli_real_escape_string($con, $_POST['port_title']);
-                            $port_desc = mysqli_real_escape_string($con, $_POST['port_desc']);
-                            $port_detail = mysqli_real_escape_string($con, $_POST['port_detail']);
-
+                        if (isset($_POST["save"])) {
+                            $port_title = mysqli_real_escape_string(
+                                $con,
+                                $_POST["port_title"]
+                            );
+                            $port_desc = mysqli_real_escape_string(
+                                $con,
+                                $_POST["port_desc"]
+                            );
+                            $port_detail = mysqli_real_escape_string(
+                                $con,
+                                $_POST["port_detail"]
+                            );
                             if (strlen($port_title) < 5) {
-                                $msg .= "عنوان الفعالية يجب أن يكون أكثر من 5 أحرف.<br>";
+                                $msg .=
+                                    "عنوان الفعالية يجب أن يكون أكثر من 5 أحرف.<br>";
                                 $status = "NOTOK";
                             }
-
                             if (strlen($port_desc) > 150) {
-                                $msg .= "الوصف المختصر يجب أن يكون أقل من 150 حرفًا.<br>";
+                                $msg .=
+                                    "الوصف المختصر يجب أن يكون أقل من 150 حرفًا.<br>";
                                 $status = "NOTOK";
                             }
-
                             if (strlen($port_detail) < 15) {
-                                $msg .= "تفاصيل الفعالية يجب أن تكون أكثر من 15 حرفًا.<br>";
+                                $msg .=
+                                    "تفاصيل الفعالية يجب أن تكون أكثر من 15 حرفًا.<br>";
                                 $status = "NOTOK";
                             }
-
-                            $uploads_dir = 'uploads/event';
+                            $uploads_dir = "uploads/event";
                             $tmp_name = $_FILES["ufile"]["tmp_name"];
                             $name = basename($_FILES["ufile"]["name"]);
                             $random_digit = rand(0000, 9999);
                             $new_file_name = $random_digit . $name;
-
-                            move_uploaded_file($tmp_name, "$uploads_dir/$new_file_name");
-
+                            move_uploaded_file(
+                                $tmp_name,
+                                "$uploads_dir/$new_file_name"
+                            );
                             if ($status == "OK") {
-                                $qb = mysqli_query($con, "INSERT INTO event (port_title, port_desc, port_detail, ufile) VALUES ('$port_title', '$port_desc', '$port_detail', '$new_file_name')");
-
+                                $qb = mysqli_query(
+                                    $con,
+                                    "INSERT INTO event (port_title, port_desc, port_detail, ufile) VALUES ('$port_title', '$port_desc', '$port_detail', '$new_file_name')"
+                                );
                                 if ($qb) {
                                     $errormsg = "
                                         <div class='alert alert-success alert-dismissible alert-outline fade show'>
@@ -99,11 +109,11 @@
                         <div class="card-body p-4">
                             <div class="tab-content">
                                 <div class="tab-pane active" id="personalDetails" role="tabpanel">
-                                    <?php
-                                    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                                    <?php if (
+                                        $_SERVER["REQUEST_METHOD"] == "POST"
+                                    ) {
                                         print $errormsg;
-                                    }
-                                    ?>
+                                    } ?>
                                     <form action="" method="post" enctype="multipart/form-data">
                                         <div class="row">
 

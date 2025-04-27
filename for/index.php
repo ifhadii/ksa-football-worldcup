@@ -297,62 +297,111 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
-<!-- ***** event Area Start ***** -->
 <section id="event" class="event-area overflow-hidden ptb_100">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 col-md-10 col-lg-7">
                 <!-- Section Heading -->
                 <div class="section-heading text-center">
-                    <h2>فعاليات كأس العالم 2034</h2>
+                    <h2 class="mb-3">فعاليات كأس العالم 2034</h2>
                     <p class="d-none d-sm-block mt-4">استكشف أبرز المواقع، الفعاليات، والمشاريع التي ستُضيء المملكة خلال هذا الحدث التاريخي.</p>
                 </div>
             </div>
         </div>
-        <!-- event Items -->
-        <div class="row items event-items">
-
+        
+        <!-- Event Items -->
+        <div class="row">
             <?php
-            $q = "SELECT * FROM  event ORDER BY id DESC LIMIT 6";
-
-
-            $r123 = mysqli_query($con, $q);
-
-            while ($ro = mysqli_fetch_array($r123)) {
-
-                $id = "$ro[id]";
-                $port_title = "$ro[port_title]";
-                $port_desc = "$ro[port_desc]";
-                $ufile = "$ro[ufile]";
-
-                print "
-    <div class='col-12 col-sm-6 col-lg-4 event-item' data-groups='['marketing','development']'>
-    <!-- Single Case Studies -->
-    <div class='single-case-studies'>
-        <!-- Case Studies Thumb -->
-        <a href='eventail.php?id=$id'>
-            <!-- <img src='../dashboard/uploads/event/$ufile' alt=''> -->
-        </a>
-        <!-- Case Studies Overlay -->
-        <a href='eventail.php?id=$id' class='case-studies-overlay'>
-            <!-- Overlay Text -->
-            <span class='overlay-text text-center p-3'>
-                <h3 class='text-white mb-3'>$port_title</h3>
-                <p class='text-white'>$port_desc.</p>
-            </span>
-        </a>
-    </div>
-    </div>
-    ";
+            // Secure database query with error handling
+            $query = "SELECT id, port_title, port_desc, ufile FROM event ORDER BY id DESC LIMIT 6";
+            $result = mysqli_query($con, $query);
+            
+            if (!$result) {
+                echo "<div class='col-12 text-center text-danger'>حدث خطأ في جلب البيانات</div>";
+            } else {
+                while ($event = mysqli_fetch_assoc($result)) {
+                    $id = htmlspecialchars($event['id']);
+                    $title = htmlspecialchars($event['port_title']);
+                    $desc = htmlspecialchars($event['port_desc']);
+                    $image = htmlspecialchars($event['ufile']);
+                    
+                    echo "
+                    <div class='col-12 col-sm-6 col-lg-4 mb-4'>
+                        <div class='card event-card h-100 shadow-sm border-0 overflow-hidden'>
+                            <div class='card-img-top event-image-container'>
+                                <a href='eventail.php?id=$id'>
+                                    " . (!empty($image) ? 
+                                        "<img src='../dashboard/uploads/event/$image' alt='$title' class='img-fluid'>" : 
+                                        "<div class='no-image-placeholder d-flex align-items-center justify-content-center'>
+                                            <i class='fas fa-calendar-alt fa-3x text-secondary'></i>
+                                        </div>") . "
+                                </a>
+                            </div>
+                            <div class='card-body'>
+                                <h3 class='card-title h5'><a href='eventail.php?id=$id' class='text-decoration-none'>$title</a></h3>
+                                <p class='card-text text-muted'>" . substr($desc, 0, 100) . (strlen($desc) > 100 ? '...' : '') . "</p>
+                            </div>
+                            <div class='card-footer bg-transparent border-top-0'>
+                                <a href='eventail.php?id=$id' class='btn btn-primary btn-sm'>التفاصيل <i class='fas fa-arrow-left ms-2'></i></a>
+                            </div>
+                        </div>
+                    </div>";
+                }
             }
             ?>
-
         </div>
+        
+        <div class="row justify-content-center mt-4">
         <div class="row justify-content-center">
             <a href="event" class="btn btn-bordered mt-4">View More</a>
         </div>
+        </div>
     </div>
 </section>
+
+<style>
+    .event-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 8px;
+    }
+    
+    .event-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    
+    .event-image-container {
+        height: 200px;
+        overflow: hidden;
+        background-color: #f8f9fa;
+    }
+    
+    .event-image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+    
+    .event-card:hover .event-image-container img {
+        transform: scale(1.05);
+    }
+    
+    .no-image-placeholder {
+        width: 100%;
+        height: 100%;
+        background-color: #f1f1f1;
+    }
+    
+    .card-title a {
+        color: #343a40;
+        transition: color 0.3s ease;
+    }
+    
+    .card-title a:hover {
+        color: #0d6efd;
+    }
+</style>
        
 
 <section class="section ptb_100 bg-light" id="stadiums">
@@ -366,7 +415,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </div>
 
-        <!-- XXXXXXXXXXXXXXXXXXXXXX first maintenance XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
         <div class="row mt-4">
     <!-- ملعب 1 -->
     <div class="row">

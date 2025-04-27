@@ -6,7 +6,7 @@ if (!file_exists($target_dir)) {
 
 if (isset($_FILES["file"])) {
     $file = $_FILES["file"];
-    $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
+    $ext = pathinfo($file["name"], PATHINFO_EXTENSION);
     $newName = uniqid() . "." . $ext;
     $target_file = $target_dir . $newName;
 

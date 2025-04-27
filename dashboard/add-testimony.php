@@ -1,5 +1,5 @@
-<?php include"header.php";?>
-<?php include"sidebar.php";?>
+<?php include "header.php"; ?>
+<?php include "sidebar.php"; ?>
 
 <!-- ============================================================== -->
 <!-- بدء المحتوى الأيمن هنا -->
@@ -46,92 +46,94 @@
 
 
                                 <?php
-           $status = "OK"; // الحالة الأولية
-$msg="";
-           if(ISSET($_POST['save'])){
-$namex = mysqli_real_escape_string($con,$_POST['name']);
-$message = mysqli_real_escape_string($con,$_POST['message']);
-$position = mysqli_real_escape_string($con,$_POST['position']);
-
- if ( strlen($namex) < 1 ){
-$msg=$msg."يجب أن يحتوي الاسم على حرف واحد على الأقل.<BR>";
-$status= "NOTOK";}
- if ( strlen($position) < 1 ){
-$msg=$msg."يجب أن يحتوي المنصب على حرف واحد على الأقل.<BR>";
-$status= "NOTOK";}
-
-if ( strlen($message) < 10 ){
-  $msg=$msg."يجب أن تكون رسالة الشهادة أكثر من 10 أحرف.<BR>";
-  $status= "NOTOK";}
-
-
-
-$uploads_dir = 'uploads/testimony';
-
-        $tmp_name = $_FILES["ufile"]["tmp_name"];
-        // basename() قد يمنع هجمات التصفح عبر نظام الملفات;
-        // قد يكون التحقق الإضافي من اسم الملف مناسبًا
-        $name = basename($_FILES["ufile"]["name"]);
-        $random_digit=rand(0000,9999);
-        $new_file_name=$random_digit.$name;
-
-        move_uploaded_file($tmp_name, "$uploads_dir/$new_file_name");
-
-if($status=="OK")
-{
-$qf=mysqli_query($con,"INSERT INTO testimony (name, message, position,ufile) VALUES ('$namex', '$message', '$position', '$new_file_name')");
-
-
-
-
-		if($qf){
-		    	$errormsg= "
+                                $status = "OK";
+                                // الحالة الأولية
+                                $msg = "";
+                                if (isset($_POST["save"])) {
+                                    $namex = mysqli_real_escape_string(
+                                        $con,
+                                        $_POST["name"]
+                                    );
+                                    $message = mysqli_real_escape_string(
+                                        $con,
+                                        $_POST["message"]
+                                    );
+                                    $position = mysqli_real_escape_string(
+                                        $con,
+                                        $_POST["position"]
+                                    );
+                                    if (strlen($namex) < 1) {
+                                        $msg =
+                                            $msg .
+                                            "يجب أن يحتوي الاسم على حرف واحد على الأقل.<BR>";
+                                        $status = "NOTOK";
+                                    }
+                                    if (strlen($position) < 1) {
+                                        $msg =
+                                            $msg .
+                                            "يجب أن يحتوي المنصب على حرف واحد على الأقل.<BR>";
+                                        $status = "NOTOK";
+                                    }
+                                    if (strlen($message) < 10) {
+                                        $msg =
+                                            $msg .
+                                            "يجب أن تكون رسالة الشهادة أكثر من 10 أحرف.<BR>";
+                                        $status = "NOTOK";
+                                    }
+                                    $uploads_dir = "uploads/testimony";
+                                    $tmp_name = $_FILES["ufile"]["tmp_name"]; // basename() قد يمنع هجمات التصفح عبر نظام الملفات; // قد يكون التحقق الإضافي من اسم الملف مناسبًا
+                                    $name = basename($_FILES["ufile"]["name"]);
+                                    $random_digit = rand(0000, 9999);
+                                    $new_file_name = $random_digit . $name;
+                                    move_uploaded_file(
+                                        $tmp_name,
+                                        "$uploads_dir/$new_file_name"
+                                    );
+                                    if ($status == "OK") {
+                                        $qf = mysqli_query(
+                                            $con,
+                                            "INSERT INTO testimony (name, message, position,ufile) VALUES ('$namex', '$message', '$position', '$new_file_name')"
+                                        );
+                                        if ($qf) {
+                                            $errormsg = "
 <div class='alert alert-success alert-dismissible alert-outline fade show'>
                  تم إضافة الشهادة بنجاح.
                   <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                   </div>
  "; // طباعة الخطأ إذا تم العثور عليه في التحقق
-
-		}
-        else{
-            $errormsg= "
+                                        } else {
+                                            $errormsg = "
             <div class='alert alert-danger alert-dismissible alert-outline fade show'>
                        هناك مشكلة تقنية. يرجى المحاولة مرة أخرى لاحقًا أو طلب المساعدة من المسؤول.
                        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                        </div>"; // طباعة الخطأ إذا تم العثور عليه في التحقق
-
-        }
-	}
-
-        elseif ($status!=="OK") {
-            $errormsg= "
+                                        }
+                                    } elseif ($status !== "OK") {
+                                        $errormsg =
+                                            "
 <div class='alert alert-danger alert-dismissible alert-outline fade show'>
-                     ".$msg." <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button> </div>"; // طباعة الخطأ إذا تم العثور عليه في التحقق
-
-
-    }
-    else{
-			$errormsg= "
+                     " .
+                                            $msg .
+                                            " <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button> </div>"; // طباعة الخطأ إذا تم العثور عليه في التحقق
+                                    } else {
+                                        $errormsg = "
       <div class='alert alert-danger alert-dismissible alert-outline fade show'>
                  هناك مشكلة تقنية. يرجى المحاولة مرة أخرى لاحقًا أو طلب المساعدة من المسؤول.
                  <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                  </div>"; // طباعة الخطأ إذا تم العثور عليه في التحقق
-
-
-		}
-           }
-           ?>
+                                    }
+                                }
+                                ?>
 
 
                                 <div class="card-body p-4">
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="personalDetails" role="tabpanel">
-                                        <?php
-if($_SERVER['REQUEST_METHOD'] == 'POST')
-						{
-						print $errormsg;
-						}
-   ?>
+                                        <?php if (
+                                            $_SERVER["REQUEST_METHOD"] == "POST"
+                                        ) {
+                                            print $errormsg;
+                                        } ?>
               <form action="" method="post" enctype="multipart/form-data">
                                                 <div class="row">
                                               <div class="col-lg-6">
@@ -188,4 +190,4 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
                 <!-- حاوية السائل -->
             </div>
             <!-- نهاية المحتوى -->
-            <?php include"footer.php";?>
+            <?php include "footer.php"; ?>

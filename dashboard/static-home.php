@@ -1,5 +1,5 @@
-<?php include"header.php";?>
-<?php include"sidebar.php";?>
+<?php include "header.php"; ?>
+<?php include "sidebar.php"; ?>
 
 <!-- ============================================================== -->
 <!-- Start right Content here -->
@@ -47,21 +47,32 @@
 
 
                                 <?php
-           $status = "OK"; //initial status
-$msg="";
-           if(ISSET($_POST['save'])){
-$stitle = mysqli_real_escape_string($con,$_POST['stitle']);
-$stext = mysqli_real_escape_string($con,$_POST['stext']);
+                                $status = "OK";
+                                //initial status
+                                $msg = "";
+                                if (isset($_POST["save"])) {
+                                    $stitle = mysqli_real_escape_string(
+                                        $con,
+                                        $_POST["stitle"]
+                                    );
+                                    $stext = mysqli_real_escape_string(
+                                        $con,
+                                        $_POST["stext"]
+                                    );
+                                    if (strlen($stitle) < 5) {
+                                        $msg =
+                                            $msg .
+                                            "Title field can not be empty.<BR>";
+                                        $status = "NOTOK";
+                                    }
+                                    if (strlen($stext) < 20) {
+                                        $msg =
+                                            $msg .
+                                            "Slider Text Field Must contain characters.<BR>";
+                                        $status = "NOTOK";
+                                    }
 
- if ( strlen($stitle) < 5 ){
-$msg=$msg."Title field can not be empty.<BR>";
-$status= "NOTOK";}
- if ( strlen($stext) < 20 ){
-$msg=$msg."Slider Text Field Must contain characters.<BR>";
-$status= "NOTOK";}
-
-
- /*
+                                    /*
 $uploads_dir = 'uploads';
 
         $tmp_name = $_FILES["ufile"]["tmp_name"];
@@ -71,41 +82,37 @@ $uploads_dir = 'uploads';
         $random_digit=rand(0000,9999);
         $new_file_name=$random_digit.$name;
 
-        move_uploaded_file($tmp_name, "$uploads_dir/$new_file_name");*/
-
-if($status=="OK")
-{
-$qb=mysqli_query($con,"update static set stitle='$stitle', stext='$stext' where id=1");
-
-		if($qb){
-		    	$errormsg= "
+        move_uploaded_file($tmp_name, "$uploads_dir/$new_file_name");*/ if (
+                                        $status == "OK"
+                                    ) {
+                                        $qb = mysqli_query(
+                                            $con,
+                                            "update static set stitle='$stitle', stext='$stext' where id=1"
+                                        );
+                                        if ($qb) {
+                                            $errormsg = "
 <div class='alert alert-success alert-dismissible alert-outline fade show'>
                 Slider Info Updated successfully.
                   <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                   </div>
  "; //printing error if found in validation
-
-		}
-	}
-
-        elseif ($status!=="OK") {
-            $errormsg= "
+                                        }
+                                    } elseif ($status !== "OK") {
+                                        $errormsg =
+                                            "
 <div class='alert alert-danger alert-dismissible alert-outline fade show'>
-                     ".$msg." <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button> </div>"; //printing error if found in validation
-
-
-    }
-    else{
-			$errormsg= "
+                     " .
+                                            $msg .
+                                            " <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button> </div>"; //printing error if found in validation
+                                    } else {
+                                        $errormsg = "
       <div class='alert alert-danger alert-dismissible alert-outline fade show'>
                  Some Technical Glitch Is There. Please Try Again Later Or Ask Admin For Help.
                  <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                  </div>"; //printing error if found in validation
-
-
-		}
-           }
-           ?>
+                                    }
+                                }
+                                ?>
 
 
 
@@ -114,27 +121,27 @@ $qb=mysqli_query($con,"update static set stitle='$stitle', stext='$stext' where 
                                         <div class="tab-pane active" id="personalDetails" role="tabpanel">
 
                                         <?php
-					 $query="SELECT * FROM static where id=1 ";
+                                        $query =
+                                            "SELECT * FROM static where id=1 ";
+                                        $result = mysqli_query($con, $query);
+                                        $i = 0;
+                                        while (
+                                            $row = mysqli_fetch_array($result)
+                                        ) {
+                                            $stitle = "$row[stitle]";
+
+                                            $stext = "$row[stext]";
+                                        }
+                                        ?>
 
 
- $result = mysqli_query($con,$query);
-$i=0;
-while($row = mysqli_fetch_array($result))
-{
-	$stitle="$row[stitle]";
-	$stext="$row[stext]";
-}
-  ?>
 
 
-
-
-                                      <?php
-if($_SERVER['REQUEST_METHOD'] == 'POST')
-						{
-						print $errormsg;
-						}
-   ?>
+                                      <?php if (
+                                          $_SERVER["REQUEST_METHOD"] == "POST"
+                                      ) {
+                                          print $errormsg;
+                                      } ?>
               <form action="" method="post" enctype="multipart/form-data">
                                                 <div class="row">
 
@@ -142,14 +149,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
                                                     <div class="col-lg-6">
                                                         <div class="mb-3">
                                                             <label for="firstnameInput" class="form-label"> Slider Title</label>
-                                                            <input type="text" class="form-control" id="firstnameInput" name="stitle"  value="<?php print $stitle ?>">
+                                                            <input type="text" class="form-control" id="firstnameInput" name="stitle"  value="<?php print $stitle; ?>">
                                                         </div>
                                                     </div>
 
                                                     <div class="col-lg-6">
                                                         <div class="mb-3">
                                                             <label for="firstnameInput" class="form-label"> Slider Text</label>
-                                                            <input type="text" class="form-control" id="firstnameInput" name="stext"  value="<?php print $stext ?>">
+                                                            <input type="text" class="form-control" id="firstnameInput" name="stext"  value="<?php print $stext; ?>">
                                                         </div>
                                                     </div>
 
@@ -185,4 +192,4 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
             </div>
             <!-- End Page-content -->
 
-            <?php include"footer.php";?>
+            <?php include "footer.php"; ?>

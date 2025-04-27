@@ -1,6 +1,6 @@
 <?php
 include "../for/z_db.php";
-$username = $_SESSION['username'];
+$username = $_SESSION["username"];
 ?>
 <div class="app-menu navbar-menu" style="direction: rtl; text-align: right;">
   <!-- الشعار -->
@@ -13,19 +13,19 @@ $username = $_SESSION['username'];
 
     <a href="index.php" class="logo logo-dark">
       <span class="logo-sm">
-        <img src="uploads/logo/<?php echo $ufile ?>" alt="شعار" height="22">
+        <img src="uploads/logo/<?php echo $ufile; ?>" alt="شعار" height="22">
       </span>
       <span class="logo-lg">
-        <img src="uploads/logo/<?php echo $ufile ?>" alt="شعار" height="30">
+        <img src="uploads/logo/<?php echo $ufile; ?>" alt="شعار" height="30">
       </span>
     </a>
     <!-- الشعار في الوضع الفاتح -->
     <a href="index.php" class="logo logo-light">
       <span class="logo-sm">
-        <!-- <img src="uploads/logo/<?php echo $ufile ?>" alt="شعار" height="22"> -->
+        <!-- <img src="uploads/logo/<?php echo $ufile; ?>" alt="شعار" height="22"> -->
       </span>
       <span class="logo-lg">
-        <!-- <img src="uploads/logo/<?php echo $ufile ?>" alt="شعار" height="30"> -->
+        <!-- <img src="uploads/logo/<?php echo $ufile; ?>" alt="شعار" height="30"> -->
       </span>
     </a>
     <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover" id="vertical-hover">

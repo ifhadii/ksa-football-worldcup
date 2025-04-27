@@ -1,5 +1,5 @@
-<?php include"header.php";?>
-<?php include"sidebar.php";?>
+<?php include "header.php"; ?>
+<?php include "sidebar.php"; ?>
 
 <!-- ============================================================== -->
 <!-- Start right Content here -->
@@ -44,44 +44,36 @@
                                         <tbody>
 
                                         <?php
-                   $q="SELECT * FROM  testimony ORDER BY id DESC";
-
- $r123 = mysqli_query($con,$q);
-
-while($ro = mysqli_fetch_array($r123))
-{
-
-    $id="$ro[id]";
-    $name="$ro[name]";
-  $ufile="$ro[ufile]";
-
-  print "<tr>
-          <td>
-                  <img src='uploads/testimony/$ufile' alt='img' style='max-height:50px;'>
-                  </td>
-<td>
-                  $name
-                  </td>
-          <td>
-                                                    <div class='dropdown d-inline-block'>
-                                                        <button class='btn btn-soft-secondary btn-sm dropdown' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                                        $q = "SELECT * FROM  testimony ORDER BY id DESC";
+                                        $r123 = mysqli_query($con, $q);
+                                        while ($ro = mysqli_fetch_array($r123)) {
+                                            $id = "$ro[id]";
+                                            $name = "$ro[name]";
+                                            $ufile = "$ro[ufile]";
+                                            print "<tr>
+                                                    <td>
+                                                        <img src='uploads/testimony/$ufile' alt='img' style='max-height:50px;'>
+                                                    </td>
+                                                    <td>
+                                                        $name
+                                                    </td>
+                                                    <td>
+                                                        <div class='dropdown d-inline-block'>
+                                                            <button class='btn btn-soft-secondary btn-sm dropdown' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
                                                             <i class='ri-more-fill align-middle'></i>
-                                                        </button>
-                                                        <ul class='dropdown-menu dropdown-menu-end'>
- <li>
+                                                            </button>
+                                                            <ul class='dropdown-menu dropdown-menu-end'>
+                                                                <li>
                                                                 <a href='deletetest.php?id=$id' class='dropdown-item remove-item-btn'>
-                                                                    <i class='ri-delete-bin-fill align-bottom me-2 text-muted'></i> حذف
+                                                                <i class='ri-delete-bin-fill align-bottom me-2 text-muted'></i> حذف
                                                                 </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </td>
-                  </tr>";
-
-  }
-  ?>
-
-
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </td>
+                                                    </tr>";
+                                        }
+                                        ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -94,4 +86,4 @@ while($ro = mysqli_fetch_array($r123))
             </div>
             <!-- End Page-content -->
 
-            <?php include"footer.php";?>
+            <?php include "footer.php"; ?>

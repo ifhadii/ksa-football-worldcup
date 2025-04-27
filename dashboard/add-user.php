@@ -1,5 +1,5 @@
-<?php include"header.php";?>
-<?php include"sidebar.php";?>
+<?php include "header.php"; ?>
+<?php include "sidebar.php"; ?>
 
 <!-- ============================================================== -->
 <!-- Start right Content here -->
@@ -47,56 +47,107 @@
 
 
                                 <?php
-           $status = "OK"; //initial status
-$msg="";
-           if(ISSET($_POST['save'])){
-$username = mysqli_real_escape_string($con,$_POST['username']);
-$password = mysqli_real_escape_string($con,$_POST['password']);
-$role = mysqli_real_escape_string($con,$_POST['role']);
-$nod = mysqli_real_escape_string($con,$_POST['nod']);
-$nationality = mysqli_real_escape_string($con,$_POST['nationality']);
-$pod = mysqli_real_escape_string($con,$_POST['pod']);
-$dod = mysqli_real_escape_string($con,$_POST['dod']);
-$itd = mysqli_real_escape_string($con,$_POST['itd']);
-$sn = mysqli_real_escape_string($con,$_POST['sn']);
-$sc = mysqli_real_escape_string($con,$_POST['sc']);
-$nok = mysqli_real_escape_string($con,$_POST['nok']);
-$cv = mysqli_real_escape_string($con,$_POST['cv']);
-
- if ( strlen($username) < 5 ){
-$msg=$msg."Username Must Be More Than 5 Char Length.<BR>";
-$status= "NOTOK";}
- if ( strlen($password) < 5 ){
-$msg=$msg."Password Must Be More Than 5 Char Length.<BR>";
-$status= "NOTOK";}
-
-if ( strlen($nod) < 3 ){
-  $msg=$msg."Depositor's Name Must Be More Than 3 Char Length.<BR>";
-  $status= "NOTOK";}
-
-  if ( strlen($nationality) < 3 ){
-    $msg=$msg."Nationality Must Be More Than 3 Char Length.<BR>";
-    $status= "NOTOK";}
-
- if ( strlen($pod) < 3 ){
-  $msg=$msg."Purpose of Deposit Must Be More Than 3 Char Length.<BR>";
-  $status= "NOTOK";}
-
- if ( strlen($dod) < 1 ){
-  $msg=$msg."Date of Deposit Must contain a Char.<BR>";
-  $status= "NOTOK";}
-
-
-  $rr=mysqli_query($con,"SELECT COUNT(*) FROM deposit WHERE username = '$username'");
-  $r = mysqli_fetch_row($rr);
-  $nr = $r[0];
-  if($nr==1){
-  $msg=$msg."Username Already Exists. Please Try Another One.<BR>";
-  $status= "NOTOK";
-  }
-
-
- /*
+                                $status = "OK";
+                                //initial status
+                                $msg = "";
+                                if (isset($_POST["save"])) {
+                                    $username = mysqli_real_escape_string(
+                                        $con,
+                                        $_POST["username"]
+                                    );
+                                    $password = mysqli_real_escape_string(
+                                        $con,
+                                        $_POST["password"]
+                                    );
+                                    $role = mysqli_real_escape_string(
+                                        $con,
+                                        $_POST["role"]
+                                    );
+                                    $nod = mysqli_real_escape_string(
+                                        $con,
+                                        $_POST["nod"]
+                                    );
+                                    $nationality = mysqli_real_escape_string(
+                                        $con,
+                                        $_POST["nationality"]
+                                    );
+                                    $pod = mysqli_real_escape_string(
+                                        $con,
+                                        $_POST["pod"]
+                                    );
+                                    $dod = mysqli_real_escape_string(
+                                        $con,
+                                        $_POST["dod"]
+                                    );
+                                    $itd = mysqli_real_escape_string(
+                                        $con,
+                                        $_POST["itd"]
+                                    );
+                                    $sn = mysqli_real_escape_string(
+                                        $con,
+                                        $_POST["sn"]
+                                    );
+                                    $sc = mysqli_real_escape_string(
+                                        $con,
+                                        $_POST["sc"]
+                                    );
+                                    $nok = mysqli_real_escape_string(
+                                        $con,
+                                        $_POST["nok"]
+                                    );
+                                    $cv = mysqli_real_escape_string(
+                                        $con,
+                                        $_POST["cv"]
+                                    );
+                                    if (strlen($username) < 5) {
+                                        $msg =
+                                            $msg .
+                                            "Username Must Be More Than 5 Char Length.<BR>";
+                                        $status = "NOTOK";
+                                    }
+                                    if (strlen($password) < 5) {
+                                        $msg =
+                                            $msg .
+                                            "Password Must Be More Than 5 Char Length.<BR>";
+                                        $status = "NOTOK";
+                                    }
+                                    if (strlen($nod) < 3) {
+                                        $msg =
+                                            $msg .
+                                            "Depositor's Name Must Be More Than 3 Char Length.<BR>";
+                                        $status = "NOTOK";
+                                    }
+                                    if (strlen($nationality) < 3) {
+                                        $msg =
+                                            $msg .
+                                            "Nationality Must Be More Than 3 Char Length.<BR>";
+                                        $status = "NOTOK";
+                                    }
+                                    if (strlen($pod) < 3) {
+                                        $msg =
+                                            $msg .
+                                            "Purpose of Deposit Must Be More Than 3 Char Length.<BR>";
+                                        $status = "NOTOK";
+                                    }
+                                    if (strlen($dod) < 1) {
+                                        $msg =
+                                            $msg .
+                                            "Date of Deposit Must contain a Char.<BR>";
+                                        $status = "NOTOK";
+                                    }
+                                    $rr = mysqli_query(
+                                        $con,
+                                        "SELECT COUNT(*) FROM deposit WHERE username = '$username'"
+                                    );
+                                    $r = mysqli_fetch_row($rr);
+                                    $nr = $r[0];
+                                    if ($nr == 1) {
+                                        $msg =
+                                            $msg .
+                                            "Username Already Exists. Please Try Another One.<BR>";
+                                        $status = "NOTOK";
+                                    }
+                                    /*
 $uploads_dir = 'uploads';
 
         $tmp_name = $_FILES["ufile"]["tmp_name"];
@@ -106,55 +157,49 @@ $uploads_dir = 'uploads';
         $random_digit=rand(0000,9999);
         $new_file_name=$random_digit.$name;
 
-        move_uploaded_file($tmp_name, "$uploads_dir/$new_file_name");*/
-
-if($status=="OK")
-{
-$qb=mysqli_query($con,"INSERT INTO deposit (username, password, role,nod,nationality,pod,dod,itd,sn,sc,nok,cv) VALUES ('$username', '$password', '$role', '$nod', '$nationality', '$pod', '$dod', '$itd', '$sn', '$sc', '$nok', '$cv')");
-
-
-		if($qb){
-		    	$errormsg= "
+        move_uploaded_file($tmp_name, "$uploads_dir/$new_file_name");*/ if (
+                                        $status == "OK"
+                                    ) {
+                                        $qb = mysqli_query(
+                                            $con,
+                                            "INSERT INTO deposit (username, password, role,nod,nationality,pod,dod,itd,sn,sc,nok,cv) VALUES ('$username', '$password', '$role', '$nod', '$nationality', '$pod', '$dod', '$itd', '$sn', '$sc', '$nok', '$cv')"
+                                        );
+                                        if ($qb) {
+                                            $errormsg = "
 <div class='alert alert-success alert-dismissible alert-outline fade show'>
                   User has been added successfully.
                   <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                   </div>
  "; //printing error if found in validation
-
-		}
-	}
-
-        elseif ($status!=="OK") {
-            $errormsg= "
+                                        }
+                                    } elseif ($status !== "OK") {
+                                        $errormsg =
+                                            "
 <div class='alert alert-danger alert-dismissible alert-outline fade show'>
-                     ".$msg." <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button> </div>"; //printing error if found in validation
-
-
-    }
-    else{
-			$errormsg= "
+                     " .
+                                            $msg .
+                                            " <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button> </div>"; //printing error if found in validation
+                                    } else {
+                                        $errormsg = "
       <div class='alert alert-danger alert-dismissible alert-outline fade show'>
                  Some Technical Glitch Is There. Please Try Again Later Or Ask Admin For Help.
                  <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                  </div>"; //printing error if found in validation
-
-
-		}
-           }
-           ?>
+                                    }
+                                }
+                                ?>
 
 
 
                                 <div class="card-body p-4">
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="personalDetails" role="tabpanel">
-                                        <?php
-if($_SERVER['REQUEST_METHOD'] == 'POST')
-						{
-						print $errormsg;
-						}
-   ?>
-              <form action="" method="post" enctype="multipart/form-data">
+                                        <?php if (
+                                            $_SERVER["REQUEST_METHOD"] == "POST"
+                                        ) {
+                                            print $errormsg;
+                                        } ?>
+                                             <form action="" method="post" enctype="multipart/form-data">
                                                 <div class="row">
 
                                                 <div class="col-lg-6">
@@ -168,7 +213,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
                                            </div>
                                             </div>
 
-   <div class="col-lg-6">
+                                                        <div class="col-lg-6">
                                                         <div class="mb-3">
                                                             <label for="firstnameInput" class="form-label"> Username</label>
                                                             <input type="text" class="form-control" id="firstnameInput" name="username" placeholder="Enter Username">
@@ -274,4 +319,4 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
             </div>
             <!-- End Page-content -->
 
-            <?php include"footer.php";?>
+            <?php include "footer.php"; ?>

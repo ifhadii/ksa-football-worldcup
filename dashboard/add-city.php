@@ -53,93 +53,158 @@
                             </ul>
                         </div>
                         <?php
-$status = "OK";
-$msg = "";
-$city_id = 0;
-
-if (isset($_POST['save'])) {
-    // Handle city data
-    $city_title = mysqli_real_escape_string($con, $_POST['city_title']);
-    $city_desc = mysqli_real_escape_string($con, $_POST['city_desc']);
-
-    // Validation
-    if (strlen($city_title) < 5) {
-        $msg .= "🛑 عنوان المدينة يجب أن يكون أكثر من 5 أحرف.<br>";
-        $status = "NOTOK";
-    }
-    if (strlen($city_desc) > 190) {
-        $msg .= "🛑 الوصف المختصر يجب أن لا يتجاوز 190 حرفًا.<br>";
-        $status = "NOTOK";
-    }
-
-    if ($status == "OK") {
-        // Insert city data
-        $qb = mysqli_query($con, "INSERT INTO city (city_title, city_desc) VALUES ('$city_title', '$city_desc')");
-        
-        if ($qb) {
-            $city_id = mysqli_insert_id($con);
-            $errormsg = "<div class='alert alert-success alert-dismissible fade show'>✅ تم إضافة المدينة بنجاح.<button type='button' class='btn-close' data-bs-dismiss='alert'></button></div>";
-            
-            // Handle card data if city was added successfully
-            if (isset($_POST['place_name']) && is_array($_POST['place_name'])) {
-                foreach ($_POST['place_name'] as $index => $place_name) {
-                    if (!empty($place_name)) {
-                        $place_name = mysqli_real_escape_string($con, $place_name);
-                        $place_description = mysqli_real_escape_string($con, $_POST['place_description'][$index]);
-                        
-                        // Handle card image upload
-                        $card_image = '';
-                        if (!empty($_FILES["place_image"]["tmp_name"][$index])) {
-                            $uploads_dir = 'uploads/services';
-                            $tmp_name = $_FILES["place_image"]["tmp_name"][$index];
-                            $name = basename($_FILES["place_image"]["name"][$index]);
-                            $random_digit = rand(0000, 9999);
-                            $card_image = $random_digit . $name;
-                            if (!move_uploaded_file($tmp_name, "$uploads_dir/$card_image")) {
-                                $card_image = ''; // Continue without image if upload fails
+                        $status = "OK";
+                        $msg = "";
+                        $city_id = 0;
+                        if (isset($_POST["save"])) {
+                            // Handle city data
+                            $city_title = mysqli_real_escape_string(
+                                $con,
+                                $_POST["city_title"]
+                            );
+                            $city_desc = mysqli_real_escape_string(
+                                $con,
+                                $_POST["city_desc"]
+                            ); // Validation
+                            if (strlen($city_title) < 5) {
+                                $msg .=
+                                    "🛑 عنوان المدينة يجب أن يكون أكثر من 5 أحرف.<br>";
+                                $status = "NOTOK";
+                            }
+                            if (strlen($city_desc) > 190) {
+                                $msg .=
+                                    "🛑 الوصف المختصر يجب أن لا يتجاوز 190 حرفًا.<br>";
+                                $status = "NOTOK";
+                            }
+                            if ($status == "OK") {
+                                // Insert city data
+                                $qb = mysqli_query(
+                                    $con,
+                                    "INSERT INTO city (city_title, city_desc) VALUES ('$city_title', '$city_desc')"
+                                );
+                                if ($qb) {
+                                    $city_id = mysqli_insert_id($con);
+                                    $errormsg =
+                                        "<div class='alert alert-success alert-dismissible fade show'>✅ تم إضافة المدينة بنجاح.<button type='button' class='btn-close' data-bs-dismiss='alert'></button></div>"; // Handle card data if city was added successfully
+                                    if (
+                                        isset($_POST["place_name"]) &&
+                                        is_array($_POST["place_name"])
+                                    ) {
+                                        foreach (
+                                            $_POST["place_name"]
+                                            as $index => $place_name
+                                        ) {
+                                            if (!empty($place_name)) {
+                                                $place_name = mysqli_real_escape_string(
+                                                    $con,
+                                                    $place_name
+                                                );
+                                                $place_description = mysqli_real_escape_string(
+                                                    $con,
+                                                    $_POST["place_description"][
+                                                        $index
+                                                    ]
+                                                );
+                                                // Handle card image upload
+                                                $card_image = "";
+                                                if (
+                                                    !empty(
+                                                        $_FILES["place_image"][
+                                                            "tmp_name"
+                                                        ][$index]
+                                                    )
+                                                ) {
+                                                    $uploads_dir =
+                                                        "uploads/services";
+                                                    $tmp_name =
+                                                        $_FILES["place_image"][
+                                                            "tmp_name"
+                                                        ][$index];
+                                                    $name = basename(
+                                                        $_FILES["place_image"][
+                                                            "name"
+                                                        ][$index]
+                                                    );
+                                                    $random_digit = rand(
+                                                        0000,
+                                                        9999
+                                                    );
+                                                    $card_image =
+                                                        $random_digit . $name;
+                                                    if (
+                                                        !move_uploaded_file(
+                                                            $tmp_name,
+                                                            "$uploads_dir/$card_image"
+                                                        )
+                                                    ) {
+                                                        $card_image = ""; // Continue without image if upload fails
+                                                    }
+                                                }
+                                                // Insert card data
+                                                $card_query = "INSERT INTO city_cards (city_id, place_name, place_description, place_image) 
+                                      VALUES ('$city_id', '$place_name', '$place_description', '$card_image')";
+                                                $card_result = mysqli_query(
+                                                    $con,
+                                                    $card_query
+                                                );
+                                                if (!$card_result) {
+                                                    $msg .=
+                                                        "🛑 خطأ في حفظ بطاقة المكان: " .
+                                                        mysqli_error($con) .
+                                                        "<br>";
+                                                }
+                                            }
+                                        }
+                                    }
+                                    // Handle hotels if available
+                                    if (
+                                        !empty($_POST["hotel_name"]) &&
+                                        is_array($_POST["hotel_name"])
+                                    ) {
+                                        foreach (
+                                            $_POST["hotel_name"]
+                                            as $hotel_name
+                                        ) {
+                                            $hotel_name = mysqli_real_escape_string(
+                                                $con,
+                                                $hotel_name
+                                            );
+                                            if (!empty($hotel_name)) {
+                                                $hotel_insert = mysqli_query(
+                                                    $con,
+                                                    "INSERT INTO city_hotels (city_id, hotel_name) VALUES ('$city_id', '$hotel_name')"
+                                                );
+                                                if (!$hotel_insert) {
+                                                    $msg .=
+                                                        "🛑 خطأ في حفظ الفندق: " .
+                                                        mysqli_error($con) .
+                                                        "<br>";
+                                                }
+                                            }
+                                        }
+                                    }
+                                } else {
+                                    $msg .=
+                                        "🛑 خطأ في حفظ المدينة: " .
+                                        mysqli_error($con) .
+                                        "<br>";
+                                    $status = "NOTOK";
+                                }
+                            }
+                            if ($status !== "OK") {
+                                $errormsg = "<div class='alert alert-danger alert-dismissible fade show'>$msg<button type='button' class='btn-close' data-bs-dismiss='alert'></button></div>";
                             }
                         }
-                        
-                        // Insert card data
-                        $card_query = "INSERT INTO city_cards (city_id, place_name, place_description, place_image) 
-                                      VALUES ('$city_id', '$place_name', '$place_description', '$card_image')";
-                        $card_result = mysqli_query($con, $card_query);
-                        
-                        if (!$card_result) {
-                            $msg .= "🛑 خطأ في حفظ بطاقة المكان: " . mysqli_error($con) . "<br>";
-                        }
-                    }
-                }
-            }
-
-            // Handle hotels if available
-            if (!empty($_POST['hotel_name']) && is_array($_POST['hotel_name'])) {
-                foreach ($_POST['hotel_name'] as $hotel_name) {
-                    $hotel_name = mysqli_real_escape_string($con, $hotel_name);
-                    if (!empty($hotel_name)) {
-                        $hotel_insert = mysqli_query($con, "INSERT INTO city_hotels (city_id, hotel_name) VALUES ('$city_id', '$hotel_name')");
-                        if (!$hotel_insert) {
-                            $msg .= "🛑 خطأ في حفظ الفندق: " . mysqli_error($con) . "<br>";
-                        }
-                    }
-                }
-            }
-        } else {
-            $msg .= "🛑 خطأ في حفظ المدينة: " . mysqli_error($con) . "<br>";
-            $status = "NOTOK";
-        }
-    }
-    
-    if ($status !== "OK") {
-        $errormsg = "<div class='alert alert-danger alert-dismissible fade show'>$msg<button type='button' class='btn-close' data-bs-dismiss='alert'></button></div>";
-    }
-}
-?>
+                        ?>
 
                         <div class="card-body p-4">
                             <div class="tab-content">
                                 <div class="tab-pane active" id="personalDetails" role="tabpanel">
-                                    <?php if ($_SERVER['REQUEST_METHOD'] == 'POST') echo $errormsg; ?>
+                                    <?php if (
+                                        $_SERVER["REQUEST_METHOD"] == "POST"
+                                    ) {
+                                        echo $errormsg;
+                                    } ?>
 
                                     <form action="" method="post" enctype="multipart/form-data">
                                         <div class="row">

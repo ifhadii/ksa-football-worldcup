@@ -1,8 +1,7 @@
 <?php
-include"header.php";
-$todo=  mysqli_real_escape_string($con,$_GET['id']);
-include"sidebar.php";
-
+include "header.php";
+$todo = mysqli_real_escape_string($con, $_GET["id"]);
+include "sidebar.php";
 ?>
 
 <!-- ============================================================== -->
@@ -30,17 +29,16 @@ include"sidebar.php";
                     </div>
                     <!-- end page title -->
                     <?php
-					 $query="SELECT * FROM  event where id='$todo' ";
- $result = mysqli_query($con,$query);
-$i=0;
-while($row = mysqli_fetch_array($result))
-{
-	$id="$row[id]";
-	$port_title="$row[port_title]";
-	$port_desc="$row[port_desc]";
-  $port_detail="$row[port_detail]";
-}
-  ?>
+                    $query = "SELECT * FROM  event where id='$todo' ";
+                    $result = mysqli_query($con, $query);
+                    $i = 0;
+                    while ($row = mysqli_fetch_array($result)) {
+                        $id = "$row[id]";
+                        $port_title = "$row[port_title]";
+                        $port_desc = "$row[port_desc]";
+                        $port_detail = "$row[port_detail]";
+                    }
+                    ?>
 
                     <div class="row">
 
@@ -62,13 +60,22 @@ while($row = mysqli_fetch_array($result))
 
 
                                 <?php
-           $status = "OK"; //initial status
-$msg="";
-           if(ISSET($_POST['save'])){
-$service_title = mysqli_real_escape_string($con,$_POST['service_title']);
-$service_desc = mysqli_real_escape_string($con,$_POST['service_desc']);
-$service_detail = mysqli_real_escape_string($con,$_POST['service_detail']);
- /*
+                                $status = "OK"; //initial status
+                                $msg = "";
+                                if (isset($_POST["save"])) {
+                                    $service_title = mysqli_real_escape_string(
+                                        $con,
+                                        $_POST["service_title"]
+                                    );
+                                    $service_desc = mysqli_real_escape_string(
+                                        $con,
+                                        $_POST["service_desc"]
+                                    );
+                                    $service_detail = mysqli_real_escape_string(
+                                        $con,
+                                        $_POST["service_detail"]
+                                    );
+                                    /*
 $uploads_dir = 'uploads';
 
         $tmp_name = $_FILES["ufile"]["tmp_name"];
@@ -80,52 +87,47 @@ $uploads_dir = 'uploads';
 
         move_uploaded_file($tmp_name, "$uploads_dir/$new_file_name");*/
 
-if($status=="OK")
-{
-$qb=mysqli_query($con,"update event set port_title='$port_title', port_desc='$port_desc', port_detail='$port_detail' where id='$todo'");
+                                    if ($status == "OK") {
+                                        $qb = mysqli_query(
+                                            $con,
+                                            "update event set port_title='$port_title', port_desc='$port_desc', port_detail='$port_detail' where id='$todo'"
+                                        );
 
-
-		if($qb){
-		    	$errormsg= "
+                                        if ($qb) {
+                                            $errormsg = "
 <div class='alert alert-success alert-dismissible alert-outline fade show'>
                  event Updated successfully.
                   <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                   </div>
  "; //printing error if found in validation
-
-		}
-	}
-
-        elseif ($status!=="OK") {
-            $errormsg= "
+                                        }
+                                    } elseif ($status !== "OK") {
+                                        $errormsg =
+                                            "
 <div class='alert alert-danger alert-dismissible alert-outline fade show'>
-                     ".$msg." <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button> </div>"; //printing error if found in validation
-
-
-    }
-    else{
-			$errormsg= "
+                     " .
+                                            $msg .
+                                            " <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button> </div>"; //printing error if found in validation
+                                    } else {
+                                        $errormsg = "
       <div class='alert alert-danger alert-dismissible alert-outline fade show'>
                  Some Technical Glitch Is There. Please Try Again Later Or Ask Admin For Help.
                  <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                  </div>"; //printing error if found in validation
-
-
-		}
-           }
-           ?>
+                                    }
+                                }
+                                ?>
 
 
 
                                 <div class="card-body p-4">
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="personalDetails" role="tabpanel">
-                                        <?php
-if($_SERVER['REQUEST_METHOD'] == 'POST')
-						{
-						print $errormsg;
-						}
-   ?>
+                                        <?php if (
+                                            $_SERVER["REQUEST_METHOD"] == "POST"
+                                        ) {
+                                            print $errormsg;
+                                        } ?>
               <form action="" method="post" enctype="multipart/form-data">
                                                 <div class="row">
 
@@ -134,21 +136,21 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
    <div class="col-lg-6">
                                                         <div class="mb-3">
                                                             <label for="firstnameInput" class="form-label"> event Title</label>
-                                                            <input type="text" class="form-control" id="firstnameInput" name="service_title" value="<?php print $port_title ?>" placeholder="Enter event Title">
+                                                            <input type="text" class="form-control" id="firstnameInput" name="service_title" value="<?php print $port_title; ?>" placeholder="Enter event Title">
                                                         </div>
                                                     </div>
 
                                                     <div class="col-lg-6">
                                                         <div class="mb-3">
                                                             <label for="firstnameInput" class="form-label"> Short Description</label>
-                                                            <textarea class="form-control" id="exampleFormControlTextarea5" name="service_desc" rows="2"><?php print $port_desc ?></textarea>
+                                                            <textarea class="form-control" id="exampleFormControlTextarea5" name="service_desc" rows="2"><?php print $port_desc; ?></textarea>
                                                         </div>
                                                     </div>
 
                                                     <div class="col-lg-6">
                                                         <div class="mb-3">
                                                             <label for="firstnameInput" class="form-label">event Detail</label>
-                                                            <textarea class="form-control" id="exampleFormControlTextarea5" name="service_detail" rows="3"><?php print $port_detail ?></textarea>
+                                                            <textarea class="form-control" id="exampleFormControlTextarea5" name="service_detail" rows="3"><?php print $port_detail; ?></textarea>
                                                         </div>
                                                     </div>
 
@@ -186,4 +188,4 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
             </div>
             <!-- End Page-content -->
 
-            <?php include"footer.php";?>
+            <?php include "footer.php"; ?>
