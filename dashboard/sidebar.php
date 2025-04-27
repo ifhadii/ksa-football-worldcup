@@ -79,18 +79,35 @@ $username = $_SESSION["username"];
           </div>
         </li>
 
-        <!-- إدارة الروابط الاجتماعية -->
+        <!-- إدارة المستخدمين -->
         <li class="nav-item">
-          <a class="nav-link menu-link" href="#sidebarSocial" data-bs-toggle="collapse" role="button" aria-expanded="true">
-            <i class="ri-chrome-fill"></i> <span>إدارة المستخدمين </span>
+          <a class="nav-link menu-link" href="#sidebarUsers" data-bs-toggle="collapse" role="button" aria-expanded="false">
+            <i class="ri-user-fill"></i> <span>إدارة المستخدمين</span>
           </a>
-          <div class="menu-dropdown collapse" id="sidebarSocial">
+          <div class="menu-dropdown collapse" id="sidebarUsers">
             <ul class="nav nav-sm flex-column">
               <li class="nav-item">
-                <a href="createsocial" class="nav-link">إضافة مستخدم</a>
+                <a href="add-users.php?action=create" class="nav-link">إضافة مستخدم</a>
               </li>
               <li class="nav-item">
-                <a href="social" class="nav-link">قائمة المستخدمين</a>
+                <a href="manage_users.php" class="nav-link">قائمة المستخدمين</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+    <!-- إدارة المستخدمين -->
+        <li class="nav-item">
+          <a class="nav-link menu-link" href="#sidebarUsers" data-bs-toggle="collapse" role="button" aria-expanded="false">
+            <i class="ri-user-fill"></i> <span>إدارة المستخدمين</span>
+          </a>
+          <div class="menu-dropdown collapse" id="sidebarUsers">
+            <ul class="nav nav-sm flex-column">
+              <li class="nav-item">
+                <a href="add-users.php?action=create" class="nav-link">إضافة رابط</a>
+              </li>
+              <li class="nav-item">
+                <a href="manage_users.php" class="nav-link">قائمة الروابط</a>
               </li>
             </ul>
           </div>

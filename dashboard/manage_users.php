@@ -11,9 +11,8 @@ $user_query = "SELECT * FROM users";
 $user_result = mysqli_query($con, $user_query);
 ?>
 
-<!-- ============================================================== -->
-<!-- Main Content -->
-<!-- ============================================================== -->
+
+
 <div class="main-content" dir="rtl">
     <div class="page-content">
         <div class="container-fluid">
@@ -39,7 +38,7 @@ $user_result = mysqli_query($con, $user_query);
                                     <?php
                                     if (mysqli_num_rows($admin_result) > 0) {
                                         while ($admin = mysqli_fetch_assoc($admin_result)) {
-                                            echo "<tr>";
+                                            echo "<tr id='row-admin-{$admin['id']}'>";
                                             echo "<td>{$admin['id']}</td>";
                                             echo "<td>{$admin['username']}</td>";
                                             echo "<td>{$admin['email']}</td>";
@@ -49,8 +48,8 @@ $user_result = mysqli_query($con, $user_query);
                                                         تعديل
                                                     </button>
                                                     <ul class='dropdown-menu' aria-labelledby='dropdownMenuButton{$admin['id']}'>
-                                                        <li><a class='dropdown-item' href='editsocial.php?id={$admin['id']}&table=admin'>تعديل</a></li>
-                                                        <li><a class='dropdown-item' href='delete_user.php?id={$admin['id']}&table=admin' onclick='return confirm(\"هل أنت متأكد من حذف هذا المدير؟\")'>حذف</a></li>
+                                                        <li><a class='dropdown-item' href='edit_users.php?id={$admin['id']}&table=admin'>تعديل</a></li>
+                                                        <li><a class='dropdown-item' href='delete_users.php' onclick='return deleteUser({$admin['id']}, \"admin\")'>حذف</a></li>
                                                     </ul>
                                                 </div>
                                             </td>";
@@ -88,7 +87,7 @@ $user_result = mysqli_query($con, $user_query);
                                     <?php
                                     if (mysqli_num_rows($user_result) > 0) {
                                         while ($user = mysqli_fetch_assoc($user_result)) {
-                                            echo "<tr>";
+                                            echo "<tr id='row-users-{$user['user_id']}'>";
                                             echo "<td>{$user['user_id']}</td>";
                                             echo "<td>{$user['full_name']}</td>";
                                             echo "<td>{$user['email']}</td>";
@@ -98,8 +97,8 @@ $user_result = mysqli_query($con, $user_query);
                                                         تعديل
                                                     </button>
                                                     <ul class='dropdown-menu' aria-labelledby='dropdownMenuButton{$user['user_id']}'>
-                                                        <li><a class='dropdown-item' href='editsocial.php?id={$user['user_id']}&table=users'>تعديل</a></li>
-                                                        <li><a class='dropdown-item' href='delete_user.php?id={$user['user_id']}&table=users' onclick='return confirm(\"هل أنت متأكد من حذف هذا المستخدم؟\")'>حذف</a></li>
+                                                        <li><a class='dropdown-item' href='edit_users.php?id={$user['user_id']}&table=users'>تعديل</a></li>
+                                                        <li><a class='dropdown-item' href='delete_users.php' onclick='return deleteUser({$user['user_id']}, \"users\")'>حذف</a></li>
                                                     </ul>
                                                 </div>
                                             </td>";
@@ -119,5 +118,60 @@ $user_result = mysqli_query($con, $user_query);
         </div>
     </div>
 </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+function deleteUser(id, table) {
+    Swal.fire({
+        title: 'هل أنت متأكد؟',
+        text: "لن تتمكن من استعادة هذه البيانات!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'نعم، احذف!',
+        cancelButtonText: 'إلغاء',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: 'delete_users.php', // Make sure this path is correct
+                type: 'POST',
+                data: {id: id, table: table},
+                dataType: 'json',
+                success: function(response) {
+                    if(response.status === 'success') {
+                        Swal.fire({
+                            title: 'تم الحذف!',
+                            text: response.message || 'تم الحذف بنجاح',
+                            icon: 'success'
+                        }).then(() => {
+                            // Remove the row from the table
+                            $('#row-'+table+'-'+id).remove();
+                        });
+                    } else {
+                        Swal.fire({
+                            title: 'خطأ!',
+                            text: response.message || 'حدث خطأ أثناء الحذف',
+                            icon: 'error'
+                        });
+                    }
+                },
+                error: function(xhr, status, error) {
+                    Swal.fire({
+                        title: 'خطأ!',
+                        text: 'حدث خطأ في الاتصال بالخادم: ' + error + 
+                              '\nالرجاء التأكد من وجود ملف delete_users.php',
+                        icon: 'error'
+                    });
+                }
+            });
+        }
+    });
+    return false; // Prevent default action
+}
+</script>
 
 <?php include "footer.php"; ?>

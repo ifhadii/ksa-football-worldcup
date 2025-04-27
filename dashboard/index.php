@@ -6,27 +6,27 @@ $username = $_SESSION["username"];
 
 <?php include "sidebar.php"; ?>
 <!-- ============================================================== -->
-<!-- Start right Content here -->
+<!-- ابدأ المحتوى من هنا -->
 <!-- ============================================================== -->
-<div class="main-content" dir="ltr" style="margin-left: 250px;">
+<div class="main-content" dir="rtl" style="margin-right: 250px;">
     <div class="page-content">
         <div class="container-fluid">
 
-            <!-- start page title -->
+            <!-- عنوان الصفحة -->
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0">Dashboard</h4>
+                        <h4 class="mb-sm-0">لوحة التحكم</h4>
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Dashboard</li>
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">لوحة التحكم</a></li>
+                                <li class="breadcrumb-item active">لوحة التحكم</li>
                             </ol>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- end page title -->
+            <!-- نهاية عنوان الصفحة -->
 
             <div class="row">
                 <div class="col-12">
@@ -35,16 +35,16 @@ $username = $_SESSION["username"];
                             <div class="col-12">
                                 <div class="d-flex align-items-lg-center flex-lg-row flex-column">
                                     <div class="flex-grow-1">
-                                        <h4 class="fs-16 mb-1">Hello, <?php echo htmlspecialchars(
+                                        <h4 class="fs-16 mb-1">مرحباً، بالاداري <?php echo htmlspecialchars(
                                             $username
                                         ); ?></h4>
-                                        <p class="text-muted mb-0">Welcome to the Dashboard</p>
+                                        <p class="text-muted mb-0">أهلاً بك في لوحة التحكم</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Stats Cards Row -->
+                        <!-- صف بطاقات الإحصائيات -->
                         <div class="row">
                             <div class="col-lg-4 col-md-6 mb-4">
                                 <div class="card h-100">
@@ -56,7 +56,7 @@ $username = $_SESSION["username"];
                                                 </span>
                                             </div>
                                             <div class="flex-grow-1 ms-3">
-                                                <p class="text-uppercase fw-semibold fs-12 text-muted mb-1">Total Cities</p>
+                                                <p class="text-uppercase fw-semibold fs-12 text-muted mb-1">إجمالي المدن</p>
                                                 <h3>
                                                 <?php
                                                 $result = mysqli_query(
@@ -87,7 +87,7 @@ $username = $_SESSION["username"];
                                                 </span>
                                             </div>
                                             <div class="flex-grow-1 ms-3">
-                                                <p class="text-uppercase fw-semibold fs-12 text-muted mb-1">Total Events</p>
+                                                <p class="text-uppercase fw-semibold fs-12 text-muted mb-1">إجمالي الأحداث</p>
                                                 <h3>
                                                 <?php
                                                 $result = mysqli_query(
@@ -119,7 +119,7 @@ $username = $_SESSION["username"];
                                             </div>
                                             <div class="flex-grow-1 ms-3">
 
-                                                <p class="text-uppercase fw-semibold fs-12 text-muted mb-1">Total Blogs</p>
+                                                <p class="text-uppercase fw-semibold fs-12 text-muted mb-1">إجمالي الاراء</p>
                                                 <h3>
                                                 <?php
                                                 $result = mysqli_query(
@@ -140,7 +140,7 @@ $username = $_SESSION["username"];
                                 </div>
                             </div>
                         </div>
-                        <!-- End Stats Cards Row -->
+                        <!-- نهاية صف بطاقات الإحصائيات -->
 
                     </div>
                 </div>
@@ -149,8 +149,8 @@ $username = $_SESSION["username"];
         </div>
         <!-- container-fluid -->
     </div>
-    <!-- End Page-content -->
+    <!-- نهاية محتوى الصفحة -->
 </div>
-<!-- end main content-->
+<!-- نهاية المحتوى الرئيسي -->
 
 <?php include "footer.php"; ?>

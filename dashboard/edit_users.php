@@ -32,7 +32,7 @@ if ($table === 'admin') {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Process form data (if needed)
     // Then redirect:
-    header("Location: social-links.php");
+    header("Location: manage_users.php");
     exit();
 }
 
