@@ -87,10 +87,10 @@ $username = $_SESSION["username"];
           <div class="menu-dropdown collapse" id="sidebarSocial">
             <ul class="nav nav-sm flex-column">
               <li class="nav-item">
-                <a href="createsocial" class="nav-link">إضافة رابط</a>
+                <a href="createsocial" class="nav-link">إضافة مستخدم</a>
               </li>
               <li class="nav-item">
-                <a href="social" class="nav-link">قائمة الروابط</a>
+                <a href="social" class="nav-link">قائمة المستخدمين</a>
               </li>
             </ul>
           </div>

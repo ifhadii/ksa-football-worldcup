@@ -1,84 +1,123 @@
-<?php include "header.php"; ?>
-<?php include "sidebar.php"; ?>
+<?php
+include "header.php";
+include "sidebar.php";
+
+// Fetch all admins
+$admin_query = "SELECT * FROM admin";
+$admin_result = mysqli_query($con, $admin_query);
+
+// Fetch all users
+$user_query = "SELECT * FROM users";
+$user_result = mysqli_query($con, $user_query);
+?>
 
 <!-- ============================================================== -->
-<!-- بداية المحتوى الأيمن -->
+<!-- Main Content -->
 <!-- ============================================================== -->
 <div class="main-content" dir="rtl">
- <div class="page-content">
-       <div class="container-fluid">
-
-            <!-- عنوان الصفحة -->
+    <div class="page-content">
+        <div class="container-fluid">
+            
+            <!-- Admin Table -->
             <div class="row">
                 <div class="col-12">
-                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0">شبكات التواصل الاجتماعي</h4>
-
-                        <div class="page-title-left">
-                            <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="javascript: void(0);">الكل</a></li>
-                                <li class="breadcrumb-item active">التواصل</li>
-                            </ol>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <!-- نهاية عنوان الصفحة -->
-
-            <div class="row">
-                <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title mb-0">قائمة شبكات التواصل</h5>
+                            <h5 class="card-title mb-0">إدارة المدراء</h5>
                         </div>
                         <div class="card-body">
-                            <table id="example" class="table table-bordered dt-responsive nowrap table-striped align-middle" style="width:100%">
+                            <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th data-ordering="false">اسم الشبكة</th>
-                                        <th data-ordering="false">الرابط</th>
+                                        <th>#</th>
+                                        <th>اسم المدير</th>
+                                        <th>البريد الإلكتروني</th>
                                         <th>الإجراء</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-
-                                <?php
-                                $q = "SELECT * FROM social ORDER BY id DESC";
-                                $r123 = mysqli_query($con, $q);
-                                while ($ro = mysqli_fetch_array($r123)) {
-                                    $id = $ro["id"];
-                                    $name = $ro["name"];
-                                    $social_link = $ro["social_link"];
-                                    echo "<tr>
-                                        <td>$name</td>
-                                        <td><a href='$social_link' target='_blank'>$social_link</a></td>
-                                        <td>
-                                            <div class='dropdown d-inline-block'>
-                                                <button class='btn btn-soft-secondary btn-sm dropdown-toggle' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
-                                                    <i class='ri-more-fill align-middle'></i>
-                                                </button>
-                                                <ul class='dropdown-menu dropdown-menu-start'>
-                                                    <li>
-                                                        <a href='deletesocial.php?id=$id' class='dropdown-item text-danger'>
-                                                            <i class='ri-delete-bin-fill align-bottom me-2 text-muted'></i> حذف
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </td>
-                                    </tr>";
-                                }
-                                ?>
-
+                                    <?php
+                                    if (mysqli_num_rows($admin_result) > 0) {
+                                        while ($admin = mysqli_fetch_assoc($admin_result)) {
+                                            echo "<tr>";
+                                            echo "<td>{$admin['id']}</td>";
+                                            echo "<td>{$admin['username']}</td>";
+                                            echo "<td>{$admin['email']}</td>";
+                                            echo "<td>
+                                                <div class='dropdown'>
+                                                    <button class='btn btn-secondary dropdown-toggle btn-sm' type='button' id='dropdownMenuButton{$admin['id']}' data-bs-toggle='dropdown' aria-expanded='false'>
+                                                        تعديل
+                                                    </button>
+                                                    <ul class='dropdown-menu' aria-labelledby='dropdownMenuButton{$admin['id']}'>
+                                                        <li><a class='dropdown-item' href='editsocial.php?id={$admin['id']}&table=admin'>تعديل</a></li>
+                                                        <li><a class='dropdown-item' href='delete_user.php?id={$admin['id']}&table=admin' onclick='return confirm(\"هل أنت متأكد من حذف هذا المدير؟\")'>حذف</a></li>
+                                                    </ul>
+                                                </div>
+                                            </td>";
+                                            echo "</tr>";
+                                        }
+                                    } else {
+                                        echo "<tr><td colspan='4'>لا توجد بيانات للعرض</td></tr>";
+                                    }
+                                    ?>
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                </div><!-- نهاية العمود -->
-            </div><!-- نهاية الصف -->
+                </div>
+            </div>
 
-        </div><!-- نهاية الحاوية -->
-    </div><!-- نهاية محتوى الصفحة -->
+            <!-- Users Table -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">إدارة المستخدمين</h5>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>اسم المستخدم</th>
+                                        <th>البريد الإلكتروني</th>
+                                        <th>الإجراء</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    if (mysqli_num_rows($user_result) > 0) {
+                                        while ($user = mysqli_fetch_assoc($user_result)) {
+                                            echo "<tr>";
+                                            echo "<td>{$user['user_id']}</td>";
+                                            echo "<td>{$user['full_name']}</td>";
+                                            echo "<td>{$user['email']}</td>";
+                                            echo "<td>
+                                                <div class='dropdown'>
+                                                    <button class='btn btn-secondary dropdown-toggle btn-sm' type='button' id='dropdownMenuButton{$user['user_id']}' data-bs-toggle='dropdown' aria-expanded='false'>
+                                                        تعديل
+                                                    </button>
+                                                    <ul class='dropdown-menu' aria-labelledby='dropdownMenuButton{$user['user_id']}'>
+                                                        <li><a class='dropdown-item' href='editsocial.php?id={$user['user_id']}&table=users'>تعديل</a></li>
+                                                        <li><a class='dropdown-item' href='delete_user.php?id={$user['user_id']}&table=users' onclick='return confirm(\"هل أنت متأكد من حذف هذا المستخدم؟\")'>حذف</a></li>
+                                                    </ul>
+                                                </div>
+                                            </td>";
+                                            echo "</tr>";
+                                        }
+                                    } else {
+                                        echo "<tr><td colspan='4'>لا توجد بيانات للعرض</td></tr>";
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 <?php include "footer.php"; ?>
