@@ -98,16 +98,16 @@ $username = $_SESSION["username"];
 
     <!-- إدارة المستخدمين -->
         <li class="nav-item">
-          <a class="nav-link menu-link" href="#sidebarUsers" data-bs-toggle="collapse" role="button" aria-expanded="false">
-            <i class="ri-user-fill"></i> <span>إدارة المستخدمين</span>
+          <a class="nav-link menu-link" href="#sidebarUsers1" data-bs-toggle="collapse" role="button" aria-expanded="false">
+            <i class="ri-user-fill"></i> <span>إدارة شبكات التواصل الاجتماعية</span>
           </a>
-          <div class="menu-dropdown collapse" id="sidebarUsers">
+          <div class="menu-dropdown collapse" id="sidebarUsers1">
             <ul class="nav nav-sm flex-column">
               <li class="nav-item">
-                <a href="add-users.php?action=create" class="nav-link">إضافة رابط</a>
+                <a href="add-social.php?action=create" class="nav-link">إضافة رابط</a>
               </li>
               <li class="nav-item">
-                <a href="manage_users.php" class="nav-link">قائمة الروابط</a>
+                <a href="manage_social.php" class="nav-link">قائمة الروابط</a>
               </li>
             </ul>
           </div>

@@ -1,6 +1,6 @@
 <?php
 header("refresh:2;url=testimony");
-include_once "../z_db.php";
+include_once "../for/z_db.php";
 // Inialize session
 session_start();
 // Check, if username session is NOT set then this page will jump to login page
