@@ -563,7 +563,7 @@ function showImage(imageSrc) {
                         </div>
                         <div class='reviewer media mt-3'>
                             <div class='reviewer-thumb'>
-                                <img class='avatar-lg radius-100' src='../dashboard/uploads/testimony/$ufile' alt=''>
+                                <img class='avatar-lg radius-100' src='uploads/testimonials/$ufile' alt=''>
                             </div>
                             <div class='reviewer-meta media-body align-self-center mr-4'>
                                 <h5 class='reviewer-name color-primary mb-2' dir='rtl'>$name</h5>

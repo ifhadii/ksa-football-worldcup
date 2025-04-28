@@ -179,7 +179,7 @@ function deleteUser(id, table) {
                     Swal.fire({
                         title: 'خطأ!',
                         text: 'حدث خطأ في الاتصال بالخادم: ' + error + 
-                              '\nالرجاء التأكد من وجود ملف delete_users.php',
+                              '\nالرجاء التأكد من وجود ملف deletetest.php',
                         icon: 'error'
                     });
                 }

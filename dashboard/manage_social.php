@@ -3,7 +3,7 @@ include "header.php";
 include "sidebar.php";
 
 // Fetch all social links with proper column names
-$query = "SELECT * FROM social ORDER BY id";
+$query = "SELECT * FROM social";
 $result = mysqli_query($con, $query);
 
 // Check for query errors
@@ -65,7 +65,7 @@ if ($result === false) {
                                                                     </a>
                                                                 </li>
                                                                 <li>
-                                                                    <a href="javascript:void(0);" class="dropdown-item text-danger" onclick="deleteSocial(<?= $row['id'] ?>)">
+                                                                    <a href="javascript:void(0);" class="dropdown-item text-danger" onclick="confirmDelete(<?= $row['id'] ?>)">
                                                                         <i class="ri-delete-bin-fill align-bottom me-2"></i> حذف
                                                                     </a>
                                                                 </li>
@@ -98,7 +98,7 @@ if ($result === false) {
 </div>
 
 <script>
-function deleteSocial(id) {
+function confirmDelete(id) {
     Swal.fire({
         title: 'هل أنت متأكد؟',
         text: "لن تتمكن من استعادة هذه البيانات!",
@@ -111,56 +111,59 @@ function deleteSocial(id) {
         reverseButtons: true
     }).then((result) => {
         if (result.isConfirmed) {
-            $.ajax({
-                url: 'delete_social.php',
-                type: 'POST',
-                data: {id: id},
-                dataType: 'json',
-                success: function(response) {
-                    if(response.status === 'success') {
-                        Swal.fire({
-                            title: 'تم الحذف!',
-                            text: response.message || 'تم حذف الرابط الاجتماعي بنجاح',
-                            icon: 'success'
-                        }).then(() => {
-                            $('#row-social-'+id).remove();
-                            
-                            // Check if table is now empty
-                            if ($('.table tbody tr').length === 0) {
-                                $('.table').closest('.card-body').html(`
-                                    <div class="text-center py-5">
-                                        <div class="empty-state">
-                                            <i class="fas fa-share-alt fa-4x text-muted mb-4"></i>
-                                            <h4 class="text-muted">لا توجد روابط اجتماعية مسجلة</h4>
-                                            <p class="text-muted mb-4">يمكنك البدء بإضافة روابط جديدة للتواصل الاجتماعي</p>
-                                            <a href="add-social.php" class="btn btn-primary px-4">
-                                                <i class="fas fa-plus me-2"></i> إضافة رابط جديد
-                                            </a>
-                                        </div>
-                                    </div>
-                                `);
-                            }
-                        });
-                    } else {
-                        Swal.fire({
-                            title: 'خطأ!',
-                            text: response.message || 'حدث خطأ أثناء الحذف',
-                            icon: 'error'
-                        });
-                    }
-                },
-                error: function(xhr, status, error) {
-                    Swal.fire({
-                        title: 'خطأ!',
-                        text: 'حدث خطأ في الاتصال بالخادم: ' + error,
-                        icon: 'error'
-                    });
-                    console.error('AJAX Error:', status, error);
-                }
-            });
+            deleteSocial(id);
         }
     });
-    return false;
+}
+
+function deleteSocial(id) {
+    $.ajax({
+        url: 'delete_social.php',
+        type: 'POST',
+        data: {id: id},
+        dataType: 'json',
+        success: function(response) {
+            if(response.status === 'success') {
+                Swal.fire({
+                    title: 'تم الحذف!',
+                    text: response.message || 'تم حذف الرابط الاجتماعي بنجاح',
+                    icon: 'success'
+                }).then(() => {
+                    $('#row-social-'+id).remove();
+                    
+                    // Check if table is now empty
+                    if ($('.table tbody tr').length === 0) {
+                        $('.table').closest('.card-body').html(`
+                            <div class="text-center py-5">
+                                <div class="empty-state">
+                                    <i class="fas fa-share-alt fa-4x text-muted mb-4"></i>
+                                    <h4 class="text-muted">لا توجد روابط اجتماعية مسجلة</h4>
+                                    <p class="text-muted mb-4">يمكنك البدء بإضافة روابط جديدة للتواصل الاجتماعي</p>
+                                    <a href="add-social.php" class="btn btn-primary px-4">
+                                        <i class="fas fa-plus me-2"></i> إضافة رابط جديد
+                                    </a>
+                                </div>
+                            </div>
+                        `);
+                    }
+                });
+            } else {
+                Swal.fire({
+                    title: 'خطأ!',
+                    text: response.message || 'حدث خطأ أثناء الحذف',
+                    icon: 'error'
+                });
+            }
+        },
+        error: function(xhr, status, error) {
+            Swal.fire({
+                title: 'خطأ!',
+                text: 'حدث خطأ في الاتصال بالخادم: ' + error,
+                icon: 'error'
+            });
+            console.error('AJAX Error:', status, error);
+        }
+    });
 }
 </script>
 
