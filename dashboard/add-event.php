@@ -85,10 +85,7 @@
                                 );
                                 if ($qb) {
                                     $errormsg = "
-                                        <div class='alert alert-success alert-dismissible alert-outline fade show'>
-                                            تم إضافة الفعالية بنجاح.
-                                            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-                                        </div>";
+                    <div class='alert alert-success alert-dismissible fade show'>✅ تم إضافة المدينة بنجاح.<button type='button' class='btn-close' data-bs-dismiss='alert'></button></div>"; // Handle card data if city was added successfully
                                 }
                             } elseif ($status != "OK") {
                                 $errormsg = "

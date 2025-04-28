@@ -10,7 +10,7 @@ $result = mysqli_query($con, $query);
 if ($result === false) {
     die("خطأ في قاعدة البيانات: " . mysqli_error($con));
 }
-?>
+?> 
 
 <div class="main-content" dir="rtl">
     <div class="page-content">
@@ -54,13 +54,22 @@ if ($result === false) {
                                                         <span class="ms-2"><?= htmlspecialchars($row['fa']) ?></span>
                                                     </td>
                                                     <td>
-                                                        <div class="d-flex">
-                                                            <a href="edit_social.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-outline-primary me-2">
-                                                                <i class="fas fa-edit"></i> تعديل
-                                                            </a>
-                                                            <button onclick="deleteSocial(<?= $row['id'] ?>)" class="btn btn-sm btn-outline-danger">
-                                                                <i class="fas fa-trash"></i> حذف
+                                                        <div class="dropdown d-inline-block">
+                                                            <button class="btn btn-soft-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                <i class="ri-more-fill align-middle"></i>
                                                             </button>
+                                                            <ul class="dropdown-menu dropdown-menu-start">
+                                                                <li>
+                                                                    <a href="edit_social.php?id=<?= $row['id'] ?>" class="dropdown-item">
+                                                                        <i class="ri-pencil-fill align-bottom me-2 text-muted"></i> تعديل
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="javascript:void(0);" class="dropdown-item text-danger" onclick="deleteSocial(<?= $row['id'] ?>)">
+                                                                        <i class="ri-delete-bin-fill align-bottom me-2"></i> حذف
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
                                                         </div>
                                                     </td>
                                                 </tr>

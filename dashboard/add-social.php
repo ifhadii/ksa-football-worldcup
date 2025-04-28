@@ -70,10 +70,8 @@
                                 $query = mysqli_query($con, "INSERT INTO social (name, fa, social_link) VALUES ('$name', '$fa', '$social_link')");
                                 
                                 if ($query) {
-                                    $errormsg = "<div class='alert alert-success alert-dismissible alert-outline fade show'>
-                                        تم إضافة الرابط الاجتماعي بنجاح.
-                                        <button type='button' class='btn-close' data-bs-dismiss='alert'></button>
-                                    </div>";
+                                    $errormsg =                                         "<div class='alert alert-success alert-dismissible fade show'>✅ تم إضافة المدينة بنجاح.<button type='button' class='btn-close' data-bs-dismiss='alert'></button></div>"; // Handle card data if city was added successfully
+                                    ;
                                 } else {
                                     $errormsg = "<div class='alert alert-danger alert-dismissible alert-outline fade show'>
                                         حدث خطأ أثناء إضافة الرابط: " . mysqli_error($con) . "

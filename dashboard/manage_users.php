@@ -11,7 +11,7 @@ $user_query = "SELECT * FROM users";
 $user_result = mysqli_query($con, $user_query);
 ?>
 
-
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
 
 <div class="main-content" dir="rtl">
     <div class="page-content">
@@ -35,30 +35,38 @@ $user_result = mysqli_query($con, $user_query);
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php
-                                    if (mysqli_num_rows($admin_result) > 0) {
-                                        while ($admin = mysqli_fetch_assoc($admin_result)) {
-                                            echo "<tr id='row-admin-{$admin['id']}'>";
-                                            echo "<td>{$admin['id']}</td>";
-                                            echo "<td>{$admin['username']}</td>";
-                                            echo "<td>{$admin['email']}</td>";
-                                            echo "<td>
-                                                <div class='dropdown'>
-                                                    <button class='btn btn-secondary dropdown-toggle btn-sm' type='button' id='dropdownMenuButton{$admin['id']}' data-bs-toggle='dropdown' aria-expanded='false'>
-                                                        تعديل
-                                                    </button>
-                                                    <ul class='dropdown-menu' aria-labelledby='dropdownMenuButton{$admin['id']}'>
-                                                        <li><a class='dropdown-item' href='edit_users.php?id={$admin['id']}&table=admin'>تعديل</a></li>
-                                                        <li><a class='dropdown-item' href='delete_users.php' onclick='return deleteUser({$admin['id']}, \"admin\")'>حذف</a></li>
-                                                    </ul>
-                                                </div>
-                                            </td>";
-                                            echo "</tr>";
-                                        }
-                                    } else {
-                                        echo "<tr><td colspan='4'>لا توجد بيانات للعرض</td></tr>";
-                                    }
-                                    ?>
+                                <?php
+if (mysqli_num_rows($admin_result) > 0) {
+    while ($admin = mysqli_fetch_assoc($admin_result)) {
+        echo "<tr id='row-admin-{$admin['id']}'>";
+        echo "<td>{$admin['id']}</td>";
+        echo "<td>{$admin['username']}</td>";
+        echo "<td>{$admin['email']}</td>";
+        echo "<td>
+            <div class='dropdown d-inline-block'>
+                <button class='btn btn-soft-secondary btn-sm dropdown-toggle' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                    <i class='ri-more-fill align-middle'></i>
+                </button>
+                <ul class='dropdown-menu dropdown-menu-start'>
+                    <li>
+                        <a href='edit_users.php?id={$admin['id']}&table=admin' class='dropdown-item'>
+                            <i class='ri-pencil-fill align-bottom me-2 text-muted'></i> تعديل
+                        </a>
+                    </li>
+                    <li>
+                        <a href='javascript:void(0);' class='dropdown-item text-danger' onclick='deleteUser({$admin['id']}, \"admin\")'>
+                            <i class='ri-delete-bin-fill align-bottom me-2'></i> حذف
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </td>";
+        echo "</tr>";
+    }
+} else {
+    echo "<tr><td colspan='4'>لا توجد بيانات للعرض</td></tr>";
+}
+?>
                                 </tbody>
                             </table>
                         </div>
@@ -84,30 +92,38 @@ $user_result = mysqli_query($con, $user_query);
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php
-                                    if (mysqli_num_rows($user_result) > 0) {
-                                        while ($user = mysqli_fetch_assoc($user_result)) {
-                                            echo "<tr id='row-users-{$user['user_id']}'>";
-                                            echo "<td>{$user['user_id']}</td>";
-                                            echo "<td>{$user['full_name']}</td>";
-                                            echo "<td>{$user['email']}</td>";
-                                            echo "<td>
-                                                <div class='dropdown'>
-                                                    <button class='btn btn-secondary dropdown-toggle btn-sm' type='button' id='dropdownMenuButton{$user['user_id']}' data-bs-toggle='dropdown' aria-expanded='false'>
-                                                        تعديل
-                                                    </button>
-                                                    <ul class='dropdown-menu' aria-labelledby='dropdownMenuButton{$user['user_id']}'>
-                                                        <li><a class='dropdown-item' href='edit_users.php?id={$user['user_id']}&table=users'>تعديل</a></li>
-                                                        <li><a class='dropdown-item' href='delete_users.php' onclick='return deleteUser({$user['user_id']}, \"users\")'>حذف</a></li>
-                                                    </ul>
-                                                </div>
-                                            </td>";
-                                            echo "</tr>";
-                                        }
-                                    } else {
-                                        echo "<tr><td colspan='4'>لا توجد بيانات للعرض</td></tr>";
-                                    }
-                                    ?>
+                                <?php
+                                            if (mysqli_num_rows($user_result) > 0) {
+                                                while ($user = mysqli_fetch_assoc($user_result)) {
+                                                    echo "<tr id='row-users-{$user['user_id']}'>";
+                                                    echo "<td>{$user['user_id']}</td>";
+                                                    echo "<td>{$user['full_name']}</td>";
+                                                    echo "<td>{$user['email']}</td>";
+                                                    echo "<td>
+                                                        <div class='dropdown d-inline-block'>
+                                                            <button class='btn btn-soft-secondary btn-sm dropdown-toggle' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                                                                <i class='ri-more-fill align-middle'></i>
+                                                            </button>
+                                                            <ul class='dropdown-menu dropdown-menu-start'>
+                                                                <li>
+                                                                    <a href='edit_users.php?id={$user['user_id']}&table=users' class='dropdown-item'>
+                                                                        <i class='ri-pencil-fill align-bottom me-2 text-muted'></i> تعديل
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href='javascript:void(0);' class='dropdown-item text-danger' onclick='deleteUser({$user['user_id']}, \"users\")'>
+                                                                        <i class='ri-delete-bin-fill align-bottom me-2'></i> حذف
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </td>";
+                                                    echo "</tr>";
+                                                }
+                                            } else {
+                                                echo "<tr><td colspan='4'>لا توجد بيانات للعرض</td></tr>";
+                                            }
+                                            ?>
                                 </tbody>
                             </table>
                         </div>
