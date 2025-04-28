@@ -3,7 +3,7 @@ include "../for/z_db.php";
 $username = $_SESSION["username"];
 ?>
 
-<style>
+<!-- <style>
   /* Add this to your CSS file */
 .app-menu {
     right: 0;
@@ -33,7 +33,7 @@ $username = $_SESSION["username"];
     .main-content {
         margin-right: 0;
     }
-}
+} -->
 </style>
 <div class="app-menu navbar-menu" style="direction: ltr; text-align: left;">
   <!-- الشعار -->
