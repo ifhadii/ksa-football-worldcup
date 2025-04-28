@@ -12,6 +12,9 @@ if ($result === false) {
 }
 ?> 
 
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+<link href="assets/css/rtl.css" rel="stylesheet" type="text/css" />
+
 <div class="main-content" dir="rtl">
     <div class="page-content">
         <div class="container-fluid">
@@ -20,22 +23,22 @@ if ($result === false) {
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between align-items-center">
-                                <h5 class="card-title mb-0">إدارة الروابط الاجتماعية</h5>
+                                <h4 class="card-title mb-0">إدارة الروابط الاجتماعية</h4>
                                 <a href="add-social.php" class="btn btn-primary">
-                                    <i class="fas fa-plus me-1"></i> إضافة جديد
+                                    <i class="ri-add-line align-bottom me-1"></i> إضافة جديد
                                 </a>
                             </div>
                         </div>
                         <div class="card-body">
                             <?php if (mysqli_num_rows($result) > 0) { ?>
                                 <div class="table-responsive">
-                                    <table class="table table-striped table-hover">
+                                    <table class="table table-striped table-hover table-bordered">
                                         <thead class="table-light">
                                             <tr>
                                                 <th width="5%">#</th>
                                                 <th width="20%">المنصة</th>
-                                                <th width="25%">الرابط</th>
-                                                <th width="15%">الأيقونة</th>
+                                                <th width="30%">الرابط</th>
+                                                <th width="20%">الأيقونة</th>
                                                 <th width="15%">الإجراءات</th>
                                             </tr>
                                         </thead>
@@ -43,25 +46,25 @@ if ($result === false) {
                                             <?php while ($row = mysqli_fetch_assoc($result)) { ?>
                                                 <tr id="row-social-<?= $row['id'] ?>">
                                                     <td><?= $row['id'] ?></td>
-                                                    <td><?= htmlspecialchars($row['name']) ?></td>
+                                                    <td class="fw-semibold"><?= htmlspecialchars($row['name']) ?></td>
                                                     <td>
-                                                        <a href="<?= htmlspecialchars($row['social_link']) ?>" target="_blank" class="text-truncate d-inline-block" style="max-width: 200px;">
+                                                        <a href="<?= htmlspecialchars($row['social_link']) ?>" target="_blank" class="text-truncate d-inline-block" style="max-width: 250px;">
                                                             <?= htmlspecialchars($row['social_link']) ?>
                                                         </a>
                                                     </td>
                                                     <td>
-                                                        <i class="fas <?= htmlspecialchars($row['fa']) ?> fa-lg"></i>
-                                                        <span class="ms-2"><?= htmlspecialchars($row['fa']) ?></span>
+                                                        <i class="<?= htmlspecialchars($row['fa']) ?> align-middle me-2"></i>
+                                                        <span><?= htmlspecialchars($row['fa']) ?></span>
                                                     </td>
                                                     <td>
-                                                        <div class="dropdown d-inline-block">
+                                                        <div class="dropdown">
                                                             <button class="btn btn-soft-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                                <i class="ri-more-fill align-middle"></i>
+                                                                <i class="ri-more-2-fill"></i>
                                                             </button>
-                                                            <ul class="dropdown-menu dropdown-menu-start">
+                                                            <ul class="dropdown-menu dropdown-menu-end">
                                                                 <li>
                                                                     <a href="edit_social.php?id=<?= $row['id'] ?>" class="dropdown-item">
-                                                                        <i class="ri-pencil-fill align-bottom me-2 text-muted"></i> تعديل
+                                                                        <i class="ri-pencil-fill align-bottom me-2"></i> تعديل
                                                                     </a>
                                                                 </li>
                                                                 <li>
@@ -79,14 +82,12 @@ if ($result === false) {
                                 </div>
                             <?php } else { ?>
                                 <div class="text-center py-5">
-                                    <div class="empty-state">
-                                        <i class="fas fa-share-alt fa-4x text-muted mb-4"></i>
-                                        <h4 class="text-muted">لا توجد روابط اجتماعية مسجلة</h4>
-                                        <p class="text-muted mb-4">يمكنك البدء بإضافة روابط جديدة للتواصل الاجتماعي</p>
-                                        <a href="add-social.php" class="btn btn-primary px-4">
-                                            <i class="fas fa-plus me-2"></i> إضافة رابط جديد
-                                        </a>
-                                    </div>
+                                    <i class="ri-share-line display-4 text-muted mb-4"></i>
+                                    <h4 class="text-muted">لا توجد روابط اجتماعية مسجلة</h4>
+                                    <p class="text-muted mb-4">يمكنك البدء بإضافة روابط جديدة للتواصل الاجتماعي</p>
+                                    <a href="add-social.php" class="btn btn-primary px-4">
+                                        <i class="ri-add-line me-2"></i> إضافة رابط جديد
+                                    </a>
                                 </div>
                             <?php } ?>
                         </div>
@@ -97,6 +98,8 @@ if ($result === false) {
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 function confirmDelete(id) {
     Swal.fire({
@@ -104,64 +107,69 @@ function confirmDelete(id) {
         text: "لن تتمكن من استعادة هذه البيانات!",
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
         confirmButtonText: 'نعم، احذف!',
         cancelButtonText: 'إلغاء',
+        customClass: {
+            confirmButton: 'btn btn-danger me-2',
+            cancelButton: 'btn btn-secondary'
+        },
+        buttonsStyling: false,
         reverseButtons: true
     }).then((result) => {
         if (result.isConfirmed) {
-            deleteSocial(id);
-        }
-    });
-}
-
-function deleteSocial(id) {
-    $.ajax({
-        url: 'delete_social.php',
-        type: 'POST',
-        data: {id: id},
-        dataType: 'json',
-        success: function(response) {
-            if(response.status === 'success') {
-                Swal.fire({
-                    title: 'تم الحذف!',
-                    text: response.message || 'تم حذف الرابط الاجتماعي بنجاح',
-                    icon: 'success'
-                }).then(() => {
-                    $('#row-social-'+id).remove();
-                    
-                    // Check if table is now empty
-                    if ($('.table tbody tr').length === 0) {
-                        $('.table').closest('.card-body').html(`
-                            <div class="text-center py-5">
-                                <div class="empty-state">
-                                    <i class="fas fa-share-alt fa-4x text-muted mb-4"></i>
-                                    <h4 class="text-muted">لا توجد روابط اجتماعية مسجلة</h4>
-                                    <p class="text-muted mb-4">يمكنك البدء بإضافة روابط جديدة للتواصل الاجتماعي</p>
-                                    <a href="add-social.php" class="btn btn-primary px-4">
-                                        <i class="fas fa-plus me-2"></i> إضافة رابط جديد
-                                    </a>
-                                </div>
-                            </div>
-                        `);
+            $.ajax({
+                url: 'delete_social.php',
+                type: 'POST',
+                data: {id: id},
+                dataType: 'json',
+                success: function(response) {
+                    if(response.status === 'success') {
+                        Swal.fire({
+                            title: 'تم الحذف!',
+                            text: response.message || 'تم حذف الرابط الاجتماعي بنجاح',
+                            icon: 'success',
+                            customClass: {
+                                confirmButton: 'btn btn-success'
+                            }
+                        }).then(() => {
+                            $('#row-social-'+id).fadeOut(300, function() {
+                                $(this).remove();
+                                if ($('tbody tr').length === 0) {
+                                    $('.card-body').html(`
+                                        <div class="text-center py-5">
+                                            <i class="ri-share-line display-4 text-muted mb-4"></i>
+                                            <h4 class="text-muted">لا توجد روابط اجتماعية مسجلة</h4>
+                                            <p class="text-muted mb-4">يمكنك البدء بإضافة روابط جديدة للتواصل الاجتماعي</p>
+                                            <a href="add-social.php" class="btn btn-primary px-4">
+                                                <i class="ri-add-line me-2"></i> إضافة رابط جديد
+                                            </a>
+                                        </div>
+                                    `);
+                                }
+                            });
+                        });
+                    } else {
+                        Swal.fire({
+                            title: 'خطأ!',
+                            text: response.message || 'حدث خطأ أثناء الحذف',
+                            icon: 'error',
+                            customClass: {
+                                confirmButton: 'btn btn-danger'
+                            }
+                        });
                     }
-                });
-            } else {
-                Swal.fire({
-                    title: 'خطأ!',
-                    text: response.message || 'حدث خطأ أثناء الحذف',
-                    icon: 'error'
-                });
-            }
-        },
-        error: function(xhr, status, error) {
-            Swal.fire({
-                title: 'خطأ!',
-                text: 'حدث خطأ في الاتصال بالخادم: ' + error,
-                icon: 'error'
+                },
+                error: function(xhr, status, error) {
+                    Swal.fire({
+                        title: 'خطأ!',
+                        text: 'حدث خطأ في الاتصال بالخادم: ' + error,
+                        icon: 'error',
+                        customClass: {
+                            confirmButton: 'btn btn-danger'
+                        }
+                    });
+                }
             });
-            console.error('AJAX Error:', status, error);
         }
     });
 }

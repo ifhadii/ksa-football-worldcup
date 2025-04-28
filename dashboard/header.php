@@ -6,7 +6,6 @@ header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 
-include "z_db.php";
 
 session_start();
 // Check, if username session is NOT set then this page will jump to login page
@@ -79,18 +78,18 @@ if (isset($_SESSION["username"])) {
                         <div class="navbar-brand-box horizontal-logo">
                             <a href="index.php" class="logo logo-dark">
                                 <span class="logo-sm">
-                                    <img src="assets/images/logo-sm.png" alt="شعار فوغ" height="22">
+                                    <!-- <img src="assets/images/logo-sm.png" alt="شعار فوغ" height="22"> -->
                                 </span>
                                 <span class="logo-lg">
-                                    <img src="assets/images/logo-dark.png" alt="شعار فوغ" height="17">
+                                    <!-- <img src="assets/images/logo-dark.png" alt="شعار فوغ" height="17"> -->
                                 </span>
                             </a>
                             <a href="index.php" class="logo logo-light">
                                 <span class="logo-sm">
-                                    <img src="assets/images/logo-sm.png" alt="شعار فوغ" height="22">
+                                    <!-- <img src="assets/images/logo-sm.png" alt="شعار فوغ" height="22"> -->
                                 </span>
                                 <span class="logo-lg">
-                                    <img src="assets/images/logo-light.png" alt="شعار فوغ" height="17">
+                                    <!-- <img src="assets/images/logo-light.png" alt="شعار فوغ" height="17"> -->
                                 </span>
                             </a>
                         </div>

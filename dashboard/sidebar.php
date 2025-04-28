@@ -2,7 +2,40 @@
 include "../for/z_db.php";
 $username = $_SESSION["username"];
 ?>
-<div class="app-menu navbar-menu" style="direction: rtl; text-align: right;">
+
+<style>
+  /* Add this to your CSS file */
+.app-menu {
+    right: 0;
+    left: auto;
+    border-right: none;
+    border-left: 1px solid #eff0f2;
+}
+
+.main-content {
+    margin-right: 250px; /* Instead of margin-left */
+    margin-left: 0;
+}
+
+/* For collapsed state */
+.app-menu.d-none + .main-content {
+    margin-right: 0;
+}
+
+/* Mobile view adjustments */
+@media (max-width: 991.98px) {
+    .app-menu {
+        right: -250px;
+    }
+    .app-menu.show {
+        right: 0;
+    }
+    .main-content {
+        margin-right: 0;
+    }
+}
+</style>
+<div class="app-menu navbar-menu" style="direction: ltr; text-align: left;">
   <!-- الشعار -->
   <div class="navbar-brand-box">
     <?php
@@ -47,7 +80,7 @@ $username = $_SESSION["username"];
 
         <!-- إدارة المدن -->
         <li class="nav-item">
-          <a class="nav-link menu-link" href="#sidebarCity" data-bs-toggle="collapse" role="button" aria-expanded="true">
+          <a class="nav-link menu-link" href="#sidebarCity" data-bs-toggle="collapse" role="button" aria-expanded="false">
             <i class="ri-checkbox-multiple-line"></i> <span>إدارة المدن</span>
           </a>
           <div class="menu-dropdown collapse" id="sidebarCity">
@@ -64,7 +97,7 @@ $username = $_SESSION["username"];
 
         <!-- إدارة الفعاليات -->
         <li class="nav-item">
-          <a class="nav-link menu-link" href="#sidebarEvent" data-bs-toggle="collapse" role="button" aria-expanded="true">
+          <a class="nav-link menu-link" href="#sidebarEvent" data-bs-toggle="collapse" role="button" aria-expanded="false">
             <i class="ri-rhythm-fill"></i> <span>إدارة الفعاليات</span>
           </a>
           <div class="menu-dropdown collapse" id="sidebarEvent">
@@ -82,7 +115,7 @@ $username = $_SESSION["username"];
         <!-- إدارة المستخدمين -->
         <li class="nav-item">
           <a class="nav-link menu-link" href="#sidebarUsers" data-bs-toggle="collapse" role="button" aria-expanded="false">
-            <i class="ri-user-fill"></i> <span>إدارة المستخدمين</span>
+          <i class="ri-user-fill"></i> <span>إدارة المستخدمين</span>
           </a>
           <div class="menu-dropdown collapse" id="sidebarUsers">
             <ul class="nav nav-sm flex-column">
@@ -96,10 +129,10 @@ $username = $_SESSION["username"];
           </div>
         </li>
 
-    <!-- إدارة المستخدمين -->
+    <!-- إدارة شبكات التواصل الاجتماعية -->
         <li class="nav-item">
           <a class="nav-link menu-link" href="#sidebarUsers1" data-bs-toggle="collapse" role="button" aria-expanded="false">
-            <i class="ri-user-fill"></i> <span>إدارة شبكات التواصل الاجتماعية</span>
+            <i class="ri-global-fill"></i> <span style="white-space: nowrap;">إدارة شبكات التواصل الاجتماعية</span>
           </a>
           <div class="menu-dropdown collapse" id="sidebarUsers1">
             <ul class="nav nav-sm flex-column">
@@ -115,7 +148,7 @@ $username = $_SESSION["username"];
 
         <!-- إدارة الآراء -->
         <li class="nav-item">
-          <a class="nav-link menu-link" href="#sidebarTestimony" data-bs-toggle="collapse" role="button" aria-expanded="true">
+          <a class="nav-link menu-link" href="#sidebarTestimony" data-bs-toggle="collapse" role="button" aria-expanded="false">
             <i class="ri-message-line"></i> <span>إدارة الآراء</span>
           </a>
           <div class="menu-dropdown collapse" id="sidebarTestimony">

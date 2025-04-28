@@ -5,7 +5,7 @@ include "z_db.php";
 session_start();
 
 // Check if user is NOT logged in
-if (!isset($_SESSION['user_id'])) {
+if (isset($_SESSION['user_id'])) {
     echo json_encode(['status' => 'error', 'message' => 'غير مسموح بالوصول - يرجى تسجيل الدخول']);
     exit();
 }
