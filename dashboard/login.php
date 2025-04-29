@@ -1,6 +1,6 @@
 
 <?php
-include_once "../for/z_db.php";
+include_once "z_db.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["username"])) {
     $status = "OK"; //initial status

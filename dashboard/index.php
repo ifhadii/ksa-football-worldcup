@@ -269,6 +269,70 @@ h4 {
                                 </div>
                             </div>
 
+
+                            <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar-sm flex-shrink-0">
+                                                <span class="avatar-title bg-light text-primary rounded-circle fs-3">
+                                                    <i class="ri-server-line"></i>
+                                                </span>
+                                            </div>
+                                            <div class="flex-grow-1 ms-3">
+                                                <p class="text-uppercase fw-semibold fs-12 text-muted mb-1">إجمالي المستخدمين</p>
+                                                <h3>
+                                                <?php
+                                                $result = mysqli_query(
+                                                    $con,
+                                                    "SELECT count(user_id) FROM users"
+                                                );
+                                                $numrows = $result
+                                                    ? mysqli_fetch_row(
+                                                        $result
+                                                    )[0]
+                                                    : 0;
+                                                echo $numrows;
+                                                ?>
+                                                </h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar-sm flex-shrink-0">
+                                                <span class="avatar-title bg-light text-primary rounded-circle fs-3">
+                                                    <i class="ri-server-line"></i>
+                                                </span>
+                                            </div>
+                                            <div class="flex-grow-1 ms-3">
+                                                <p class="text-uppercase fw-semibold fs-12 text-muted mb-1">إجمالي الإداريين</p>
+                                                <h3>
+                                                <?php
+                                                $result = mysqli_query(
+                                                    $con,
+                                                    "SELECT count(id) FROM admin"
+                                                );
+                                                $numrows = $result
+                                                    ? mysqli_fetch_row(
+                                                        $result
+                                                    )[0]
+                                                    : 0;
+                                                echo $numrows;
+                                                ?>
+                                                </h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="col-lg-4 col-md-6 mb-4">
                                 <div class="card h-100">
                                     <div class="card-body">

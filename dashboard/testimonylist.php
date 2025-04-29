@@ -21,7 +21,7 @@ $testimony_result = mysqli_query($con, $testimony_query);
                         <div class="card-header">
                             <div class="d-flex justify-content-between align-items-center">
                                 <h4 class="card-title mb-0">إدارة الشهادات</h4>
-                                <a href="add_testimony.php" class="btn btn-primary">
+                                <a href="add-testimony.php" class="btn btn-primary">
                                     <i class="ri-add-line align-bottom me-1"></i> إضافة شهادة جديدة
                                 </a>
                             </div>

@@ -23,11 +23,11 @@ if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
 
     // Get user details
-    $user_query = mysqli_query($con, "SELECT email, username, admin_chc FROM users WHERE user_id = '$user_id'");
+    $user_query = mysqli_query($con, "SELECT email, full_name FROM users WHERE user_id = '$user_id'");
     if ($user_query && mysqli_num_rows($user_query) > 0) {
         $user_data = mysqli_fetch_assoc($user_query);
         $user_email = $user_data['email'];
-        $user_username = $user_data['username'];
+        $user_username = $user_data['full_name'];
     }
 }
 ?>

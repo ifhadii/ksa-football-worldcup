@@ -50,7 +50,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     }
                 });
               </script>';
-        exit();
     } else {
         echo '<script>
                 Swal.fire({
@@ -65,22 +64,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 ?>
+
 <style>
     .main-content {
-    margin-left: 250px; /* Adjust based on your sidebar width */
-    width: calc(100% - 250px);
-    padding: 20px;
-}
+        margin-left: 250px;
+        width: calc(100% - 250px);
+        padding: 20px;
+    }
 </style>
+
 <div class="main-content" dir="rtl">
     <div class="page-content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <br>
-                    <br>
-                    <br>
-                    <br>
+                    <br><br><br><br>
                     <div class="card">
                         <div class="card-header">
                             <h5 class="card-title mb-0">تعديل رابط اجتماعي</h5>
@@ -145,7 +143,9 @@ document.getElementById('editForm').addEventListener('submit', function(e) {
             title: 'خطأ في الأيقونة',
             text: 'يجب أن تبدأ أيقونة Font Awesome بـ fa-',
             icon: 'error',
-            confirmButtonText: 'حسناً'
+            confirmButtonText: 'حسناً',
+            background: "#f8f9fa",
+            iconColor: "#dc3545"
         });
         faInput.focus();
     }

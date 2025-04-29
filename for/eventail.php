@@ -120,9 +120,6 @@ $event_date = htmlspecialchars($event['updated_at']);
                         <a href="event.php" class="btn btn-primary">
                             <i class="fas fa-arrow-right me-2"></i>عودة إلى الفعاليات
                         </a>
-                        <a href="event.php" class="btn btn-primary">
-                            <i class="fas fa-arrow-right me-2"></i>عودة إلى الفعاليات
-                        </a>
                     </div>
                 </div>
             </div>

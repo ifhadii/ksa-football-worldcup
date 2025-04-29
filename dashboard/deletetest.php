@@ -6,7 +6,7 @@ include "z_db.php";
 session_start();
 
 // Check if user is admin (adjust according to your auth system)
-if (isset($_SESSION['user_id'])) {
+if (isset($_SESSION['id'])) {
     echo json_encode(['status' => 'error', 'message' => 'غير مسموح بالوصول']);
     exit();
 }

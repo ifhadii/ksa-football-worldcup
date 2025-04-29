@@ -129,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     <small class="text-muted">اتركه فارغاً إذا كنت لا تريد تغيير الصورة</small>
                                     <?php if ($testimony['ufile']): ?>
                                         <div class="mt-2">
-                                            <img src="uploads/testimony/<?= htmlspecialchars($testimony['ufile']) ?>" 
+                                            <img src="../for/uploads/testimony/<?= htmlspecialchars($testimony['ufile']) ?>" 
                                                  alt="الصورة الحالية" style="max-height: 100px;">
                                         </div>
                                     <?php endif; ?>

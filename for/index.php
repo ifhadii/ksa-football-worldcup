@@ -57,9 +57,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
-
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous"> -->
+<!-- Add this to your <head> -->
 <!-- Modal Dialog -->
 <div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -303,7 +302,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="section-heading text-center">
                 <h2 class="mb-3" style="color:rgb(9, 128, 68);">فعاليات كأس العالم 2034</h2>
                 <p class="d-none d-sm-block mt-4">استكشف أبرز المواقع، الفعاليات، والمشاريع التي ستُضيء المملكة خلال هذا الحدث التاريخي.</p>
-
                 </div>
             </div>
         </div>
@@ -314,32 +312,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $q = "SELECT * FROM event ORDER BY id ASC LIMIT 6";
                 $r123 = mysqli_query($con, $q);
                 while ($ro = mysqli_fetch_array($r123)) {
+                    $id = $ro['id']; // THIS WAS MISSING
                     $name = $ro['port_title'];
                     $position = $ro['port_desc'];
                     $message = $ro['port_desc'];
                     $ufile = $ro['ufile'];
                     echo "
-                    <div class='card mb-3' dir='rtl' style='max-width: 700px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-radius: 0; border: none;'>
-                        <div class='row g-0' style='display: flex; flex-direction: row-reverse;'>
-                            <div class='col-md-4'>
-                                <img src='../dashboard/uploads/event/$ufile' class='card-img h-100' alt='$name' style='object-fit: cover; border-radius: 0;'>
+                    <div class='card' style='width: 18rem; height: 400px;'>
+                        <img class='card-img-top' src='../dashboard/uploads/event/$ufile' alt='$name' style='height: 200px; object-fit: cover;'>
+                        <div class='card-body d-flex flex-column' style='height: 200px;'>
+                            <div>
+                                <h5 class='card-title'>$name</h5>
+                                <p class='card-text'>$position</p>
                             </div>
-                            <div class='col-md-8 d-flex flex-column justify-content-between'>
-                                <div class='card-body' style='padding: 1.25rem;'>
-                                    <h5 class='card-title' style='color: #1a73e8; font-weight: 600; margin-bottom: 0.5rem;'>$name</h5>
-                                    <h6 class='card-subtitle mb-2 text-muted'>$position</h6>
-                                    <p class='card-text' style='color: #333;'>$message</p>
-                                </div>
-                                <div class='card-footer bg-transparent border-top-0' style='padding: 0.75rem 1.25rem; text-align: left;'>
-                                    <a href='eventail.php?id=$id' class='btn btn-primary btn-sm'>
-                                        التفاصيل <i class='fas fa-arrow-left ms-2'></i>
-                                    </a>
-                                </div>
+                            <div class='mt-auto'>
+                                <a href='eventail.php?id=$id' class='btn btn-primary'>التفاصيل</a>
                             </div>
                         </div>
                     </div>
                     ";
-                
                 }
                 ?>
             </div>
@@ -687,8 +678,6 @@ function showImage(imageSrc) {
 </section>
 <!--====== Contact Area End ======-->
 
-<!-- Swiper CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 
