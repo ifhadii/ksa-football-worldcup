@@ -65,12 +65,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 ?>
-
+<style>
+    .main-content {
+    margin-left: 250px; /* Adjust based on your sidebar width */
+    width: calc(100% - 250px);
+    padding: 20px;
+}
+</style>
 <div class="main-content" dir="rtl">
     <div class="page-content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
                     <div class="card">
                         <div class="card-header">
                             <h5 class="card-title mb-0">تعديل رابط اجتماعي</h5>

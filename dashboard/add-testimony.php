@@ -63,7 +63,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 ?>
-
 <div class="main-content">
     <div class="page-content">
         <div class="container-fluid">

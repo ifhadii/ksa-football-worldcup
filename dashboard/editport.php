@@ -4,188 +4,135 @@ $todo = mysqli_real_escape_string($con, $_GET["id"]);
 include "sidebar.php";
 ?>
 
-<!-- ============================================================== -->
-<!-- Start right Content here -->
-<!-- ============================================================== -->
+<!-- Main Content Wrapper -->
 <div class="main-content">
- <div class="page-content">
-       <div class="container-fluid">
-
-                    <!-- start page title -->
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                <h4 class="mb-sm-0">Edit event</h4>
-
-                                <div class="page-title-right">
-                                    <ol class="breadcrumb m-0">
-                                        <li class="breadcrumb-item"><a href="javascript: void(0);">User</a></li>
-                                        <li class="breadcrumb-item active">event</li>
-                                    </ol>
-                                </div>
-
-                            </div>
+    <div class="page-content">
+        <div class="container-fluid">
+            <!-- Page Title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 class="mb-sm-0">Edit Event</h4>
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">User</a></li>
+                                <li class="breadcrumb-item active">Event</li>
+                            </ol>
                         </div>
                     </div>
-                    <!-- end page title -->
-                    <?php
-                    $query = "SELECT * FROM  event where id='$todo' ";
-                    $result = mysqli_query($con, $query);
-                    $i = 0;
-                    while ($row = mysqli_fetch_array($result)) {
-                        $id = "$row[id]";
-                        $port_title = "$row[port_title]";
-                        $port_desc = "$row[port_desc]";
-                        $port_detail = "$row[port_detail]";
-                    }
-                    ?>
-
-                    <div class="row">
-
-                        <!--end col-->
-                        <div class="col-xxl-9">
-                            <div class="card mt-xxl-n5">
-                                <div class="card-header">
-                                    <ul class="nav nav-tabs-custom rounded card-header-tabs border-bottom-0" role="tablist">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" data-bs-toggle="tab" href="#personalDetails" role="tab" aria-selected="false">
-                                                <i class="fas fa-home"></i> Edit event
-                                            </a>
-                                        </li>
-
-
-                                    </ul>
-                                </div>
-
-
-
-                                <?php
-                                $status = "OK"; //initial status
-                                $msg = "";
-                                if (isset($_POST["save"])) {
-                                    $service_title = mysqli_real_escape_string(
-                                        $con,
-                                        $_POST["service_title"]
-                                    );
-                                    $service_desc = mysqli_real_escape_string(
-                                        $con,
-                                        $_POST["service_desc"]
-                                    );
-                                    $service_detail = mysqli_real_escape_string(
-                                        $con,
-                                        $_POST["service_detail"]
-                                    );
-                                    /*
-$uploads_dir = 'uploads';
-
-        $tmp_name = $_FILES["ufile"]["tmp_name"];
-        // basename() may prevent filesystem traversal attacks;
-        // further validation/sanitation of the filename may be appropriate
-        $name = basename($_FILES["ufile"]["name"]);
-        $random_digit=rand(0000,9999);
-        $new_file_name=$random_digit.$name;
-
-        move_uploaded_file($tmp_name, "$uploads_dir/$new_file_name");*/
-
-                                    if ($status == "OK") {
-                                        $qb = mysqli_query(
-                                            $con,
-                                            "update event set port_title='$port_title', port_desc='$port_desc', port_detail='$port_detail' where id='$todo'"
-                                        );
-
-                                        if ($qb) {
-                                            $errormsg = "
-<div class='alert alert-success alert-dismissible alert-outline fade show'>
-                 event Updated successfully.
-                  <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-                  </div>
- "; //printing error if found in validation
-                                        }
-                                    } elseif ($status !== "OK") {
-                                        $errormsg =
-                                            "
-<div class='alert alert-danger alert-dismissible alert-outline fade show'>
-                     " .
-                                            $msg .
-                                            " <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button> </div>"; //printing error if found in validation
-                                    } else {
-                                        $errormsg = "
-      <div class='alert alert-danger alert-dismissible alert-outline fade show'>
-                 Some Technical Glitch Is There. Please Try Again Later Or Ask Admin For Help.
-                 <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-                 </div>"; //printing error if found in validation
-                                    }
-                                }
-                                ?>
-
-
-
-                                <div class="card-body p-4">
-                                    <div class="tab-content">
-                                        <div class="tab-pane active" id="personalDetails" role="tabpanel">
-                                        <?php if (
-                                            $_SERVER["REQUEST_METHOD"] == "POST"
-                                        ) {
-                                            print $errormsg;
-                                        } ?>
-              <form action="" method="post" enctype="multipart/form-data">
-                                                <div class="row">
-
-
-
-   <div class="col-lg-6">
-                                                        <div class="mb-3">
-                                                            <label for="firstnameInput" class="form-label"> event Title</label>
-                                                            <input type="text" class="form-control" id="firstnameInput" name="service_title" value="<?php print $port_title; ?>" placeholder="Enter event Title">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-lg-6">
-                                                        <div class="mb-3">
-                                                            <label for="firstnameInput" class="form-label"> Short Description</label>
-                                                            <textarea class="form-control" id="exampleFormControlTextarea5" name="service_desc" rows="2"><?php print $port_desc; ?></textarea>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-lg-6">
-                                                        <div class="mb-3">
-                                                            <label for="firstnameInput" class="form-label">event Detail</label>
-                                                            <textarea class="form-control" id="exampleFormControlTextarea5" name="service_detail" rows="3"><?php print $port_detail; ?></textarea>
-                                                        </div>
-                                                    </div>
-
-
-
-                                                    <!--end col-->
-
-                                                    <!--end col-->
-                                                    <div class="col-lg-12">
-                                                        <div class="hstack gap-2 justify-content-end">
-                                                            <button type="submit" name="save" class="btn btn-primary">Update event</button>
-
-                                                        </div>
-                                                    </div>
-                                                    <!--end col-->
-                                                </div>
-                                                <!--end row-->
-                                            </form>
-                                        </div>
-                                        <!--end tab-pane-->
-
-                                        <!--end tab-pane-->
-
-                                        <!--end tab-pane-->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--end col-->
-                    </div>
-
-
                 </div>
-                <!-- container-fluid -->
             </div>
-            <!-- End Page-content -->
+            <!-- End Page Title -->
 
-            <?php include "footer.php"; ?>
+            <?php
+            $query = "SELECT * FROM event WHERE id='$todo'";
+            $result = mysqli_query($con, $query);
+            $i = 0;
+            while ($row = mysqli_fetch_array($result)) {
+                $id = $row['id'];
+                $port_title = $row['port_title'];
+                $port_desc = $row['port_desc'];
+                $port_detail = $row['port_detail'];
+            }
+            ?>
+
+            <!-- Main Content Row -->
+            <div class="row justify-content-center">
+                <div class="col-xl-8 col-lg-10">
+                    <div class="card">
+                        <div class="card-header">
+                            <ul class="nav nav-tabs-custom rounded card-header-tabs border-bottom-0" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-bs-toggle="tab" href="#personalDetails" role="tab">
+                                        <i class="fas fa-home"></i> Edit Event
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <?php
+                        $status = "OK";
+                        $msg = "";
+                        if (isset($_POST["save"])) {
+                            $service_title = mysqli_real_escape_string($con, $_POST["service_title"]);
+                            $service_desc = mysqli_real_escape_string($con, $_POST["service_desc"]);
+                            $service_detail = mysqli_real_escape_string($con, $_POST["service_detail"]);
+                            
+                            if ($status == "OK") {
+                                // FIXED: Using the form values instead of original values
+                                $qb = mysqli_query($con, "UPDATE event SET 
+                                    port_title='$service_title', 
+                                    port_desc='$service_desc', 
+                                    port_detail='$service_detail' 
+                                    WHERE id='$todo'");
+                                
+                                if ($qb) {
+                                    $errormsg = "<div class='alert alert-success alert-dismissible fade show'>✅ تم تحديث الفعالية<button type='button' class='btn-close' data-bs-dismiss='alert'></button></div>";
+                                    // Refresh the data after update
+                                    $query = "SELECT * FROM event WHERE id='$todo'";
+                                    $result = mysqli_query($con, $query);
+                                    $row = mysqli_fetch_array($result);
+                                    $port_title = $row['port_title'];
+                                    $port_desc = $row['port_desc'];
+                                    $port_detail = $row['port_detail'];
+                                } else {
+                                    $errormsg = "<div class='alert alert-danger alert-dismissible fade show'>Error updating event: " . mysqli_error($con) . "<button type='button' class='btn-close' data-bs-dismiss='alert'></button></div>";
+                                }
+                            } elseif ($status !== "OK") {
+                                $errormsg = "<div class='alert alert-danger alert-dismissible alert-outline fade show'>$msg<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+                            } else {
+                                $errormsg = "<div class='alert alert-danger alert-dismissible alert-outline fade show'>Some technical glitch occurred. Please try again later.<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+                            }
+                        }
+                        ?>
+
+                        <div class="card-body p-4">
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="personalDetails" role="tabpanel">
+                                    <?php if ($_SERVER["REQUEST_METHOD"] == "POST") { print $errormsg; } ?>
+                                    
+                                    <form action="" method="post" enctype="multipart/form-data">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="mb-3">
+                                                    <label for="eventTitle" class="form-label">Event Title</label>
+                                                    <input type="text" class="form-control" id="eventTitle" name="service_title" value="<?php echo htmlspecialchars($port_title); ?>" placeholder="Enter event title">
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-lg-12">
+                                                <div class="mb-3">
+                                                    <label for="shortDescription" class="form-label">Short Description</label>
+                                                    <textarea class="form-control" id="shortDescription" name="service_desc" rows="3"><?php echo htmlspecialchars($port_desc); ?></textarea>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-lg-12">
+                                                <div class="mb-3">
+                                                    <label for="eventDetail" class="form-label">Event Details</label>
+                                                    <textarea class="form-control" id="eventDetail" name="service_detail" rows="5"><?php echo htmlspecialchars($port_detail); ?></textarea>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-lg-12">
+                                                <div class="hstack gap-2 justify-content-end">
+                                                    <button type="submit" name="save" class="btn btn-primary">Update Event</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Main Content Row -->
+        </div>
+        <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+</div>
+<!-- End Main Content Wrapper -->
+
+<?php include "footer.php"; ?>

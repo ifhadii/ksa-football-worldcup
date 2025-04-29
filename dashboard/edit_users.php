@@ -50,11 +50,23 @@ if (mysqli_num_rows($result) == 0) {
 $user = mysqli_fetch_assoc($result);
 ?>
 
+<style>
+    .main-content {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    padding: 20px;
+}
+</style>
+
 <div class="main-content" dir="rtl">
     <div class="page-content">
-        <div class="container-fluid">
+        <div class="container">
             <div class="row">
                 <div class="col-12">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
                     <div class="card">
                         <div class="card-header">
                             <h5 class="card-title mb-0">تعديل بيانات المستخدم</h5>

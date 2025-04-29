@@ -1,6 +1,7 @@
 <?php include "header.php"; ?>
 <?php include "sidebar.php"; ?>
 
+
 <div class="main-content">
     <div class="page-content">
         <div class="container-fluid">
@@ -23,6 +24,10 @@
             <!-- Form section -->
             <div class="row">
                 <div class="col-xxl-9">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
                     <div class="card mt-xxl-n5">
                         <div class="card-header">
                             <ul class="nav nav-tabs-custom rounded card-header-tabs border-bottom-0" role="tablist">

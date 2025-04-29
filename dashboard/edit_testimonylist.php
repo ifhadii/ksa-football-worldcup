@@ -99,6 +99,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
                     <div class="card">
                         <div class="card-header">
                             <h5 class="card-title mb-0">تعديل شهادة</h5>

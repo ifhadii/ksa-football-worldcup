@@ -19,10 +19,11 @@
   margin-bottom: 15px;
   border-radius: 5px;
 }
+
 </style>
 <div class="main-content">
     <div class="page-content">
-        <div class="container-fluid">
+        <div class="container">
 
             <!-- Page Title -->
             <div class="row">

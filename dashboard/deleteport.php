@@ -5,7 +5,7 @@ include_once "z_db.php";
 session_start();
 
 // Check if user is logged in
-if (isset($_SESSION['user_id'])) {
+if (isset($_SESSION['id'])) {
     echo json_encode([
         'status' => 'error', 
         'message' => 'يجب تسجيل الدخول أولاً'

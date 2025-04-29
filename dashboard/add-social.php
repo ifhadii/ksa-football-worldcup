@@ -1,9 +1,11 @@
 <?php include "header.php"; ?>
 <?php include "sidebar.php"; ?>
 
+
+
 <div class="main-content">
     <div class="page-content">
-        <div class="container-fluid">
+        <div class="container">
 
             <!-- Page title -->
             <div class="row">

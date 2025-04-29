@@ -32,13 +32,19 @@ if (isset($_GET["delete_card"])) {
     mysqli_query($con, "DELETE FROM city_cards WHERE id='$card_id'");
 }
 ?>
-
+<style>
+    .main-content {
+    margin-left: 250px; /* Adjust based on your sidebar width */
+    width: calc(100% - 250px);
+    padding: 20px;
+}
+</style>
 <!-- ============================================================== -->
 <!-- Start right Content here -->
 <!-- ============================================================== -->
 <div class="main-content">
     <div class="page-content">
-        <div class="container-fluid">
+        <div class="container">
             <!-- start page title -->
             <div class="row">
                 <div class="col-12">
@@ -68,6 +74,10 @@ if (isset($_GET["delete_card"])) {
 
             <div class="row">
                 <div class="col-xxl-9">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
                     <div class="card mt-xxl-n5">
                         <div class="card-header">
                             <ul class="nav nav-tabs-custom rounded card-header-tabs border-bottom-0" role="tablist">
@@ -104,10 +114,8 @@ if (isset($_GET["delete_card"])) {
 
                                 if ($qb) {
                                     $errormsg = "
-                                    <div class='alert alert-success alert-dismissible alert-outline fade show'>
-                                        city Updated successfully.
-                                        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-                                    </div>";
+                    <div class='alert alert-success alert-dismissible fade show'>✅ تم تعديل المدينة بنجاح.<button type='button' class='btn-close' data-bs-dismiss='alert'></button></div>"; // Handle card data if city was added successfully
+
                                 }
                             } elseif ($status !== "OK") {
                                 $errormsg =

@@ -6,7 +6,7 @@ $msg = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $action = $_POST['action'];
-
+    
     if ($action == 'login') {
         $email = mysqli_real_escape_string($con, $_POST['email']);
         $password = $_POST['password'];
@@ -17,12 +17,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->execute();
         $result = $stmt->get_result();
         $user = $result->fetch_assoc();
-
+        
         if ($user && password_verify($password, $user['password'])) {
             $_SESSION['user_id'] = $user['user_id'];
             $_SESSION['full_name'] = $user['full_name'];
-
-
+            
+            
             // نجاح: توجيه إلى الصفحة الرئيسية
             header("Location: home");
             exit();
@@ -34,20 +34,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = mysqli_real_escape_string($con, $_POST['email']);
         $password = $_POST['password'];
         $confirm_password = $_POST['confirm_password'];
-
+        
         if ($password !== $confirm_password) {
             $msg = "❌ كلمة المرور وتأكيدها غير متطابقتين.";
         } else {
             $hash = password_hash($password, PASSWORD_DEFAULT);
             $stmt = $con->prepare("INSERT INTO users (full_name, email, password) VALUES (?, ?, ?)");
             $stmt->bind_param("sss", $full_name, $email, $hash);
-
+            
             if ($stmt->execute()) {
                 // ✅ تسجيل الدخول تلقائي بعد الإنشاء
                 $new_user_id = $stmt->insert_id;
                 $_SESSION['user_id'] = $new_user_id;
                 $_SESSION['full_name'] = $full_name;
-
+                
                 header("Location: home"); // التوجيه للصفحة الرئيسية
                 exit();
             } else {
@@ -57,11 +57,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
-<style>
 
-
-
-</style>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
 
 <!-- Modal Dialog -->
 <div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
@@ -87,7 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             var feedbackModal = new bootstrap.Modal(document.getElementById('feedbackModal'));
             feedbackModal.show();
         });
-    </script>
+        </script>
 <?php endif; ?>
 
 
@@ -96,42 +93,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 <style>
-.single-review[dir='rtl'] .reviewer {
-    display: flex;
-    flex-direction: row-reverse; /* This makes the image come before the text */
-    text-align: right; /* Ensures that text is aligned to the right */
-}
-
-.single-review[dir='rtl'] .reviewer-meta {
-    text-align: right; /* Right-aligns the reviewer details */
-}
-
-.modal-content {
+    .single-review[dir='rtl'] .reviewer {
+        display: flex;
+        flex-direction: row-reverse; /* This makes the image come before the text */
+        text-align: right; /* Ensures that text is aligned to the right */
+    }
+    
+    .single-review[dir='rtl'] .reviewer-meta {
+        text-align: right; /* Right-aligns the reviewer details */
+    }
+    
+    .modal-content {
         background-color: #1c1c1c;
         color: white;
         border-radius: 15px;
         overflow: hidden;
     }
-
+    
     .form-side {
         padding: 40px;
     }
-
+    
     .form-side h2 {
         font-size: 28px;
         margin-bottom: 10px;
     }
-
+    
     .form-side p {
         font-size: 14px;
         color: #ccc;
         margin-bottom: 25px;
     }
-
+    
     .form-group input {
         text-align: right;
     }
-
+    
     .login-btn {
         background-color: #2962ff;
         color: #fff;
@@ -143,7 +140,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         cursor: pointer;
         margin-bottom: 15px;
     }
-
+    
     .google-btn {
         margin-top: 10px;
         background-color: transparent;
@@ -155,11 +152,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         font-size: 14px;
         cursor: pointer;
     }
-
+    
     .image-side img {
         width: 100%;
     }
-
+    
     .row {
         margin-right: -10px;
         margin-left: -10px;
@@ -168,7 +165,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         padding-right: 10px;
         padding-left: 10px;
     }
-</style>
+    </style>
 <!-- زر لفتح المودال -->
 
 
@@ -188,15 +185,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </p>
                 </div>
             </div>
-          
+            
         </div>
     </div>
     <!-- Shape Bottom -->
     <div class="shape shape-bottom">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none" fill="#FFFFFF">
             <path class="shape-fill" d="M421.9,6.5c22.6-2.5,51.5,0.4,75.5,5.3c23.6,4.9,70.9,23.5,100.5,35.7c75.8,32.2,133.7,44.5,192.6,49.7
-                c23.6,2.1,48.7,3.5,103.4-2.5c54.7-6,106.2-25.6,106.2-25.6V0H0v30.3c0,0,72,32.6,158.4,30.5c39.2-0.7,92.8-6.7,134-22.4
-                c21.2-8.1,52.2-18.2,79.7-24.2C399.3,7.9,411.6,7.5,421.9,6.5z"></path>
+            c23.6,2.1,48.7,3.5,103.4-2.5c54.7-6,106.2-25.6,106.2-25.6V0H0v30.3c0,0,72,32.6,158.4,30.5c39.2-0.7,92.8-6.7,134-22.4
+            c21.2-8.1,52.2-18.2,79.7-24.2C399.3,7.9,411.6,7.5,421.9,6.5z"></path>
         </svg>
     </div>
 </section>
@@ -263,7 +260,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="row">
 
             <?php
-            $qs = "SELECT * FROM city  ORDER BY id DESC LIMIT 6";
+            $qs = "SELECT * FROM city  ORDER BY id ASC LIMIT 6";
             $r1 = mysqli_query($con, $qs);
 
             while ($rod = mysqli_fetch_array($r1)) {
@@ -297,112 +294,59 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
-<section id="event" class="event-area overflow-hidden ptb_100">
+<!-- ***** Review Area Start ***** -->
+<section id="review" class="section review-area ptb_100" style="background-color: rgb(16, 36, 18);">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 col-md-10 col-lg-7">
                 <!-- Section Heading -->
                 <div class="section-heading text-center">
-                    <h2 class="mb-3">فعاليات كأس العالم 2034</h2>
-                    <p class="d-none d-sm-block mt-4">استكشف أبرز المواقع، الفعاليات، والمشاريع التي ستُضيء المملكة خلال هذا الحدث التاريخي.</p>
+                <h2 class="mb-3" style="color:rgb(9, 128, 68);">فعاليات كأس العالم 2034</h2>
+                <p class="d-none d-sm-block mt-4">استكشف أبرز المواقع، الفعاليات، والمشاريع التي ستُضيء المملكة خلال هذا الحدث التاريخي.</p>
+
                 </div>
             </div>
         </div>
-        
-        <!-- Event Items -->
         <div class="row">
-            <?php
-            // Secure database query with error handling
-            $query = "SELECT id, port_title, port_desc, ufile FROM event ORDER BY id DESC LIMIT 6";
-            $result = mysqli_query($con, $query);
-            
-            if (!$result) {
-                echo "<div class='col-12 text-center text-danger'>حدث خطأ في جلب البيانات</div>";
-            } else {
-                while ($event = mysqli_fetch_assoc($result)) {
-                    $id = htmlspecialchars($event['id']);
-                    $title = htmlspecialchars($event['port_title']);
-                    $desc = htmlspecialchars($event['port_desc']);
-                    $image = htmlspecialchars($event['ufile']);
-                    
+            <!-- Client Reviews -->
+            <div class="client-reviews owl-carousel">
+                <?php
+                $q = "SELECT * FROM event ORDER BY id ASC LIMIT 6";
+                $r123 = mysqli_query($con, $q);
+                while ($ro = mysqli_fetch_array($r123)) {
+                    $name = $ro['port_title'];
+                    $position = $ro['port_desc'];
+                    $message = $ro['port_desc'];
+                    $ufile = $ro['ufile'];
                     echo "
-                    <div class='col-12 col-sm-6 col-lg-4 mb-4'>
-                        <div class='card event-card h-100 shadow-sm border-0 overflow-hidden'>
-                            <div class='card-img-top event-image-container'>
-                                <a href='eventail.php?id=$id'>
-                                    " . (!empty($image) ? 
-                                        "<img src='../dashboard/uploads/event/$image' alt='$title' class='img-fluid'>" : 
-                                        "<div class='no-image-placeholder d-flex align-items-center justify-content-center'>
-                                            <i class='fas fa-calendar-alt fa-3x text-secondary'></i>
-                                        </div>") . "
-                                </a>
+                    <div class='card mb-3' dir='rtl' style='max-width: 700px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-radius: 0; border: none;'>
+                        <div class='row g-0' style='display: flex; flex-direction: row-reverse;'>
+                            <div class='col-md-4'>
+                                <img src='../dashboard/uploads/event/$ufile' class='card-img h-100' alt='$name' style='object-fit: cover; border-radius: 0;'>
                             </div>
-                            <div class='card-body'>
-                                <h3 class='card-title h5'><a href='eventail.php?id=$id' class='text-decoration-none'>$title</a></h3>
-                                <p class='card-text text-muted'>" . substr($desc, 0, 100) . (strlen($desc) > 100 ? '...' : '') . "</p>
-                            </div>
-                            <div class='card-footer bg-transparent border-top-0'>
-                                <a href='eventail.php?id=$id' class='btn btn-primary btn-sm'>التفاصيل <i class='fas fa-arrow-left ms-2'></i></a>
+                            <div class='col-md-8 d-flex flex-column justify-content-between'>
+                                <div class='card-body' style='padding: 1.25rem;'>
+                                    <h5 class='card-title' style='color: #1a73e8; font-weight: 600; margin-bottom: 0.5rem;'>$name</h5>
+                                    <h6 class='card-subtitle mb-2 text-muted'>$position</h6>
+                                    <p class='card-text' style='color: #333;'>$message</p>
+                                </div>
+                                <div class='card-footer bg-transparent border-top-0' style='padding: 0.75rem 1.25rem; text-align: left;'>
+                                    <a href='eventail.php?id=$id' class='btn btn-primary btn-sm'>
+                                        التفاصيل <i class='fas fa-arrow-left ms-2'></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>";
+                    </div>
+                    ";
+                
                 }
-            }
-            ?>
-        </div>
-        
-        <div class="row justify-content-center mt-4">
-        <div class="row justify-content-center">
-            <a href="event" class="btn btn-bordered mt-4">View More</a>
-        </div>
+                ?>
+            </div>
         </div>
     </div>
 </section>
 
-<style>
-    .event-card {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        border-radius: 8px;
-    }
-    
-    .event-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    }
-    
-    .event-image-container {
-        height: 200px;
-        overflow: hidden;
-        background-color: #f8f9fa;
-    }
-    
-    .event-image-container img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.5s ease;
-    }
-    
-    .event-card:hover .event-image-container img {
-        transform: scale(1.05);
-    }
-    
-    .no-image-placeholder {
-        width: 100%;
-        height: 100%;
-        background-color: #f1f1f1;
-    }
-    
-    .card-title a {
-        color: #343a40;
-        transition: color 0.3s ease;
-    }
-    
-    .card-title a:hover {
-        color: #0d6efd;
-    }
-</style>
-       
 
 <section class="section ptb_100 bg-light" id="stadiums">
     <div class="container">
@@ -523,6 +467,8 @@ function showImage(imageSrc) {
 
 
 <!-- ***** event Area End ***** -->
+
+
 
 <!-- ***** Price Plan Area Start ***** -->
 
@@ -741,7 +687,9 @@ function showImage(imageSrc) {
 </section>
 <!--====== Contact Area End ======-->
 
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 
 <?php include "footer.php"; ?>

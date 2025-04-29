@@ -24,6 +24,7 @@ include "sidebar.php";
 
             <div class="row">
                 <div class="col-lg-12">
+
                     <div class="card shadow-sm">
                         <div class="card-header bg-light">
                             <h5 class="card-title mb-0">قائمة المدن</h5>

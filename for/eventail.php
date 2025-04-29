@@ -1,6 +1,12 @@
 <?php
 include "header.php";
 
+// Database connection and query remains the same
+// Verify database connection
+if (!$con) {
+    die("Database connection failed: " . mysqli_connect_error());
+}
+
 // Validate and sanitize the ID parameter
 $event_id = isset($_GET["id"]) ? intval($_GET["id"]) : 0;
 
@@ -10,10 +16,21 @@ if ($event_id <= 0) {
     exit();
 }
 
-// Prepare and execute the query safely
-$stmt = mysqli_prepare($con, "SELECT port_title, port_detail, ufile, event_date, location FROM event WHERE id = ?");
+// Prepare the query safely
+$sql = "SELECT port_title, port_detail, port_desc, ufile, updated_at FROM event WHERE id = ?";
+$stmt = mysqli_prepare($con, $sql);
+
+if (!$stmt) {
+    die("Prepare failed: " . mysqli_error($con));
+}
+
+// Bind parameters and execute
 mysqli_stmt_bind_param($stmt, "i", $event_id);
-mysqli_stmt_execute($stmt);
+
+if (!mysqli_stmt_execute($stmt)) {
+    die("Execute failed: " . mysqli_stmt_error($stmt));
+}
+
 $result = mysqli_stmt_get_result($stmt);
 
 // Check if event exists
@@ -25,13 +42,13 @@ if (mysqli_num_rows($result) == 0) {
 $event = mysqli_fetch_assoc($result);
 $port_title = htmlspecialchars($event['port_title']);
 $port_detail = htmlspecialchars($event['port_detail']);
+$port_desc = htmlspecialchars($event['port_desc']);
 $ufile = htmlspecialchars($event['ufile']);
-$event_date = htmlspecialchars($event['event_date']);
-$location = htmlspecialchars($event['location']);
+$event_date = htmlspecialchars($event['updated_at']);
 ?>
 
 <!-- ***** Header Section ***** -->
-<section class="section breadcrumb-area overlay-dark d-flex align-items-center" style="direction: rtl;">
+<section class="section breadcrumb-area d-flex align-items-center" style="direction: rtl; background-color: rgb(16, 36, 18);">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -48,74 +65,83 @@ $location = htmlspecialchars($event['location']);
 </section>
 <!-- ***** End Header Section ***** -->
 
-<!-- ***** Event Card Section ***** -->
+<!-- ***** Horizontal Event Section ***** -->
 <section class="section ptb_100" style="direction: rtl;">
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12 col-lg-8">
-                <div class="card event-detail-card shadow-lg">
-                    <!-- Event Image -->
+        <div class="row align-items-stretch">
+            <!-- Image Column -->
+            <div class="col-md-6 mb-4 mb-md-0">
+                <div class="h-100 event-image-container shadow-lg rounded">
                     <?php if (!empty($ufile)): ?>
-                        <img src="/uploads/event/<?php echo $ufile; ?>" class="card-img-top" alt="<?php echo $port_title; ?>">
+                        <img src="../dashboard/uploads/event/<?php echo $ufile; ?>" class="img-fluid h-100 w-100" alt="<?php echo $port_title; ?>" style="object-fit: cover;">
                     <?php else: ?>
-                        <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 300px;">
+                        <div class="d-flex align-items-center justify-content-center bg-light h-100">
                             <span class="text-muted">لا توجد صورة</span>
                         </div>
                     <?php endif; ?>
+                </div>
+            </div>
+            
+            <!-- Content Column -->
+            <div class="col-md-6">
+                <div class="h-100 event-content-container p-4 shadow-lg rounded" style="background-color: #f8f9fa;">
+                    <!-- Event Title -->
+                    <h1 class="mb-3"><?php echo $port_title; ?></h1>
                     
-                    <div class="card-body">
-                        <!-- Event Title -->
-                        <h1 class="card-title mb-3"><?php echo $port_title; ?></h1>
-                        
-                        <!-- Event Meta -->
-                        <div class="event-meta mb-4">
-                            <?php if (!empty($event_date)): ?>
-                                <span class="meta-item me-3">
-                                    <i class="fas fa-calendar-alt me-2"></i>
-                                    <?php echo $event_date; ?>
-                                </span>
-                            <?php endif; ?>
-                            
-                            <?php if (!empty($location)): ?>
-                                <span class="meta-item">
-                                    <i class="fas fa-map-marker-alt me-2"></i>
-                                    <?php echo $location; ?>
-                                </span>
-                            <?php endif; ?>
-                        </div>
-                        
-                        <!-- Event Description -->
-                        <div class="card-text lead">
-                            <?php echo nl2br($port_detail); ?>
-                        </div>
-                        
-                        <!-- Action Buttons -->
-                        <div class="mt-4 pt-3 border-top">
-                            <a href="events.php" class="btn btn-primary">
-                                <i class="fas fa-arrow-right me-2"></i>عودة إلى الفعاليات
-                            </a>
-                            <button class="btn btn-outline-secondary ms-2">
-                                <i class="fas fa-share-alt me-2"></i>مشاركة
-                            </button>
-                        </div>
+                    <!-- Event Meta -->
+                    <div class="event-meta mb-4">
+                        <?php if (!empty($event_date)): ?>
+                            <span class="meta-item me-3">
+                                <i class="fas fa-calendar-alt me-2"></i>
+                                <?php echo date('Y-m-d', strtotime($event_date)); ?>
+                            </span>
+                        <?php endif; ?>
+                    </div>
+                    
+                    <!-- Event Description -->
+                    <div class="lead mb-4">
+                        <?php echo nl2br($port_detail); ?>
+                    </div>
+                    
+                    <!-- Event Full Description -->
+                    <div class="lead mb-4">
+                        <?php echo nl2br($port_desc); ?>
+                    </div>
+
+                    <style>
+                        .buttons {
+                            display: flex;
+                            justify-content: space-between;
+                        }
+                    </style>
+                    
+                    <!-- Action Button -->
+                    <div class="buttons mt-auto pt-3 border-top">
+                        <a href="event.php" class="btn btn-primary">
+                            <i class="fas fa-arrow-right me-2"></i>عودة إلى الفعاليات
+                        </a>
+                        <a href="event.php" class="btn btn-primary">
+                            <i class="fas fa-arrow-right me-2"></i>عودة إلى الفعاليات
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!-- ***** End Event Card Section ***** -->
+<!-- ***** End Horizontal Event Section ***** -->
 
 <style>
-    .event-detail-card {
-        border: none;
-        border-radius: 15px;
+    .event-image-container {
+        min-height: 400px;
         overflow: hidden;
+        border-radius: 15px;
     }
     
-    .event-detail-card .card-img-top {
-        height: 400px;
-        object-fit: cover;
+    .event-content-container {
+        display: flex;
+        flex-direction: column;
+        border-radius: 15px;
     }
     
     .event-meta {
@@ -128,21 +154,22 @@ $location = htmlspecialchars($event['location']);
         align-items: center;
     }
     
-    .card-title {
-        color: #343a40;
-        font-weight: 700;
-    }
-    
-    .card-text {
-        color: #495057;
-        line-height: 1.8;
-    }
-    
     @media (max-width: 768px) {
-        .event-detail-card .card-img-top {
-            height: 250px;
+        .event-image-container {
+            min-height: 250px;
+        }
+        
+        .event-content-container {
+            min-height: auto;
         }
     }
 </style>
 
-<?php include "footer.php"; ?>
+<?php 
+// Close statement and connection
+if (isset($stmt)) {
+    mysqli_stmt_close($stmt);
+}
+mysqli_close($con);
+include "footer.php"; 
+?>
