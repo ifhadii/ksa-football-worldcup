@@ -11,7 +11,6 @@ include "sidebar.php";
 
 
 
-// Check required URL parameters
 if (!isset($_GET['id']) || !isset($_GET['table'])) {
     echo '<script>alert("المعرف أو الجدول غير موجود!"); window.location.href="manage_users.php";</script>';
     exit();

@@ -1,11 +1,9 @@
 <?php include "header.php"; ?>
 
-<!-- ***** منطقة الخبز (التنقل) تبدأ ***** -->
 <section class="section breadcrumb-area d-flex align-items-center" style="background-color: rgb(16 36 18);">
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <!-- محتوى الخبز -->
                 <div class="breadcrumb-content text-center">
                     <h2 class="text-white text-uppercase mb-3">اتصل بنا</h2>
                     <ol class="breadcrumb d-flex justify-content-center">
@@ -18,13 +16,11 @@
         </div>
     </div>
 </section>
-<!-- ***** منطقة الخبز تنتهي ***** -->
 
 <section id="contact" class="contact-area ptb_100">
     <div class="container">
         <div class="row justify-content-between align-items-center">
             <div class="col-12 col-lg-5">
-                <!-- عنوان القسم -->
                 <div class="section-heading text-center mb-3">
                     <h2>كن جزءًا من كأس العالم 2034</h2>
                     <p class="d-none d-sm-block mt-4">
@@ -32,17 +28,14 @@
                         دعنا نسمع منك ونرتّب لتجربة لا تُنسى في المملكة العربية السعودية!
                     </p>
                 </div>
-                <!-- اتصل بنا -->
                 <div class="contact-us">
                     <ul>
-                        <!-- الهاتف -->
                         <li class="contact-info color-1 bg-hover active hover-bottom text-center p-5 m-3">
                             <span><i class="fas fa-mobile-alt fa-3x"></i></span>
                             <a class="d-block my-2" href="tel:0555555555">
                                 <h3>+966 567 321 055</h3>
                             </a>
                         </li>
-                        <!-- البريد الإلكتروني -->
                         <li class="contact-info color-3 bg-hover active hover-bottom text-center p-5 m-3">
                             <span><i class="fas fa-envelope-open-text fa-3x"></i></span>
                             <a class="d-block my-2" href="mailto:any@gmail.com">
@@ -53,7 +46,6 @@
                 </div>
             </div>
 
-            <!-- نموذج الاتصال -->
             <div class="col-12 col-lg-6 pt-4 pt-lg-0">
                 <div class="contact-box text-center">
                     <?php
@@ -130,19 +122,10 @@
         </div>
     </div>
 </section>
-<!--====== منطقة الاتصال تنتهي ======-->
-
-<!--====== منطقة الخريطة تبدأ ======-->
-<section class="section map-area">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15831.675671634295!2d5.213205717780946!3d7.250068752504376!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x10478fe4790d8e8f%3A0x2cd76b14809e3d7a!2sAlagbaka%2C%20Akure!5e0!3m2!1sen!2sng!4v1658159211365!5m2!1sen!2sng" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-</section>
-<!--====== منطقة الخريطة تنتهي ======-->
-
 
 <footer class="section footer-area" style="background-color: #f8f9fa; border-top: 1px solid #ddd;">
   <div class="container py-5">
     <div class="row text-center text-md-start">
-      <!-- عن البطولة -->
       <div class="col-12 col-md-6 col-lg-3 mb-4">
         <h5 class="fw-bold mb-3">عن البطولة</h5>
         <p style="font-size: 14px;">
@@ -150,19 +133,6 @@
         </p>
       </div>
 
-      <!-- روابط الموقع -->
-      <div class="col-6 col-md-6 col-lg-3 mb-4">
-        <h5 class="fw-bold mb-3">روابط الموقع</h5>
-        <ul class="list-unstyled" style="font-size: 14px;">
-          <li><a href="index" class="text-black-50 text-decoration-none">الرئيسية</a></li>
-          <li><a href="stadiums" class="text-black-50 text-decoration-none">الملاعب</a></li>
-          <li><a href="cities" class="text-black-50 text-decoration-none">المدن المستضيفة</a></li>
-          <li><a href="faq" class="text-black-50 text-decoration-none">الأسئلة الشائعة</a></li>
-          <!-- <li><a href="contact" class="text-black-50 text-decoration-none">تواصل معنا</a></li> -->
-        </ul>
-      </div>
-
-      <!-- التذاكر والإقامة -->
       <div class="col-6 col-md-6 col-lg-3 mb-4">
         <h5 class="fw-bold mb-3">🎟️ التذاكر والإقامة</h5>
         <ul class="list-unstyled" style="font-size: 14px;">
@@ -175,7 +145,6 @@
         </ul>
       </div>
 
-      <!-- المواصلات -->
       <div class="col-6 col-md-6 col-lg-3 mb-4">
         <h5 class="fw-bold mb-3">🚌 المواصلات</h5>
         <ul class="list-unstyled" style="font-size: 14px;">
@@ -189,7 +158,6 @@
 
     <hr />
 
-    <!-- حقوق -->
     <div class="text-center pt-3">
       <p class="mb-1" style="font-size: 14px;">&copy; <?php echo date('Y'); ?> جميع الحقوق محفوظة - KSAWelcomeCup</p>
     </div>
@@ -197,7 +165,6 @@
 </footer>
 
       
-        <!--====== القائمة النموذجية ستبدأ ======-->
         <div id="menu" class="modal fade p-0">
             <div class="modal-dialog dialog-animated">
                 <div class="modal-content h-100">
@@ -212,15 +179,12 @@
                 </div>
             </div>
         </div>
-        <!--====== القائمة النموذجية ستنتهي ======-->
 
 
-<!-- نموذج تسجيل الدخول -->
 <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
       <div class="row g-0">
-        <!-- النموذج -->
         <div class="col-md-12" style="background-color:#ddd;">
         <div class="form-side p-4" style="background-color:#ddd;">
             <h2>تسجيل الدخول</h2>
@@ -251,17 +215,14 @@
 </div>
 
 
-<!-- نموذج إنشاء حساب -->
 <div class="modal fade" id="registerModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
       <div class="row g-0">
-        <!-- الجانب الأيسر - صورة -->
         <div class="col-md-5 d-none d-md-flex align-items-center justify-content-center bg-white">
           <img src="assets/img/signup.png" alt="register illustration" class="img-fluid p-4">
         </div>
 
-        <!-- الجانب الأيمن - نموذج التسجيل -->
         <div class="col-md-7">
           <div class="form-side p-4" style="background-color: #ddd;">
             <h2>إنشاء حساب جديد</h2>
@@ -303,21 +264,15 @@
     </div>
 
 
-    <!-- ***** جميع إضافات jQuery ***** -->
 
-    <!-- jQuery(ضروري لجميع إضافات JavaScript) -->
     <script src="assets/js/jquery/jquery-3.5.1.min.js"></script>
 
-    <!-- Bootstrap js -->
     <script src="assets/js/bootstrap/popper.min.js"></script>
     <script src="assets/js/bootstrap/bootstrap.min.js"></script>
 
-    <!-- إضافات js -->
     <script src="assets/js/plugins/plugins.min.js"></script>
 
-    <!-- Active js -->
     <script src="assets/js/active.js"></script>
-    <!-- Bootstrap JS + Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
   $(document).ready(function () {

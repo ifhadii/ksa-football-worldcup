@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $error = "Too many login attempts. Please try again later.";
             } else {
                 // Define the query to select user
-                $query = "SELECT user_id, email, password, full_name, is_admin FROM users WHERE email = ? LIMIT 1";
+                $query = "SELECT user_id, email, password, full_name, role FROM users WHERE email = ? LIMIT 1";
                 $stmt = mysqli_prepare($con, $query);
                 
                 if ($stmt === false) {
@@ -75,14 +75,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 'user_id' => $user['user_id'],
                                 'email' => $user['email'],
                                 'full_name' => htmlspecialchars($user['full_name']),
-                                'loggedin' => true,
-                                'last_activity' => time(),
-                                'is_admin' => $user['is_admin']
+                                'role' => $user['role']
                             ];
                             
                             // Check for stored redirect URL
                             $redirect = isset($_SESSION['redirect_url']) ? $_SESSION['redirect_url'] : 
-                                        ($user['is_admin'] ? '../dashboard/' : 'profile.php');
+                                        ($user['role'] ? '../dashboard/' : 'profile.php');
                             
                             // Clear the redirect URL
                             unset($_SESSION['redirect_url']);

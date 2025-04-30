@@ -1,14 +1,10 @@
 <?php include "header.php"; ?>
 <?php include "sidebar.php"; ?>
 
-<!-- ============================================================== -->
-<!-- Start right Content here -->
-<!-- ============================================================== -->
 <div class="main-content">
  <div class="page-content">
        <div class="container-fluid">
 
-                    <!-- start page title -->
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
@@ -24,12 +20,10 @@
                             </div>
                         </div>
                     </div>
-                    <!-- end page title -->
 
 
                     <div class="row">
 
-                        <!--end col-->
                         <div class="col-xxl-9">
                             <div class="card mt-xxl-n5">
                                 <div class="card-header">
@@ -54,7 +48,6 @@
                                                             <input type="text" class="form-control" id="firstnameInput" placeholder="Enter your firstname" value="Dave">
                                                         </div>
                                                     </div>
-                                                    <!--end col-->
 
 
                                                     <div class="col-lg-12">
@@ -63,38 +56,25 @@
                                                             <textarea class="form-control" id="exampleFormControlTextarea" placeholder="Enter Page Content" rows="3"></textarea>
                                                         </div>
                                                     </div>
-                                                    <!--end col-->
 
-                                                    <!--end col-->
-
-                                                    <!--end col-->
                                                     <div class="col-lg-12">
                                                         <div class="hstack gap-2 justify-content-end">
                                                             <button type="submit" class="btn btn-primary">Update Footer</button>
 
                                                         </div>
                                                     </div>
-                                                    <!--end col-->
                                                 </div>
-                                                <!--end row-->
                                             </form>
                                         </div>
-                                        <!--end tab-pane-->
 
-                                        <!--end tab-pane-->
 
-                                        <!--end tab-pane-->
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!--end col-->
                     </div>
 
 
                 </div>
-                <!-- container-fluid -->
             </div>
-            <!-- End Page-content -->
-
             <?php include "footer.php"; ?>

@@ -173,7 +173,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <br>
     <div class="container">
         <div class="form-container">
-            <h2 class="form-title">نموذج إضافة شهادة جديدة</h2>
+            <h2 class="form-title">سجل أهتمامك الان</h2>
             
             <?php if ($success_message): ?>
                 <div class="success"><?= $success_message ?></div>
@@ -195,7 +195,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 
                 <div class="form-group">
-                    <label for="message" class="required">نص الشهادة</label>
+                    <label for="message" class="required">نص رأيك</label>
                     <textarea id="message" name="message" maxlength="300" required><?= htmlspecialchars($message) ?></textarea>
                     <small>الحد الأقصى 300 حرف</small>
                 </div>

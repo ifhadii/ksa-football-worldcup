@@ -3,7 +3,6 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <!-- محتوى العنوان -->
                 <div class="breadcrumb-content text-center">
                     <h2 class="text-white text-uppercase mb-3">المدن المستضيفة</h2>
                     <ol class="breadcrumb d-flex justify-content-center">
@@ -16,9 +15,7 @@
     </div>
 </section>
 
-<!-- ***** منطقة المدن ***** -->
 <section id="city" class="section city-area ptb_100" style="direction: rtl; text-align: right;">
-    <!-- شكل علوي -->
     <div class="shape shape-top">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none" fill="#FFFFFF">
             <path class="shape-fill" d="M421.9,6.5c22.6-2.5,51.5,0.4,75.5,5.3c23.6,4.9,70.9,23.5,100.5,35.7c75.8,32.2,133.7,44.5,192.6,49.7
@@ -30,7 +27,6 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 col-md-10 col-lg-7">
-                <!-- العنوان -->
                 <div class="section-heading text-center">
                     <h2>اكتشف المدن المستضيفة</h2>
                     <p class="d-none d-sm-block mt-4">تعرف على أبرز المدن التي ستحتضن مباريات كأس العالم</p>
@@ -62,7 +58,6 @@
                 $counter++;
             }
             
-            // إذا كان عدد المدن ليس من مضاعفات 3، نضيف عناصر فارغة لتحقيق التوازن
             if($total_cities % 3 != 0) {
                 $remaining = 3 - ($total_cities % 3);
                 for($i = 0; $i < $remaining; $i++) {
@@ -73,7 +68,6 @@
         </div>
     </div>
 
-    <!-- شكل سفلي -->
     <div class="shape shape-bottom">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none" fill="#FFFFFF">
             <path class="shape-fill" d="M421.9,6.5c22.6-2.5,51.5,0.4,75.5,5.3c23.6,4.9,70.9,23.5,100.5,35.7c75.8,32.2,133.7,44.5,192.6,49.7
@@ -84,7 +78,6 @@
 </section>
 
 <style>
-    /* تنسيق إضافي لتحسين المظهر */
     .single-city {
         transition: all 0.3s ease;
     }
@@ -107,11 +100,8 @@
             </div>
         </div>
 
-        <!-- XXXXXXXXXXXXXXXXXXXXXX first maintenance XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
         <div class="row mt-4">
-    <!-- ملعب 1 -->
     <div class="row">
-        <!-- الصور مع إضافة data-bs-toggle وdata-bs-target -->
         <div class="col-md-6 col-lg-4 mb-4">
             <div class="card h-100 shadow">
                 <img src="assets/img/1.jpg" class="card-img-top" alt="1" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage('assets/img/1.jpg')">
@@ -190,7 +180,6 @@
     </div>
 </div>
 
-<!-- Modal لعرض الصورة -->
 <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">

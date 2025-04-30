@@ -6,7 +6,6 @@ include "sidebar.php";
 <div class="main-content" dir="rtl">
     <div class="page-content">
         <div class="container-fluid">
-            <!-- Page Title -->
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
@@ -20,7 +19,6 @@ include "sidebar.php";
                     </div>
                 </div>
             </div>
-            <!-- End Page Title -->
 
             <div class="row">
                 <div class="col-lg-12">

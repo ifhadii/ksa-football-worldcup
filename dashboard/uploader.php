@@ -11,7 +11,7 @@ if (isset($_FILES["file"])) {
     $target_file = $target_dir . $newName;
 
     if (move_uploaded_file($file["tmp_name"], $target_file)) {
-        echo $target_file; // هذا سيتم إدراجه مباشرة في <img src="">
+        echo $target_file;
     } else {
         http_response_code(500);
         echo "Error uploading image.";

@@ -1,22 +1,17 @@
 <?php
 include "header.php";
 
-// Database connection and query remains the same
-// Verify database connection
 if (!$con) {
     die("Database connection failed: " . mysqli_connect_error());
 }
 
-// Validate and sanitize the ID parameter
 $event_id = isset($_GET["id"]) ? intval($_GET["id"]) : 0;
 
-// Check if ID is valid
 if ($event_id <= 0) {
     header("Location: index.php");
     exit();
 }
 
-// Prepare the query safely
 $sql = "SELECT port_title, port_detail, port_desc, ufile, updated_at FROM event WHERE id = ?";
 $stmt = mysqli_prepare($con, $sql);
 
@@ -24,7 +19,6 @@ if (!$stmt) {
     die("Prepare failed: " . mysqli_error($con));
 }
 
-// Bind parameters and execute
 mysqli_stmt_bind_param($stmt, "i", $event_id);
 
 if (!mysqli_stmt_execute($stmt)) {
@@ -33,7 +27,6 @@ if (!mysqli_stmt_execute($stmt)) {
 
 $result = mysqli_stmt_get_result($stmt);
 
-// Check if event exists
 if (mysqli_num_rows($result) == 0) {
     header("Location: index.php");
     exit();
@@ -47,7 +40,6 @@ $ufile = htmlspecialchars($event['ufile']);
 $event_date = htmlspecialchars($event['updated_at']);
 ?>
 
-<!-- ***** Header Section ***** -->
 <section class="section breadcrumb-area d-flex align-items-center" style="direction: rtl; background-color: rgb(16, 36, 18);">
     <div class="container">
         <div class="row">
@@ -63,13 +55,10 @@ $event_date = htmlspecialchars($event['updated_at']);
         </div>
     </div>
 </section>
-<!-- ***** End Header Section ***** -->
 
-<!-- ***** Horizontal Event Section ***** -->
 <section class="section ptb_100" style="direction: rtl;">
     <div class="container">
         <div class="row align-items-stretch">
-            <!-- Image Column -->
             <div class="col-md-6 mb-4 mb-md-0">
                 <div class="h-100 event-image-container shadow-lg rounded">
                     <?php if (!empty($ufile)): ?>
@@ -82,13 +71,10 @@ $event_date = htmlspecialchars($event['updated_at']);
                 </div>
             </div>
             
-            <!-- Content Column -->
             <div class="col-md-6">
                 <div class="h-100 event-content-container p-4 shadow-lg rounded" style="background-color: #f8f9fa;">
-                    <!-- Event Title -->
                     <h1 class="mb-3"><?php echo $port_title; ?></h1>
                     
-                    <!-- Event Meta -->
                     <div class="event-meta mb-4">
                         <?php if (!empty($event_date)): ?>
                             <span class="meta-item me-3">
@@ -98,12 +84,10 @@ $event_date = htmlspecialchars($event['updated_at']);
                         <?php endif; ?>
                     </div>
                     
-                    <!-- Event Description -->
                     <div class="lead mb-4">
                         <?php echo nl2br($port_detail); ?>
                     </div>
                     
-                    <!-- Event Full Description -->
                     <div class="lead mb-4">
                         <?php echo nl2br($port_desc); ?>
                     </div>
@@ -115,7 +99,6 @@ $event_date = htmlspecialchars($event['updated_at']);
                         }
                     </style>
                     
-                    <!-- Action Button -->
                     <div class="buttons mt-auto pt-3 border-top">
                         <a href="event.php" class="btn btn-primary">
                             <i class="fas fa-arrow-right me-2"></i>عودة إلى الفعاليات
@@ -126,7 +109,6 @@ $event_date = htmlspecialchars($event['updated_at']);
         </div>
     </div>
 </section>
-<!-- ***** End Horizontal Event Section ***** -->
 
 <style>
     .event-image-container {
@@ -163,7 +145,6 @@ $event_date = htmlspecialchars($event['updated_at']);
 </style>
 
 <?php 
-// Close statement and connection
 if (isset($stmt)) {
     mysqli_stmt_close($stmt);
 }

@@ -2,12 +2,10 @@
 include "header.php";
 $todo = mysqli_real_escape_string($con, $_GET["id"]);
 ?>
-<!-- ***** Breadcrumb Area Start ***** -->
 <section class="section breadcrumb-area d-flex align-items-center" style="background: rgb(16 36 18);">
     <div class="container" >
         <div class="row" >
             <div class="col-12">
-                <!-- Breamcrumb Content -->
                 <div class="breadcrumb-content d-flex flex-column align-items-center text-center" >
                     <h2 class="text-white text-uppercase mb-3">تفاصيل المدينة </h2>
                     <ol class="breadcrumb">
@@ -19,7 +17,6 @@ $todo = mysqli_real_escape_string($con, $_GET["id"]);
         </div>
     </div>
 </section>
-<!-- ***** Breadcrumb Area End ***** -->
 
 
 <?php
@@ -35,9 +32,7 @@ $ufile = "$tr[ufile]";
 
 
 
-<!-- ***** About Area Start *****-->
 
-<!-- <section class="section about-area ptb_100"> -->
     <div class="container">
         <div class="row justify-content-between align-items-center">
             <div class="col-12 col-lg-6">
@@ -46,10 +41,8 @@ $ufile = "$tr[ufile]";
                 </div>
             </div>
             <div class="col-12 col-lg-6">
-                <!-- About Content -->
                 <div class="about-content section-heading text-center text-lg-left pl-md-4 mt-5 mt-lg-0 mb-0 ">
                     <!-- <h2 class="mb-3"><?php echo $city_title; ?></h2> -->
-                    <!-- ✅ عرض التفاصيل مع دعم HTML والصور -->
                     <div class="summernote-content">
                         <?php echo $city_detail; ?>
                     </div>
@@ -57,12 +50,10 @@ $ufile = "$tr[ufile]";
             </div>
         </div>
     </div>
-<!-- </section> -->
+</section>
 
 
-<!-- ***** About Area End ***** -->
 
-<!-- ***** City Cards Area Start ***** -->
 <section class="section city-cards-area ptb_100">
     <div class="container">
         <div class="row">
@@ -102,11 +93,9 @@ $ufile = "$tr[ufile]";
         </div>
     </div>
 </section>
-<!-- ***** City Cards Area End ***** -->
 
 
 
-<!-- ***** Hotels Area Start ***** -->
 <section class="section city-hotels-area ptb_100">
     <div class="container">
         <div class="row">
@@ -143,12 +132,10 @@ $ufile = "$tr[ufile]";
         </div>
     </div>
 </section>
-<!-- ***** Hotels Area End ***** -->
 
 
 
 
-<!--====== Call To Action Area End ======-->
 <?php include "footer.php"; ?>
 
 <style>

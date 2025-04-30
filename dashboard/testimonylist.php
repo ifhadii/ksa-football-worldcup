@@ -14,7 +14,6 @@ $testimony_result = mysqli_query($con, $testimony_query);
     <div class="page-content">
         <div class="container-fluid">
             
-            <!-- Testimony Table -->
             <div class="row">
                 <div class="col-12">
                     <div class="card">

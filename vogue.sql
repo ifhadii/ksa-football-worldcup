@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 30, 2025 at 12:26 AM
+-- Generation Time: Apr 30, 2025 at 12:54 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -51,7 +51,8 @@ INSERT INTO `admin` (`id`, `username`, `email`, `password`, `updated_at`) VALUES
 (12, 'robert_t', 'robert.t@example.com', 'R0bert#2025', '2025-04-29 21:45:55'),
 (13, 'emily_g', 'emily.g@example.com', 'E$milyPass1', '2025-04-29 21:45:55'),
 (14, 'thomas_b', 'thomas.b@example.com', 'T0mAdmin!', '2025-04-29 21:45:55'),
-(15, 'olivia_h', 'olivia.h@example.com', '0livia@Pass', '2025-04-29 21:45:55');
+(15, 'olivia_h', 'olivia.h@example.com', '0livia@Pass', '2025-04-29 21:45:55'),
+(18, 'f1', 'f1@s.com', '123456', '2025-04-29 22:45:20');
 
 -- --------------------------------------------------------
 
@@ -401,7 +402,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `city`

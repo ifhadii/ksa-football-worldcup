@@ -164,6 +164,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         padding-right: 10px;
         padding-left: 10px;
     }
+
+
+    .owl-carousel .owl-nav button.owl-prev,
+    .owl-carousel .owl-nav button.owl-next {
+        color: white !important;
+        font-size: 24px !important;
+        background: rgba(0,0,0,0.5) !important;
+        width: 40px;
+        height: 40px;
+        border-radius: 50% !important;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .owl-carousel .owl-nav button.owl-prev {
+        right: -50px;
+    }
+    .owl-carousel .owl-nav button.owl-next {
+        left: -50px;
+    }
+    .owl-carousel .owl-nav button.owl-prev:hover,
+    .owl-carousel .owl-nav button.owl-next:hover {
+        background: rgba(0,0,0,0.8) !important;
+    }
     </style>
 <!-- زر لفتح المودال -->
 
@@ -294,45 +318,51 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 <!-- ***** Review Area Start ***** -->
-<section id="review" class="section review-area ptb_100" style="background-color: rgb(16, 36, 18);">
+<!-- ***** Review Area Start ***** -->
+<section id="testimonials" class="section review-area ptb_100" style="background-color: rgb(16, 36, 18);">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 col-md-10 col-lg-7">
                 <!-- Section Heading -->
                 <div class="section-heading text-center">
-                <h2 class="mb-3" style="color:rgb(9, 128, 68);">فعاليات كأس العالم 2034</h2>
-                <p class="d-none d-sm-block mt-4">استكشف أبرز المواقع، الفعاليات، والمشاريع التي ستُضيء المملكة خلال هذا الحدث التاريخي.</p>
+                    <h2 class="mb-3" style="color:rgb(9, 128, 68);">آراء الزوار والمشجعين</h2>
+                    <p class="d-none d-sm-block mt-4 text-white">
+                        آراء مشجعين من مختلف دول العالم شاركوا في تجربة كأس العالم في السعودية. كلماتهم تُلخص الشغف، التنظيم، والضيافة.
+                    </p>
                 </div>
             </div>
         </div>
         <div class="row">
-            <!-- Client Reviews -->
-            <div class="client-reviews owl-carousel">
-                <?php
-                $q = "SELECT * FROM event ORDER BY id ASC LIMIT 6";
-                $r123 = mysqli_query($con, $q);
-                while ($ro = mysqli_fetch_array($r123)) {
-                    $id = $ro['id']; // THIS WAS MISSING
-                    $name = $ro['port_title'];
-                    $position = $ro['port_desc'];
-                    $message = $ro['port_desc'];
-                    $ufile = $ro['ufile'];
-                    echo "
-                    <div class='card' style='width: 18rem; height: 400px;'>
-                        <img class='card-img-top' src='../dashboard/uploads/event/$ufile' alt='$name' style='height: 200px; object-fit: cover;'>
-                        <div class='card-body d-flex flex-column' style='height: 200px;'>
-                            <div>
-                                <h5 class='card-title'>$name</h5>
-                                <p class='card-text'>$position</p>
+            <div class="col-12">
+                <div class="owl-carousel testimonial-carousel">
+                    <?php
+                    $q = "SELECT * FROM event ORDER BY id ASC LIMIT 6";
+                    $r123 = mysqli_query($con, $q);
+                    while ($ro = mysqli_fetch_array($r123)) {
+                        $id = $ro['id'];
+                        $name = $ro['port_title'];
+                        $position = $ro['port_desc'];
+                        $message = $ro['port_desc'];
+                        $ufile = $ro['ufile'];
+                                            
+                        echo '
+                        <div class="item" >
+                            <div class="card h-100 shadow" style="border: none; border-radius: 10px; overflow: hidden; background-color: rgb(18, 54, 25);">
+                                <div class="card-img-top" style="height: 200px; overflow: hidden;">
+                                    <img src="../dashboard/uploads/event/'.$ufile.'" alt="'.$name.'" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title text-white">'.$name.'</h5>
+                                    <h6 class="text-light" style="color: #aaa !important; font-size: 14px;">'.$position.'</h6>
+                                </div>
+                                <div class="card-footer bg-transparent border-0">
+                                    <a  href="eventail.php?id='.$id.'" class="btn btn-sm w-100" style="background-color: rgb(9, 128, 68); color: white; border: none;">قراءة المزيد</a>
+                                </div>
                             </div>
-                            <div class='mt-auto'>
-                                <a href='eventail.php?id=$id' class='btn btn-primary'>التفاصيل</a>
-                            </div>
-                        </div>
-                    </div>
-                    ";
-                }
-                ?>
+                        </div>';
+                    }
+                    ?>
+                </div>
             </div>
         </div>
     </div>
@@ -351,9 +381,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
 
         <div class="row mt-4">
-    <!-- ملعب 1 -->
     <div class="row">
-        <!-- الصور مع إضافة data-bs-toggle وdata-bs-target -->
         <div class="col-md-6 col-lg-4 mb-4">
             <div class="card h-100 shadow">
                 <img src="assets/img/1.jpg" class="card-img-top" alt="1" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage('assets/img/1.jpg')">
@@ -432,7 +460,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 </div>
 
-<!-- Modal لعرض الصورة -->
 <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
@@ -457,65 +484,61 @@ function showImage(imageSrc) {
 </section>
 
 
-<!-- ***** event Area End ***** -->
 
 
 
-<!-- ***** Price Plan Area Start ***** -->
 
-<!-- ***** Price Plan Area End ***** -->
 
-<!-- ***** Review Area Start ***** -->
-<section id="review" class="section review-area bg-overlay ptb_100">
+<section id="review" class="section review-area bg-overlay ptb_100" style="background-color: #1a1a2e;">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 col-md-10 col-lg-7">
                 <!-- Section Heading -->
                 <div class="section-heading text-center">
-                    <h2 class="text-white">آراء الزوار والمشجعين</h2>
-                    <p class="text-white d-none d-sm-block mt-4">
+                    <h2 class="text-white fw-bold">آراء الزوار والمشجعين</h2>
+                    <p class="text-white d-none d-sm-block mt-4 fw-bold">
                         آراء مشجعين من مختلف دول العالم شاركوا في تجربة كأس العالم في السعودية. كلماتهم تُلخص الشغف، التنظيم، والضيافة.
                     </p>
                 </div>
             </div>
         </div>
         <div class="row">
-            <!-- Client Reviews -->
-            <div class="client-reviews owl-carousel">
-                <?php
-                $q = "SELECT * FROM testimony ORDER BY id DESC LIMIT 6";
-                $r123 = mysqli_query($con, $q);
-                while ($ro = mysqli_fetch_array($r123)) {
-                    $name = $ro['name'];
-                    $position = $ro['position'];
-                    $message = $ro['message'];
-                    $ufile = $ro['ufile'];
-
-                    echo "
-                    <div class='single-review p-5' dir='rtl'>
-                        <div class='review-content' dir='rtl'>
-                            <div class='review-text'>
-                                <p dir='rtl'>$message</p>
+            <div class="col-12">
+                <div class="owl-carousel testimonial-carousel">
+                    <?php
+                    $q = "SELECT * FROM testimony ORDER BY id DESC LIMIT 6";
+                    $r123 = mysqli_query($con, $q);
+                    while ($ro = mysqli_fetch_array($r123)) {
+                        $name = $ro['name'];
+                        $position = $ro['position'];
+                        $message = $ro['message'];
+                        $ufile = $ro['ufile'];
+                        
+                        echo '
+                        <div class="testimonial-item p-4" style="background: rgba(0,0,0,0.3); border-radius: 10px; margin: 10px; border: 1px solid rgba(255,255,255,0.1);">
+                            <div class="review-content" dir="rtl">
+                                <div class="review-text">
+                                    <p class="text-white fw-bold" style="font-size: 16px;">'.$message.'</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class='reviewer media mt-3'>
-                            <div class='reviewer-thumb'>
-                                <img class='avatar-lg radius-100' src='uploads/testimonials/$ufile' alt=''>
+                            <div class="reviewer media mt-3" dir="rtl">
+                                <div class="reviewer-thumb">
+                                    <img class="avatar-lg radius-100" src="uploads/testimonials/'.$ufile.'" alt="'.$name.'" style="width: 60px; height: 60px; object-fit: cover; border: 2px solid rgba(255,255,255,0.2);">
+                                </div>
+                                <div class="reviewer-meta media-body align-self-center mr-3">
+                                    <h5 class="reviewer-name text-white mb-1 fw-bold">'.$name.'</h5>
+                                    <h6 class="text-light fw-bold" style="color: #aaa !important;">'.$position.'</h6>
+                                </div>
                             </div>
-                            <div class='reviewer-meta media-body align-self-center mr-4'>
-                                <h5 class='reviewer-name color-primary mb-2' dir='rtl'>$name</h5>
-                                <h6 class='text-secondary fw-6'>$position</h6>
-                            </div>
-                        </div>
-                    </div>";
-                
-                }
-                ?>
+                        </div>';
+                    }
+                    ?>
+                </div>
             </div>
         </div>
     </div>
 </section>
-<!-- ***** Review Area End ***** -->
+
 
 
 
@@ -524,7 +547,6 @@ function showImage(imageSrc) {
 
 
         
-<!--====== Emergency Numbers Area Start ======-->
 <section id="emergency" class="section ptb_100 bg-light">
     <div class="container">
         <div class="row justify-content-center text-center">
@@ -563,14 +585,11 @@ function showImage(imageSrc) {
         </div>
     </div>
 </section>
-<!--====== Emergency Numbers Area End ======-->
 
-<!--====== Contact Area Start ======-->
 <section id="contact" class="contact-area ptb_100">
     <div class="container">
         <div class="row justify-content-between align-items-center">
             <div class="col-12 col-lg-5">
-                <!-- Section Heading -->
                 <div class="section-heading text-center mb-3">
                     <h2>كن جزءًا من كأس العالم 2034</h2>
                     <p class="d-none d-sm-block mt-4">
@@ -578,17 +597,14 @@ function showImage(imageSrc) {
                         دعنا نسمع منك ونرتّب لتجربة لا تُنسى في المملكة العربية السعودية!
                     </p>
                 </div>
-                <!-- Contact Us -->
                 <div class="contact-us">
                     <ul>
-                        <!-- Phone -->
                         <li class="contact-info color-1 bg-hover active hover-bottom text-center p-5 m-3">
                             <span><i class="fas fa-mobile-alt fa-3x"></i></span>
                             <a class="d-block my-2" href="tel:0555555555">
                                 <h3>+966 567 321 055</h3>
                             </a>
                         </li>
-                        <!-- Email -->
                         <li class="contact-info color-3 bg-hover active hover-bottom text-center p-5 m-3">
                             <span><i class="fas fa-envelope-open-text fa-3x"></i></span>
                             <a class="d-block my-2" href="mailto:any@gmail.com">
@@ -599,7 +615,6 @@ function showImage(imageSrc) {
                 </div>
             </div>
 
-            <!-- Contact Form -->
             <div class="col-12 col-lg-6 pt-4 pt-lg-0">
                 <div class="contact-box text-center">
                     <?php
@@ -676,9 +691,37 @@ function showImage(imageSrc) {
         </div>
     </div>
 </section>
-<!--====== Contact Area End ======-->
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 
+
+<!-- Add these right before your closing body tag or footer include -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Initialize Owl Carousel
+    $('.testimonial-carousel').owlCarousel({
+        loop: true,
+        margin: 20,
+        nav: true,
+        rtl: true, // For right-to-left languages
+        dots: false,
+        autoplay: true,
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 2
+            },
+            1000: {
+                items: 3
+            }
+        }
+    });
+});
+</script>
 <?php include "footer.php"; ?>

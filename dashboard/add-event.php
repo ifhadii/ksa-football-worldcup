@@ -1,13 +1,10 @@
 <?php include "header.php"; ?>
 <?php include "sidebar.php"; ?>
-<!-- ============================================================== -->
-<!-- بداية المحتوى الرئيسي هنا -->
-<!-- ============================================================== -->
+
 <div class="main-content" style="text-align: right;">
     <div class="page-content">
         <div class="container-fluid">
 
-            <!-- بداية عنوان الصفحة -->
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
@@ -22,7 +19,6 @@
                     </div>
                 </div>
             </div>
-            <!-- نهاية عنوان الصفحة -->
 
             <div class="row">
                 <div class="col-xxl-9">
@@ -149,15 +145,15 @@
 
                                         </div>
                                     </form>
-                                </div> <!-- end tab-pane -->
+                                </div> 
                             </div>
                         </div>
                     </div>
-                </div> <!-- end col -->
+                </div> 
             </div>
 
-        </div> <!-- container-fluid -->
-    </div> <!-- End Page-content -->
+        </div> 
+    </div> 
 </div>
 
 <?php include "footer.php"; ?>

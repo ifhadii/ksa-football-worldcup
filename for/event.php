@@ -3,7 +3,6 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <!-- محتوى العنوان -->
                 <div class="breadcrumb-content text-center">
                     <h2 class="text-white text-uppercase mb-3">فعالياتنا السابقة</h2>
                     <ol class="breadcrumb d-flex justify-content-center">
@@ -16,7 +15,6 @@
     </div>
 </section>
 
-<!-- ***** منطقة الفعاليات ***** -->
 <section id="event" class="event-area overflow-hidden ptb_100" style="direction: rtl; text-align: right;">
     <div class="container">
         <div class="row items event-items">

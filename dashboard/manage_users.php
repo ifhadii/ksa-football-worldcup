@@ -17,7 +17,6 @@ $user_result = mysqli_query($con, $user_query);
     <div class="page-content">
         <div class="container-fluid">
             
-            <!-- Admin Table -->
             <div class="row">
                 <div class="col-12">
                     <div class="card">
@@ -74,7 +73,6 @@ if (mysqli_num_rows($admin_result) > 0) {
                 </div>
             </div>
 
-            <!-- Users Table -->
             <div class="row">
                 <div class="col-12">
                     <div class="card">

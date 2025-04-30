@@ -4,11 +4,9 @@ $todo = mysqli_real_escape_string($con, $_GET["id"]);
 include "sidebar.php";
 ?>
 
-<!-- Main Content Wrapper -->
 <div class="main-content">
     <div class="page-content">
         <div class="container-fluid">
-            <!-- Page Title -->
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
@@ -22,7 +20,6 @@ include "sidebar.php";
                     </div>
                 </div>
             </div>
-            <!-- End Page Title -->
 
             <?php
             $query = "SELECT * FROM event WHERE id='$todo'";
@@ -36,7 +33,6 @@ include "sidebar.php";
             }
             ?>
 
-            <!-- Main Content Row -->
             <div class="row justify-content-center">
                 <div class="col-xl-8 col-lg-10">
                     <div class="card">
@@ -127,12 +123,8 @@ include "sidebar.php";
                     </div>
                 </div>
             </div>
-            <!-- End Main Content Row -->
         </div>
-        <!-- container-fluid -->
     </div>
-    <!-- End Page-content -->
 </div>
-<!-- End Main Content Wrapper -->
 
 <?php include "footer.php"; ?>

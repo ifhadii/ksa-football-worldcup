@@ -6,7 +6,6 @@ class User {
         $this->conn = $db;
     }
 
-    // تسجيل مستخدم جديد
     public function register($full_name, $email, $password) {
         try {
             // Validate inputs
@@ -42,7 +41,6 @@ class User {
         }
     }
 
-    // Check if email exists
     private function emailExists($email) {
         $sql = "SELECT email FROM users WHERE email = ?";
         $stmt = $this->conn->prepare($sql);
@@ -52,7 +50,6 @@ class User {
         return $stmt->num_rows > 0;
     }
 
-    // تسجيل الدخول
     public function login($email, $password) {
         try {
             if (empty($email) || empty($password)) {
@@ -89,7 +86,6 @@ class User {
         }
     }
 
-    // جلب كل المستخدمين
     public function getAll() {
         try {
             $result = $this->conn->query("SELECT user_id, full_name, email, created_at FROM users");
@@ -103,7 +99,6 @@ class User {
         }
     }
 
-    // حذف مستخدم
     public function delete($user_id) {
         try {
             $stmt = $this->conn->prepare("DELETE FROM users WHERE user_id = ?");

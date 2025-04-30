@@ -172,22 +172,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["username"])) {
 
                   </div>
                 </div>
-                <!-- end col -->
               </div>
-              <!-- end row -->
             </div>
-            <!-- end card -->
           </div>
-          <!-- end col -->
-
         </div>
-        <!-- end row -->
       </div>
-      <!-- end container -->
     </div>
-    <!-- end auth page content -->
 
-    <!-- footer -->
     <footer class="footer">
       <div class="container">
         <div class="row">
@@ -206,11 +197,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["username"])) {
         </div>
       </div>
     </footer>
-    <!-- end Footer -->
   </div>
-  <!-- end auth-page-wrapper -->
 
-  <!-- JAVASCRIPT -->
   <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/libs/simplebar/simplebar.min.js"></script>
   <script src="assets/libs/node-waves/waves.min.js"></script>
@@ -218,7 +206,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["username"])) {
   <script src="assets/js/pages/plugins/lord-icon-2.1.0.js"></script>
   <script src="assets/js/plugins.js"></script>
 
-  <!-- password-addon init -->
   <script src="assets/js/pages/password-addon.init.js"></script>
 </body>
 

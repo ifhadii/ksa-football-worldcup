@@ -10,42 +10,52 @@ header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 
-// Start session
+// Start secure session
 if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+    session_start([
+        'cookie_httponly' => true,
+        'cookie_secure' => isset($_SERVER['HTTPS']),
+        'cookie_samesite' => 'Strict'
+    ]);
 }
 
-// Admin flag
-$admin_chc = 0;
-
-// Check if user is logged in
+// Check if user is logged in and get user details
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
-
-    // Get user details
-    $user_query = mysqli_query($con, "SELECT email, full_name FROM users WHERE user_id = '$user_id'");
-    if ($user_query && mysqli_num_rows($user_query) > 0) {
-        $user_data = mysqli_fetch_assoc($user_query);
-        $user_email = $user_data['email'];
-        $user_username = $user_data['full_name'];
+    
+    // Prepared statement for security
+    $stmt = mysqli_prepare($con, "SELECT email, full_name, role FROM users WHERE user_id = ?");
+    mysqli_stmt_bind_param($stmt, "i", $user_id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    
+    if ($result && mysqli_num_rows($result) > 0) {
+        $user_data = mysqli_fetch_assoc($result);
+        $_SESSION['email'] = $user_data['email'];
+        $_SESSION['full_name'] = $user_data['full_name'];
+        $_SESSION['role'] = $user_data['role'];
     }
+    mysqli_stmt_close($stmt);
 }
 ?>
 
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
     <?php
-    // Site settings
-    $rr = mysqli_query($con, "SELECT * FROM siteconfig WHERE id=1");
-    $r = mysqli_fetch_array($rr);
+    // Site settings with prepared statement
+    $stmt = mysqli_prepare($con, "SELECT site_title FROM siteconfig WHERE id = 1");
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $r = mysqli_fetch_assoc($result);
+    mysqli_stmt_close($stmt);
     ?>
     
-    <title>KSA Welcome Cup - <?= htmlspecialchars($r['site_title']) ?></title>
+    <title>KSA Welcome Cup - <?= htmlspecialchars($r['site_title'] ?? '') ?></title>
     <link rel="icon" href="assets/img/favicon.png">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
@@ -53,14 +63,13 @@ if (isset($_SESSION['user_id'])) {
 
 <body>
     <div class="main overflow-hidden">
-        <!-- Header -->
-        <header id="header" dir="rtl">
+        <header id="header">
             <nav class="navbar navbar-expand">
                 <div class="container header" style="display: flex; flex-direction: row-reverse;">
                     <a class="navbar-brand" href="index.php"></a>
 
                     <div class="ml-auto"></div>
-
+                    
                     <ul class="navbar-nav items">
                         <li class="nav-item"><a class="nav-link" href="home">الرئيسية</a></li>
                         <li class="nav-item"><a href="about" class="nav-link">نتائج المباريات</a></li>
@@ -68,18 +77,17 @@ if (isset($_SESSION['user_id'])) {
                         <li class="nav-item"><a href="event" class="nav-link">الفعاليات</a></li>
 
                         <?php if (isset($_SESSION['user_id'])): ?>
-
-                            <li class="nav-item">
-                                <!-- <a href="http://localhost/Project/dashboard/" class="nav-link">لوحة التحكم</a> -->
-                            </li>
+                            <?php if ($_SESSION['role'] === 'admin'): ?>
+                                <li class="nav-item">
+                                    <a href="../dashboard/" class="nav-link">لوحة التحكم</a>
+                                </li>
+                            <?php endif; ?>
                             
                             <li class="nav-item"><a href="profile.php" class="nav-link">حسابي</a></li>
                             <li class="nav-item"><a href="user_testimony.php" class="nav-link">عطنا رايك</a></li>
-
                         <?php endif; ?>
                     </ul>
 
-                    <!-- Toggler -->
                     <ul class="navbar-nav toggle">
                         <li class="nav-item">
                             <a href="#" class="nav-link" data-toggle="modal" data-target="#menu">
@@ -88,7 +96,6 @@ if (isset($_SESSION['user_id'])) {
                         </li>
                     </ul>
 
-                    <!-- Login/Logout -->
                     <ul class="navbar-nav action">
                         <li class="nav-item ml-3">
                             <?php if (isset($_SESSION['user_id'])): ?>
@@ -105,9 +112,9 @@ if (isset($_SESSION['user_id'])) {
                 </div>
             </nav>
         </header>
-
     </div>
 
     <script src="assets/js/main.js"></script>
 </body>
 </html>
+<?php ob_end_flush(); ?>

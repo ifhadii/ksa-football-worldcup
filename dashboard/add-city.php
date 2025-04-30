@@ -1,9 +1,7 @@
 <?php include "header.php"; ?>
 <?php include "sidebar.php"; ?>
 
-<!-- ============================================================== -->
-<!-- Start right Content here -->
-<!-- ============================================================== -->
+
 <style>
 .summernote {
   direction: rtl !important;
@@ -25,7 +23,6 @@
     <div class="page-content">
         <div class="container">
 
-            <!-- Page Title -->
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
@@ -40,7 +37,6 @@
                 </div>
             </div>
 
-            <!-- Form -->
             <div class="row">
                 <div class="col-xxl-9">
                     <div class="card mt-xxl-n5">
@@ -223,11 +219,9 @@
                                                 </div>
                                             </div>
 
-                                            <!-- Cards Section -->
                                             <div class="col-12">
                                                 <h5 class="mb-3">بطاقات الأماكن السياحية</h5>
                                                 <div id="cards-container">
-                                                    <!-- First Card -->
                                                     <div class="card-container">
                                                         <div class="row">
                                                             <div class="col-md-4">
@@ -258,11 +252,9 @@
                                                 </button>
                                             </div>
 
-                                            <!-- Hotels Section -->
                                             <div class="col-12 mt-4">
                                                 <h5 class="mb-3">الفنادق</h5>
                                                 <div id="hotels-container">
-                                                    <!-- First Hotel Entry -->
                                                     <div class="card-container">
                                                         <div class="row">
                                                             <div class="col-md-6">
