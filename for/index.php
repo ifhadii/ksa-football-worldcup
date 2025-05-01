@@ -1,11 +1,19 @@
 <?php
-include "header.php";
+// Enable error reporting for debugging
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
+// Start session at the very beginning
+session_start();
+
+// Include database connection
+include "z_db.php";
 
 $msg = "";
 
+// Process form submissions
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $action = $_POST['action'];
+    $action = $_POST['action'] ?? '';
     
     if ($action == 'login') {
         $email = mysqli_real_escape_string($con, $_POST['email']);
@@ -21,10 +29,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($user && password_verify($password, $user['password'])) {
             $_SESSION['user_id'] = $user['user_id'];
             $_SESSION['full_name'] = $user['full_name'];
+            $_SESSION['email'] = $user['email'];
+            $_SESSION['role'] = $user['role'];
             
-            
-            // نجاح: توجيه إلى الصفحة الرئيسية
-            header("Location: home");
+            // Redirect to home page
+            header("Location: index.php");
             exit();
         } else {
             $msg = "❌ البريد الإلكتروني أو كلمة المرور غير صحيحة.";
@@ -43,12 +52,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bind_param("sss", $full_name, $email, $hash);
             
             if ($stmt->execute()) {
-                // ✅ تسجيل الدخول تلقائي بعد الإنشاء
                 $new_user_id = $stmt->insert_id;
                 $_SESSION['user_id'] = $new_user_id;
                 $_SESSION['full_name'] = $full_name;
+                $_SESSION['email'] = $email;
+                $_SESSION['role'] = 'user';
                 
-                header("Location: home"); // التوجيه للصفحة الرئيسية
+                header("Location: index.php");
                 exit();
             } else {
                 $msg = "❌ حدث خطأ أثناء إنشاء الحساب: " . $con->error;
@@ -56,10 +66,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
+
+// Include header after all processing
+include "header.php";
 ?>
-<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous"> -->
-<!-- Add this to your <head> -->
-<!-- Modal Dialog -->
 <div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content" style="direction: rtl;">
@@ -88,7 +98,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
-<!-- Bootstrap CSS -->
 
 
 <style>
@@ -189,16 +198,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         background: rgba(0,0,0,0.8) !important;
     }
     </style>
-<!-- زر لفتح المودال -->
 
 
 
 
-<!-- ***** Welcome Area Start ***** -->
 <section id="home" class="section welcome-area  overflow-hidden d-flex align-items-center">
     <div class="container">
         <div class="row align-items-center">
-            <!-- Welcome Intro Start -->
             <div class="col-12 col-md-12">
                 <div class="welcome-intro text-center">
                     <h1 class="text-white">كأس العالم لكرة القدم 2034</h1>
@@ -211,7 +217,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
         </div>
     </div>
-    <!-- Shape Bottom -->
     <div class="shape shape-bottom">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none" fill="#FFFFFF">
             <path class="shape-fill" d="M421.9,6.5c22.6-2.5,51.5,0.4,75.5,5.3c23.6,4.9,70.9,23.5,100.5,35.7c75.8,32.2,133.7,44.5,192.6,49.7
@@ -223,25 +228,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
-<!-- ***** Promo Area Start ***** -->
 <section class="section promo-area ptb_100">
     <div class="container">
         <div class="row">
-            <!-- عنصر 1 -->
             <div class="col-12 col-md-6 col-lg-4 res-margin">
                 <div class="single-promo color-1 bg-hover hover-bottom text-center p-5">
                     <h3 class="mb-3">مدن مستضيفة عالمية</h3>
                     <p>تعرف على المدن السعودية التي ستحتضن مباريات كأس العالم، من الرياض إلى جدة والدمام والمدينة، كل مدينة ستبهر العالم بطابعها الخاص.</p>
                 </div>
             </div>
-            <!-- عنصر 2 -->
             <div class="col-12 col-md-6 col-lg-4 res-margin">
                 <div class="single-promo color-1 bg-hover hover-bottom text-center p-5">
                     <h3 class="mb-3">تجربة ثقافية فريدة</h3>
                     <p>استعد لاكتشاف تاريخ المملكة وثقافتها من خلال الفعاليات المصاحبة والمهرجانات التي ترافق مباريات البطولة.</p>
                 </div>
             </div>
-            <!-- عنصر 3 -->
             <div class="col-12 col-md-6 col-lg-4 res-margin">
                 <div class="single-promo color-1 bg-hover hover-bottom text-center p-5">
                     <h3 class="mb-3">أجواء رياضية استثنائية</h3>
@@ -260,9 +261,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
-<!-- ***** Service Area End ***** -->
 <section id="service" class="section service-area bg-grey ptb_150" dir="rtl">
-    <!-- Shape Top -->
     <div class="shape shape-top">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none" fill="#FFFFFF">
             <path class="shape-fill" d="..."></path>
@@ -272,7 +271,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 col-md-10 col-lg-7">
-                <!-- Section Heading -->
                 <div class="section-heading text-center">
                     <h2>المدن المستضيفة</h2>
                     <p class="d-none d-sm-block mt-4">تعرف على أبرز المدن التي ستستضيف مباريات كأس العالم 2034 في المملكة العربية السعودية.</p>
@@ -290,10 +288,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $id = "$rod[id]";
                 $serviceg = "$rod[city_title]";
                 $service_desc = "$rod[city_desc]";
-                // XXXXXXXXXXXXXXXXXXXXXX Second maintenance XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX 
                 echo "
                 <div class='col-12 col-md-6 col-lg-4 mb-4'>
-                    <!-- Single Service -->
                     <div class='single-service p-4 h-100' style='border: solid 1px #788282; text-align: right;'>
                         <h3 class='my-3'>$serviceg</h3>
                         <p>$service_desc</p>
@@ -307,7 +303,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
 
-    <!-- Shape Bottom -->
     <div class="shape shape-bottom">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none" fill="#FFFFFF">
             <path class="shape-fill" d="..."></path>
@@ -317,13 +312,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
-<!-- ***** Review Area Start ***** -->
-<!-- ***** Review Area Start ***** -->
 <section id="testimonials" class="section review-area ptb_100" style="background-color: rgb(16, 36, 18);">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 col-md-10 col-lg-7">
-                <!-- Section Heading -->
                 <div class="section-heading text-center">
                     <h2 class="mb-3" style="color:rgb(9, 128, 68);">آراء الزوار والمشجعين</h2>
                     <p class="d-none d-sm-block mt-4 text-white">
@@ -493,7 +485,6 @@ function showImage(imageSrc) {
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 col-md-10 col-lg-7">
-                <!-- Section Heading -->
                 <div class="section-heading text-center">
                     <h2 class="text-white fw-bold">آراء الزوار والمشجعين</h2>
                     <p class="text-white d-none d-sm-block mt-4 fw-bold">
@@ -696,7 +687,6 @@ function showImage(imageSrc) {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 
 
-<!-- Add these right before your closing body tag or footer include -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
 

@@ -6,16 +6,16 @@
  session_start();
  
  // Check if user is admin
- if (isset($_SESSION['id'])) {
-     echo json_encode(['status' => 'error', 'message' => 'غير مسموح بالوصول']);
-     exit();
- }
- 
- // Validate input
- if (!isset($_POST['id']) || !is_numeric($_POST['id'])) {
-     echo json_encode(['status' => 'error', 'message' => 'معرف غير صالح']);
-     exit();
- }
+ if (!isset($_SESSION['user_id'])) {
+    echo json_encode(['status' => 'error', 'message' => 'يجب تسجيل الدخول أولاً']);
+    exit();
+}
+
+// Check if user has admin role
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+    echo json_encode(['status' => 'error', 'message' => 'ليست لديك صلاحية للقيام بهذا الإجراء']);
+    exit();
+}
  
  $id = (int)$_POST['id'];
  $table = isset($_POST['table']) ? $_POST['table'] : '';

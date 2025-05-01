@@ -1,7 +1,25 @@
 <?php
+$full_name = $_SESSION["full_name"];
+
+// Start session and verify admin role at the VERY TOP
+session_start();
+
+// Redirect if not logged in
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
+// Only allow admin role
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+    header("Location: access-denied.php");
+    exit();
+}
+
 include "header.php";
-$username = $_SESSION["username"];
+$full_name = $_SESSION["full_name"];
 ?>
+
 <?php include "sidebar.php"; ?>
 
 <div class="main-content" dir="rtl" style="">

@@ -9,7 +9,7 @@ header("Pragma: no-cache");
 session_start();
 // Check, if username session is NOT set then this page will jump to login page
 
-if (!isset($_SESSION["username"])) {
+if (!isset($_SESSION["full_name"])) {
     print "
 				<script language='javascript'>
 					window.location = 'login.php';
@@ -18,8 +18,8 @@ if (!isset($_SESSION["username"])) {
 }
 
 // Check, if username session is NOT set then this page will jump to login page
-if (isset($_SESSION["username"])) {
-    $username = $_SESSION["username"];
+if (isset($_SESSION["full_name"])) {
+    $username = $_SESSION["full_name"];
 } else {
     print "
 				<script language='javascript'>
@@ -27,6 +27,8 @@ if (isset($_SESSION["username"])) {
 				</script>
 			";
 }
+
+
 ?>
 
 
@@ -43,17 +45,13 @@ if (isset($_SESSION["username"])) {
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
     <link rel="shortcut icon" href="assets/images/favicon.ico">
-
     <link href="assets/libs/jsvectormap/css/jsvectormap.min.css" rel="stylesheet" type="text/css" />
-
     <link href="assets/libs/swiper/swiper-bundle.min.css" rel="stylesheet" type="text/css" />
-
     <script src="assets/js/layout.js"></script>
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/custom.min.css" rel="stylesheet" type="text/css" />
-
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.css" rel="stylesheet">
 
 

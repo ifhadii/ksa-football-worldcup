@@ -1,6 +1,6 @@
 <?php
 include "../for/z_db.php";
-$username = $_SESSION["username"];
+$full_name = $_SESSION["full_name"];
 ?>
 </style>
 <div class="app-menu navbar-menu" style="direction: ltr; text-align: left;">

@@ -4,8 +4,8 @@ header('Content-Type: application/json');
 include_once "z_db.php";
 session_start();
 
-// Check if user is logged in
-if (isset($_SESSION['id'])) {
+// 1. Check if user is logged in (corrected logic)
+if (!isset($_SESSION['user_id'])) {
     echo json_encode([
         'status' => 'error', 
         'message' => 'يجب تسجيل الدخول أولاً'
@@ -13,7 +13,16 @@ if (isset($_SESSION['id'])) {
     exit();
 }
 
-// Check ID parameter
+// 2. Check if user has admin privileges
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+    echo json_encode([
+        'status' => 'error', 
+        'message' => 'ليست لديك صلاحية إدارية لهذا الإجراء'
+    ]);
+    exit();
+}
+
+// 3. Validate city ID parameter
 if (!isset($_POST["id"]) || !is_numeric($_POST["id"])) {
     echo json_encode([
         'status' => 'error', 
@@ -24,7 +33,7 @@ if (!isset($_POST["id"]) || !is_numeric($_POST["id"])) {
 
 $city_id = (int)$_POST["id"];
 
-// Verify city exists
+// 4. Verify city exists
 $check = $con->prepare("SELECT id FROM city WHERE id = ?");
 $check->bind_param("i", $city_id);
 $check->execute();
@@ -38,7 +47,7 @@ if ($check->num_rows == 0) {
     exit();
 }
 
-// Delete city
+// 5. Delete city (only reaches here if all checks pass)
 $stmt = $con->prepare("DELETE FROM city WHERE id = ?");
 $stmt->bind_param("i", $city_id);
 
@@ -54,6 +63,8 @@ if ($stmt->execute()) {
     ]);
 }
 
+// 6. Clean up resources
 $stmt->close();
+$check->close();
 $con->close();
 ?>

@@ -5,9 +5,15 @@ header('Content-Type: application/json');
 include "z_db.php";
 session_start();
 
-// Check if user is admin (adjust according to your auth system)
-if (isset($_SESSION['id'])) {
-    echo json_encode(['status' => 'error', 'message' => 'غير مسموح بالوصول']);
+// Check if user is logged in and is admin
+if (!isset($_SESSION['user_id'])) {
+    echo json_encode(['status' => 'error', 'message' => 'يجب تسجيل الدخول أولاً']);
+    exit();
+}
+
+// Check if user has admin role
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+    echo json_encode(['status' => 'error', 'message' => 'ليست لديك صلاحية للقيام بهذا الإجراء']);
     exit();
 }
 
@@ -44,9 +50,9 @@ try {
     $delete_stmt->bind_param("i", $id);
     
     if ($delete_stmt->execute()) {
-        // Delete the associated image file
+        // Delete the associated image file if exists
         $image_path = "../for/uploads/testimonials/" . $image_file;
-        if (file_exists($image_path) && is_file($image_path)) {
+        if (!empty($image_file) && file_exists($image_path) && is_file($image_path)) {
             unlink($image_path);
         }
         
