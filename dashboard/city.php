@@ -1,6 +1,16 @@
 <?php 
 include "header.php";
 include "sidebar.php";
+
+
+
+// Verify admin role
+if ($_SESSION['role'] !== 'admin') {
+    header("Location: access-denied.php");
+    exit();
+}
+
+
 ?>
 
 <div class="main-content" dir="rtl">

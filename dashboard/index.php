@@ -1,23 +1,26 @@
 <?php
-$full_name = $_SESSION["full_name"];
+// Start session if not already active
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
 
-// Start session and verify admin role at the VERY TOP
-session_start();
-
-// Redirect if not logged in
-if (!isset($_SESSION['user_id'])) {
+// Verify required session variables exist
+if (!isset($_SESSION['user_id'], $_SESSION['full_name'], $_SESSION['role'])) {
     header("Location: login.php");
     exit();
 }
 
-// Only allow admin role
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+// Verify admin role
+if ($_SESSION['role'] !== 'admin') {
     header("Location: access-denied.php");
     exit();
 }
 
-include "header.php";
+// Set user data
 $full_name = $_SESSION["full_name"];
+
+// Include header
+include "header.php";
 ?>
 
 <?php include "sidebar.php"; ?>

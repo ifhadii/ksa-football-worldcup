@@ -1,37 +1,42 @@
 <?php
+// Start session if not already active
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
+
+// Include database connection
 include "z_db.php";
 
+// Set security headers
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
+header("X-Content-Type-Options: nosniff");
+header("X-Frame-Options: DENY");
 
-
-session_start();
-// Check, if username session is NOT set then this page will jump to login page
-
-if (!isset($_SESSION["full_name"])) {
-    print "
-				<script language='javascript'>
-					window.location = 'login.php';
-				</script>
-			";
-}
-
-// Check, if username session is NOT set then this page will jump to login page
-if (isset($_SESSION["full_name"])) {
-    $username = $_SESSION["full_name"];
-} else {
-    print "
-				<script language='javascript'>
-					window.location = 'login.php';
-				</script>
-			";
+// Check authentication and authorization
+if (!isset($_SESSION['user_id'], $_SESSION['full_name'], $_SESSION['role'])) {
+    header("Location: login.php");
+    exit();
 }
 
 
+// Verify admin role
+if ($_SESSION['role'] !== 'admin') {
+    header("Location: access-denied.php");
+    exit();
+}
+
+
+// Set username variable
+$username = $_SESSION["full_name"];
+
+// Verify admin role (if needed)
+// if ($_SESSION['role'] !== 'admin') {
+//     header("Location: access-denied.php");
+//     exit();
+// }
 ?>
-
-
 
 <!doctype html>
 <html  data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none">
@@ -157,7 +162,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const mainContent = document.querySelector(".main-content");
 
     toggleBtn.addEventListener("click", function () {
-        sidebar.classList.toggle("d-none"); // Hides/shows sidebar
+        sidebar.classList.toggle("d-none");
         if (sidebar.classList.contains("d-none")) {
             mainContent.style.marginLeft = "0";
         } else {

@@ -2,6 +2,27 @@
 include "header.php";
 include "sidebar.php";
 
+
+session_start();
+ 
+// Check if user is admin
+if (!isset($_SESSION['user_id'])) {
+   echo json_encode(['status' => 'error', 'message' => 'يجب تسجيل الدخول أولاً']);
+   exit();
+}
+
+// Verify admin role
+if ($_SESSION['role'] !== 'admin') {
+    header("Location: access-denied.php");
+    exit();
+}
+
+// Check if user has admin role
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+   echo json_encode(['status' => 'error', 'message' => 'ليست لديك صلاحية للقيام بهذا الإجراء']);
+   exit();
+}
+
 // Fetch all testimonies
 $testimony_query = "SELECT * FROM testimony";
 $testimony_result = mysqli_query($con, $testimony_query);

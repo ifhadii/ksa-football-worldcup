@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (mysqli_query($con, $query)) {
                 echo '<script>
                     Swal.fire({
-                        title: "تمت الإضافة بنجاح",
+                        title: "✅ تمت الإضافة بنجاح",
                         text: "تمت إضافة الشهادة بنجاح",
                         icon: "success",
                         confirmButtonColor: "#3085d6",

@@ -79,8 +79,7 @@
                                     "INSERT INTO event (port_title, port_desc, port_detail, ufile) VALUES ('$port_title', '$port_desc', '$port_detail', '$new_file_name')"
                                 );
                                 if ($qb) {
-                                    $errormsg = "
-                    <div class='alert alert-success alert-dismissible fade show'>✅ تم إضافة المدينة بنجاح.<button type='button' class='btn-close' data-bs-dismiss='alert'></button></div>"; // Handle card data if city was added successfully
+                                    $errormsg = "<div class='alert alert-success alert-dismissible fade show'>✅ تم إضافة المدينة بنجاح<button type='button' class='btn-close' data-bs-dismiss='alert'></button></div>"; // Handle card data if city was added successfully
                                 }
                             } elseif ($status != "OK") {
                                 $errormsg = "

@@ -45,7 +45,7 @@ if (isset($_POST['save'])) {
     mysqli_stmt_store_result($stmt);
     
     if (mysqli_stmt_num_rows($stmt) > 0) {
-        $msg .= "البريد الإلكتروني مسجل مسبقاً.<br>";
+        $msg .= "البريد الإلكتروني مسجل مسبقاً<br>";
         $status = "NOTOK";
     }
     mysqli_stmt_close($stmt);
@@ -63,10 +63,8 @@ if (isset($_POST['save'])) {
         mysqli_stmt_bind_param($stmt, "sss", $full_name, $email, $password);
         
         if (mysqli_stmt_execute($stmt)) {
-            $errormsg = "<div class='alert alert-success alert-dismissible fade show'>
-                تم إضافة المستخدم بنجاح ✅
-                <button type='button' class='btn-close' data-bs-dismiss='alert'></button>
-            </div>";
+            $errormsg =  "<div class='alert alert-success alert-dismissible fade show'>✅ تم إضافة المدينة بنجاح<button type='button' class='btn-close' data-bs-dismiss='alert'></button></div>"; // Handle card data if city was added successfully
+
         } else {
             $errormsg = "<div class='alert alert-danger alert-dismissible fade show'>
                 خطأ في الإضافة: ".mysqli_error($con)."

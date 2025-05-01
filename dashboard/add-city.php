@@ -81,9 +81,8 @@
                                 );
                                 if ($qb) {
                                     $city_id = mysqli_insert_id($con);
-                                    $errormsg =
-                                        "<div class='alert alert-success alert-dismissible fade show'>✅ تم إضافة المدينة بنجاح.<button type='button' class='btn-close' data-bs-dismiss='alert'></button></div>"; // Handle card data if city was added successfully
-                                    if (
+                                    $errormsg ="<div class='alert alert-success alert-dismissible fade show'>✅ تم إضافة المدينة بنجاح<button type='button' class='btn-close' data-bs-dismiss='alert'></button></div>"; // Handle card data if city was added successfully
+                                }                                    if (
                                         isset($_POST["place_name"]) &&
                                         is_array($_POST["place_name"])
                                     ) {
@@ -191,7 +190,6 @@
                             if ($status !== "OK") {
                                 $errormsg = "<div class='alert alert-danger alert-dismissible fade show'>$msg<button type='button' class='btn-close' data-bs-dismiss='alert'></button></div>";
                             }
-                        }
                         ?>
 
                         <div class="card-body p-4">

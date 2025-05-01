@@ -2,9 +2,18 @@
 include "header.php";
 include "sidebar.php";
 
+
 // Fetch all admins
 $admin_query = "SELECT * FROM admin";
 $admin_result = mysqli_query($con, $admin_query);
+
+
+// Verify admin role
+if ($_SESSION['role'] !== 'admin') {
+    header("Location: access-denied.php");
+    exit();
+}
+
 
 // Fetch all users
 $user_query = "SELECT * FROM users";
