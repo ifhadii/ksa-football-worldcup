@@ -129,7 +129,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"])) {
                         </div>
 
                         <div class="mt-4">
-                          <button class="btn btn-success w-100" type="submit">Sign In</button>
+                          <button class="btn btn-success w-100" type="submit">login</button>
                         </div>
                       </form>
                     </div>
