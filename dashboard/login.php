@@ -5,15 +5,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"])) {
     $status = "OK";
     $msg = "";
     $email = mysqli_real_escape_string($con, $_POST["email"]);
-    $password = $_POST["password"]; // Don't escape password - we'll verify the hash
+    $password = $_POST['password'];
 
     if ($status == "OK") {
-        // Check only users table where role='admin'
         $query = "SELECT user_id, email, password, full_name, role 
-        FROM users 
-        WHERE email = ? 
-        AND role = 'admin'  
-        LIMIT 1";
+                 FROM users 
+                 WHERE email = ? 
+                 AND role = 'admin'  
+                 LIMIT 1";
 
         if ($stmt = mysqli_prepare($con, $query)) {
             mysqli_stmt_bind_param($stmt, "s", $email);
@@ -21,10 +20,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"])) {
             $result = mysqli_stmt_get_result($stmt);
             
             if ($user = mysqli_fetch_assoc($result)) {
-                // Verify password (assuming passwords are hashed)
                 if (password_verify($password, $user['password'])) {
                     session_start();
-                    // Set session variables
                     $_SESSION["user_id"] = $user['user_id'];
                     $_SESSION["email"] = $user['email'];
                     $_SESSION["full_name"] = $user['full_name'];
@@ -38,14 +35,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"])) {
                 } else {
                     $errormsg = "
                     <div class='alert alert-danger alert-dismissible alert-outline fade show'>
-                        Invalid email or password
+                        البريد الإلكتروني أو كلمة المرور غير صحيحة
                         <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                     </div>";
                 }
             } else {
                 $errormsg = "
                 <div class='alert alert-danger alert-dismissible alert-outline fade show'>
-                    No admin account found with this email
+                    لا يوجد حساب مسؤول بهذا البريد الإلكتروني
                     <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                 </div>";
             }
@@ -53,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"])) {
         } else {
             $errormsg = "
             <div class='alert alert-danger alert-dismissible alert-outline fade show'>
-                Database error
+                خطأ في قاعدة البيانات
                 <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
             </div>";
         }
@@ -62,11 +59,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"])) {
 ?>
 
 <!doctype html>
-<html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none">
+<html lang="ar" dir="rtl" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none">
 
 <head>
   <meta charset="utf-8" />
-  <title>Sign In | Diamond</title>
+  <title>تسجيل الدخول الإدارة</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
   <meta content="Themesbrand" name="author" />
@@ -74,71 +71,107 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"])) {
 
   <script src="assets/js/layout.js"></script>
   <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/bootstrap.rtl.min.css" rel="stylesheet" type="text/css" />
   <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
   <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/app.rtl.min.css" rel="stylesheet" type="text/css" />
   <link href="assets/css/custom.min.css" rel="stylesheet" type="text/css" />
+  <style>
+    body {
+      font-family: 'Tajawal', sans-serif;
+      text-align: right;
+    }
+    .auth-pass-inputgroup .form-control {
+      padding-left: 45px;
+      padding-right: 12px;
+    }
+    .auth-pass-inputgroup button {
+      left: 0;
+      right: auto;
+    }
+    .form-label {
+      text-align: right;
+      display: block;
+      margin-bottom: 0.5rem;
+      float: right;
+    }
+    .text-start {
+      text-align: right !important;
+    }
+    .text-end {
+      text-align: left !important;
+    }
+    .pe-5 {
+      padding-left: 3rem !important;
+      padding-right: 1rem !important;
+    }
+  </style>
 </head>
 
 <body>
-  <div class="auth-page-wrapper auth-bg-cover py-5 d-flex justify-content-center align-items-center min-vh-100">
+  <div class="auth-page-wrapper py-5 d-flex justify-content-center align-items-center min-vh-100">
     <div class="bg-overlay"></div>
     <div class="auth-page-content overflow-hidden pt-lg-5">
       <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="card overflow-hidden">
-              <div class="row g-0">
-                <div class="col-lg-6">
-                  <div class="p-lg-5 p-4 auth-one-bg h-100">
-                    <div class="bg-overlay"></div>
-                    <div class="position-relative h-100 d-flex flex-column">
+        <!-- <div class="row"> -->
+          <!-- <div class="col-lg-12"> -->
+            <!-- <div class="card overflow-hidden"> -->
+              <!-- <div class="row g-0"> -->
+                <!-- <div class="col-lg-6"> -->
+                  <!-- <div class="p-lg-5 p-4 auth-one-bg h-100"> -->
+                    <!-- <div class="bg-overlay"></div> -->
+                    <!-- <div class="position-relative h-100 d-flex flex-column"> -->
                       <div class="mb-4">
+                        <h3>
+                        </h3>
                       <?php
                       $rr = mysqli_query($con, "SELECT ufile FROM logo");
                       $r = mysqli_fetch_row($rr);
                       $ufile = $r[0];
                       ?>
                         <a href="index.html" class="d-block">
-                          <img src="uploads/logo/<?php print $ufile; ?>" alt="" height="18">
+                          <!-- <img src="uploads/logo/<?php print $ufile; ?>" alt="" height="18"> -->
                         </a>
-                      </div>
-                    </div>
-                  </div>
+                      <!-- </div> -->
+                    <!-- </div> -->
+                  <!-- </div> -->
                 </div>
-                <div class="col-lg-6">
-                  <div class="p-lg-5 p-4">
+                <!-- <div class="col-lg-6"> -->
+                  <div class="card p-lg-5 p-4">
                     <div>
-                      <h5 class="text-primary">Welcome Back!</h5>
-                      <p class="text-muted">Sign in to continue to your dashboard.</p>
+                      <h5 class="text-primary">مرحباً بك مجدداً</h5>
+                      <p class="text-muted">سجل دخولك للوحة التحكم</p>
                     </div>
 
                     <div class="mt-4">
                     <?php if (isset($errormsg)) { echo $errormsg; } ?>
                       <form class="user" method="POST">
                         <div class="mb-3">
-                          <label for="email" class="form-label">Email</label>
-                          <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
+                          <label for="email" class="form-label">البريد الإلكتروني</label>
+                          <input type="email" class="form-control" id="email" name="email" placeholder="أدخل البريد الإلكتروني" required>
                         </div>
 
                         <div class="mb-3">
-                          <label class="form-label" for="password-input">Password</label>
+                          <label class="form-label" for="password-input">كلمة المرور</label>
                           <div class="position-relative auth-pass-inputgroup mb-3">
-                            <input type="password" class="form-control pe-5" name="password" placeholder="Enter password" id="password-input" required>
-                            <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
+                            <input type="password" class="form-control pe-5" name="password" placeholder="أدخل كلمة المرور" id="password-input" required>
+                            <button class="btn btn-link position-absolute end-30 top-50 text-decoration-none text-muted" type="button" id="password-addon">
+                              <i class="ri-eye-fill align-middle"></i>
+                            </button>
                           </div>
                         </div>
 
                         <div class="mt-4">
-                          <button class="btn btn-success w-100" type="submit">login</button>
+                          <button class="btn btn-success w-100" type="submit">تسجيل الدخول</button>
                         </div>
                       </form>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+                <!-- </div> -->
+              <!-- </div> -->
+            <!-- </div> -->
+          <!-- </div> -->
+        <!-- </div> -->
       </div>
     </div>
 
@@ -167,5 +200,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"])) {
   <script src="assets/js/pages/plugins/lord-icon-2.1.0.js"></script>
   <script src="assets/js/plugins.js"></script>
   <script src="assets/js/pages/password-addon.init.js"></script>
+  <script>
+    // Toggle password visibility
+    document.getElementById('password-addon').addEventListener('click', function () {
+      var passwordInput = document.getElementById("password-input");
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        this.innerHTML = '<i class="ri-eye-off-fill align-middle"></i>';
+      } else {
+        passwordInput.type = "password";
+        this.innerHTML = '<i class="ri-eye-fill align-middle"></i>';
+      }
+    });
+  </script>
 </body>
 </html>
