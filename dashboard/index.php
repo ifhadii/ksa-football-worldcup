@@ -66,7 +66,7 @@ include "header.php";
                                         <div class="d-flex align-items-center">
                                             <div class="avatar-sm flex-shrink-0">
                                                 <span class="avatar-title bg-light text-primary rounded-circle fs-3">
-                                                    <i class="ri-git-merge-fill"></i>
+                                                <i class="ri-building-2-fill"></i>
                                                 </span>
                                             </div>
                                             <div class="flex-grow-1 ms-3">
@@ -97,7 +97,7 @@ include "header.php";
                                         <div class="d-flex align-items-center">
                                             <div class="avatar-sm flex-shrink-0">
                                                 <span class="avatar-title bg-light text-primary rounded-circle fs-3">
-                                                    <i class="ri-server-line"></i>
+                                                <i class="ri-calendar-event-line"></i>
                                                 </span>
                                             </div>
                                             <div class="flex-grow-1 ms-3">
@@ -129,7 +129,7 @@ include "header.php";
                                         <div class="d-flex align-items-center">
                                             <div class="avatar-sm flex-shrink-0">
                                                 <span class="avatar-title bg-light text-primary rounded-circle fs-3">
-                                                    <i class="ri-server-line"></i>
+                                                <i class="ri-user-line"></i>
                                                 </span>
                                             </div>
                                             <div class="flex-grow-1 ms-3">
@@ -138,7 +138,7 @@ include "header.php";
                                                 <?php
                                                 $result = mysqli_query(
                                                     $con,
-                                                    "SELECT count(user_id) FROM users"
+                                                    "SELECT count(user_id) FROM users where role='user'"
                                                 );
                                                 $numrows = $result
                                                     ? mysqli_fetch_row(
@@ -161,7 +161,7 @@ include "header.php";
                                         <div class="d-flex align-items-center">
                                             <div class="avatar-sm flex-shrink-0">
                                                 <span class="avatar-title bg-light text-primary rounded-circle fs-3">
-                                                    <i class="ri-server-line"></i>
+                                                <i class="ri-user-line"></i>
                                                 </span>
                                             </div>
                                             <div class="flex-grow-1 ms-3">
@@ -170,7 +170,7 @@ include "header.php";
                                                 <?php
                                                 $result = mysqli_query(
                                                     $con,
-                                                    "SELECT count(id) FROM admin"
+                                                    "SELECT count(user_id) FROM users where role='admin'"
                                                 );
                                                 $numrows = $result
                                                     ? mysqli_fetch_row(
@@ -202,7 +202,7 @@ include "header.php";
                                                 <?php
                                                 $result = mysqli_query(
                                                     $con,
-                                                    "SELECT count(id) FROM testimony"
+                                                    "SELECT count(id) FROM review"
                                                 );
                                                 $numrows = $result
                                                     ? mysqli_fetch_row(

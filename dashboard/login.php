@@ -33,15 +33,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"])) {
                     </script>";
                     exit();
                 } else {
-                    $errormsg = "
-                    <div class='alert alert-danger alert-dismissible alert-outline fade show'>
-                        البريد الإلكتروني أو كلمة المرور غير صحيحة
-                        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-                    </div>";
+                  $errormsg = "
+                  <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                    البريد الإلكتروني أو كلمة المرور غير صحيحة
+                    <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                  </div>";
                 }
             } else {
                 $errormsg = "
-                <div class='alert alert-danger alert-dismissible alert-outline fade show'>
+                <div class='alert alert-danger alert-dismissible  fade show'>
                     لا يوجد حساب مسؤول بهذا البريد الإلكتروني
                     <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                 </div>";
@@ -56,6 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"])) {
         }
     }
 }
+
 ?>
 
 <!doctype html>
@@ -137,13 +138,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"])) {
                     <!-- <div class="bg-overlay"></div> -->
                     <!-- <div class="position-relative h-100 d-flex flex-column"> -->
                       <div class="">
-                        <h3>
-                        </h3>
-                      <?php
-                      $rr = mysqli_query($con, "SELECT ufile FROM logo");
-                      $r = mysqli_fetch_row($rr);
-                      $ufile = $r[0];
-                      ?>
                         <a href="index.html" class="d-block">
                           <!-- <img src="uploads/logo/<?php print $ufile; ?>" alt="" height="18"> -->
                         </a>

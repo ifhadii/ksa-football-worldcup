@@ -83,6 +83,7 @@ if (isset($_SESSION['user_id'])) {
                                 </li>
                             <?php endif; ?>
                             
+                            <li class="nav-item"><a href="tickts_providers.php" class="nav-link">مقدمي التذاكر</a></li>
                             <li class="nav-item"><a href="profile.php" class="nav-link">حسابي</a></li>
                             <li class="nav-item"><a href="user_testimony.php" class="nav-link">عطنا رايك</a></li>
                         <?php endif; ?>
