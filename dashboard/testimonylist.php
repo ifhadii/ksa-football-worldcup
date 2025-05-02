@@ -24,7 +24,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
 }
 
 // Fetch all testimonies
-$testimony_query = "SELECT * FROM testimony";
+$testimony_query = "SELECT * FROM review";
 $testimony_result = mysqli_query($con, $testimony_query);
 ?>
 
