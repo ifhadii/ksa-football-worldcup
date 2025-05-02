@@ -317,10 +317,10 @@ include "header.php";
         <div class="row justify-content-center">
             <div class="col-12 col-md-10 col-lg-7">
                 <div class="section-heading text-center">
-                    <h2 class="mb-3" style="color:rgb(9, 128, 68);">آراء الزوار والمشجعين</h2>
-                    <p class="d-none d-sm-block mt-4 text-white">
-                        آراء مشجعين من مختلف دول العالم شاركوا في تجربة كأس العالم في السعودية. كلماتهم تُلخص الشغف، التنظيم، والضيافة.
-                    </p>
+                <h2 class="mb-3" style="color:rgb(9, 128, 68);">فعالياتنا المميزة</h2>
+                <p class="d-none d-sm-block mt-4 text-white">
+                    مجموعة من الفعاليات الترفيهية والثقافية التي أقيمت في أجواء مليئة بالحماس والتفاعل، لتعكس تنوع المملكة وروحها المضيافة.
+                </p>
                 </div>
             </div>
         </div>
