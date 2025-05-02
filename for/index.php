@@ -481,7 +481,7 @@ function showImage(imageSrc) {
 
 
 
-<section id="review" class="section review-area bg-overlay ptb_100" style="background-color: #1a1a2e;">
+<section id="review" class="section review-area ptb_100" style="background-color: #1a1a2e;">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 col-md-10 col-lg-7">
@@ -506,19 +506,19 @@ function showImage(imageSrc) {
                         $ufile = $ro['ufile'];
                         
                         echo '
-                        <div class="testimonial-item p-4" style="background: rgba(0,0,0,0.3); border-radius: 10px; margin: 10px; border: 1px solid rgba(255,255,255,0.1);">
+                        <div class="testimonial-item p-4" style="background-color: #efefef; border-radius: 10px; margin: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
                             <div class="review-content" dir="rtl">
                                 <div class="review-text">
-                                    <p class="text-white fw-bold" style="font-size: 16px;">'.$message.'</p>
+                                    <p class="text-dark fw-bold" style="font-size: 16px;">'.$message.'</p>
                                 </div>
                             </div>
                             <div class="reviewer media mt-3" dir="rtl">
                                 <div class="reviewer-thumb">
-                                    <img class="avatar-lg radius-100" src="uploads/testimonials/'.$ufile.'" alt="'.$name.'" style="width: 60px; height: 60px; object-fit: cover; border: 2px solid rgba(255,255,255,0.2);">
+                                    <img class="avatar-lg radius-100" src="uploads/testimonials/'.$ufile.'" alt="'.$name.'" style="width: 60px; height: 60px; object-fit: cover;">
                                 </div>
                                 <div class="reviewer-meta media-body align-self-center mr-3">
-                                    <h5 class="reviewer-name text-white mb-1 fw-bold">'.$name.'</h5>
-                                    <h6 class="text-light fw-bold" style="color: #aaa !important;">'.$position.'</h6>
+                                    <h5 class="reviewer-name text-dark mb-1 fw-bold">'.$name.'</h5>
+                                    <h6 class="text-secondary fw-bold">'.$position.'</h6>
                                 </div>
                             </div>
                         </div>';
@@ -529,7 +529,6 @@ function showImage(imageSrc) {
         </div>
     </div>
 </section>
-
 
 
 

@@ -100,8 +100,8 @@ if (isset($_SESSION['user_id'])) {
                     <ul class="navbar-nav action">
                         <li class="nav-item ml-3">
                             <?php if (isset($_SESSION['user_id'])): ?>
-                                <a href="logout.php" class="btn ml-lg-auto btn-bordered-white">
-                                    <i class="fas fa-sign-out-alt contact-icon mr-md-2"></i>تسجيل الخروج
+                                <a href="logout.php" class="btn ml-lg-auto btn-bordered-white text-white">
+                                    <i class="fas fa-sign-out-alt contact-icon mr-md-2 text-white"></i>تسجيل الخروج
                                 </a>
                             <?php else: ?>
                                 <a href="login.php" class="btn ml-lg-auto btn-bordered-white" data-bs-toggle="modal" data-bs-target="#loginModal">
