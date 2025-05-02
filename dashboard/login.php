@@ -140,8 +140,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"])) {
               </div>
 
   <div class="card w-50">
-  <div class="card-header bg-success py-3">
-    <h3 class="text-primary text-center font-weight-bold">أهلا بالإداري</h5>
+  <div class="card-header py-3" style="background-color: rgb(16, 36, 18); color: white;">
+    <h3 class="text-center font-weight-bold">أهلا بالإداري</h5>
     <h4 class="text-white text-center mb-0 font-weight-bold">سجل دخولك للوحة التحكم</h5>
   </div>
   <div class="card-body">
@@ -181,7 +181,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"])) {
       </div>
     </div>
 
-    <footer class="footer">
+    <footer class="footer" style="background-color: rgb(16, 36, 18); color: white;">
       <div class="container">
         <div class="row">
           <div class="col-lg-12">
