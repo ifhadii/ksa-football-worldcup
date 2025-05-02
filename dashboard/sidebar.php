@@ -3,20 +3,14 @@ include "../for/z_db.php";
 $full_name = $_SESSION["full_name"];
 ?>
 </style>
-<div class="app-menu navbar-menu" style="direction: ltr; text-align: left;">
-  <div class="navbar-brand-box">
-    <?php
-    $rr = mysqli_query($con, "SELECT ufile FROM logo");
-    $r = mysqli_fetch_row($rr);
-    $ufile = $r[0];
-    ?>
-
+<div class="app-menu navbar-menu" style="direction: ltr; text-align: left;" >
+  <div class="navbar-brand-box" >
     <a href="index.php" class="logo logo-dark">
       <span class="logo-sm">
-        <img src="uploads/logo/<?php echo $ufile; ?>" alt="شعار" height="22">
+        <!-- <img src="uploads/logo/<?php echo $ufile; ?>" alt="شعار" height="22"> -->
       </span>
       <span class="logo-lg">
-        <img src="uploads/logo/<?php echo $ufile; ?>" alt="شعار" height="30">
+        <!-- <img src="uploads/logo/<?php echo $ufile; ?>" alt="شعار" height="30"> -->
       </span>
     </a>
     <a href="index.php" class="logo logo-light">
@@ -111,7 +105,7 @@ $full_name = $_SESSION["full_name"];
     </div>
   </div>
 
-  <div class="sidebar-background"></div>
+  <!-- <div class="sidebar-background"></div> -->
 </div>
 
-<div class="vertical-overlay"></div>
+<!-- <div class="vertical-overlay"></div> -->

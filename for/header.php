@@ -48,11 +48,11 @@ if (isset($_SESSION['user_id'])) {
     
     <?php
     // Site settings with prepared statement
-    $stmt = mysqli_prepare($con, "SELECT site_title FROM siteconfig WHERE id = 1");
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
-    $r = mysqli_fetch_assoc($result);
-    mysqli_stmt_close($stmt);
+    // $stmt = mysqli_prepare($con, "SELECT site_title FROM siteconfig WHERE id = 1");
+    // mysqli_stmt_execute($stmt);
+    // $result = mysqli_stmt_get_result($stmt);
+    // $r = mysqli_fetch_assoc($result);
+    // mysqli_stmt_close($stmt);
     ?>
     
     <title>KSA Welcome Cup - <?= htmlspecialchars($r['site_title'] ?? '') ?></title>

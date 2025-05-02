@@ -80,7 +80,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"])) {
     body {
       font-family: 'Tajawal', sans-serif;
       text-align: right;
+      /* background-image: url('uploads/dashboard/circuit_photo.jpg'); */
     }
+    body::before {
+  content: "";
+  background-image: url('uploads/dashboard/circuit_photo.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.2; /* Adjust this value (0.0 to 1.0) */
+  z-index: -1;
+}
     .auth-pass-inputgroup .form-control {
       padding-left: 45px;
       padding-right: 12px;
@@ -108,9 +123,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"])) {
   </style>
 </head>
 
-<body>
+<body style="background-color:rgb(219, 218, 218); color: white;">
   <div class="auth-page-wrapper py-5 d-flex justify-content-center align-items-center min-vh-100">
-    <div class="bg-overlay"></div>
+    <!-- <div class="bg-overlay"></div> -->
     <div class="auth-page-content overflow-hidden pt-lg-5">
       <div class="container  d-flex justify-content-center align-items-center">
         <!-- <div class="row"> -->
@@ -141,7 +156,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"])) {
 
   <div class="card w-50">
   <div class="card-header py-3" style="background-color: rgb(16, 36, 18); color: white;">
-    <h3 class="text-center font-weight-bold">أهلا بالإداري</h5>
+    <h3 class="text-center font-weight-bold text-white">أهلا بالإداري</h5>
     <h4 class="text-white text-center mb-0 font-weight-bold">سجل دخولك للوحة التحكم</h5>
   </div>
   <div class="card-body">
