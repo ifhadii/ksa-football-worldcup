@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 02, 2025 at 10:23 PM
+-- Generation Time: Apr 30, 2025 at 12:54 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -52,19 +52,7 @@ INSERT INTO `admin` (`id`, `username`, `email`, `password`, `updated_at`) VALUES
 (13, 'emily_g', 'emily.g@example.com', 'E$milyPass1', '2025-04-29 21:45:55'),
 (14, 'thomas_b', 'thomas.b@example.com', 'T0mAdmin!', '2025-04-29 21:45:55'),
 (15, 'olivia_h', 'olivia.h@example.com', '0livia@Pass', '2025-04-29 21:45:55'),
-(18, 'f1', 'f1@s.com', '123456', '2025-04-29 22:45:20'),
-(19, 'fahad ali', 'fahad1@sss.com', '123456', '2025-05-01 07:53:28');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `chatbot`
---
-
-CREATE TABLE `chatbot` (
-  `chatbot_id` int(11) NOT NULL,
-  `date` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+(18, 'f1', 'f1@s.com', '123456', '2025-04-29 22:45:20');
 
 -- --------------------------------------------------------
 
@@ -87,8 +75,8 @@ CREATE TABLE `city` (
 
 INSERT INTO `city` (`id`, `city_title`, `city_desc`, `city_detail`, `ufile`, `upadated_at`) VALUES
 (65, 'الرياض', ' عاصمة المملكة العربية السعودية، تُعد مركزًا سياسيًا وإداريًا وماليًا متطورًا', '', '', '2025-04-26 11:31:38'),
-(66, 'جدة', 'ثاني أكبر مدينة في المملكة، تعتبر بوابة الحجاج إلى مكة وتتميز بكورنيشها الرائع', '', '', '2025-05-01 11:08:47'),
-(67, 'أبها', 'مدينة جبلية عاصمة منطقة عسير، تتميز بمناخ معتدل وطبيعة الساحرة', '', '', '2025-05-01 13:48:38'),
+(66, 'جدة', 'ثاني أكبر مدينة في المملكة، تعتبر بوابة الحجاج إلى مكة وتتميز بكورنيشها الجميل', '', '', '2025-04-26 11:40:00'),
+(67, 'أبها', 'مدينة جبلية عاصمة منطقة عسير، تتميز بمناخ معتدل وطبيعة ساحرة', '', '', '2025-04-26 12:02:47'),
 (68, 'الخبر', 'مدينة ساحلية تقع في المنطقة الشرقية، تتميز بكورنيشها الجميل والمرافق الحديثة.', '', '', '2025-04-26 12:05:44'),
 (69, 'نيوم', 'مدينة مبتكرة ضمن رؤية السعودية 2030، تهدف لتكون مركزًا عالميًا للابتكار', '', '', '2025-04-26 12:08:33');
 
@@ -188,7 +176,7 @@ CREATE TABLE `event` (
 INSERT INTO `event` (`id`, `port_title`, `port_desc`, `port_detail`, `ufile`, `updated_at`) VALUES
 (7, 'استضافة حفل الافتتاح المبهر في الرياض', 'حفل عالمي في استاد الرياض بحضور قادة وفنانينعروض ثقافية وتقنيات مبهرة', ' يهدف هذا الحدث إلى تقديم صورة مشرقة عن المملكة وقدرتها التنظيمية. سيكون انطلاقة مميزة للبطولة ويعكس شغف المملكة بكرة القدم والترحيب بالزوار', '827778-142719-ksa-national-day1_700x400.jpeg', '2025-04-29 21:05:06'),
 (8, ' تنظيم مهرجان ثقافي عالمي في جدة التاريخية', 'مهرجان ثقافي في جدة التاريخية طوال البطولة. معارض، حرف، أمسيات، أزياء، ومطاعم', 'يهدف هذا المهرجان إلى تعريف الزوار بالتراث الثقافي الغني للمملكة في أجواء احتفالية', '8354111451-احتفالات-السعوديين-باليوم-الوطني-الـ-90.webp', '2025-04-29 21:05:36'),
-(9, 'كرة القدم من أجل المستقبل في نيوم', 'مبادرة عالمية في نيوم تركز على التنمية المستدامة والاندماج ودعم الشباب', 'تهدف هذه المبادرة إلى إظهار دور المملكة في استخدام الرياضة للتغيير الإيجابي وربط استضافة كأس العالم برؤية المملكة للمستقبل المستدام', '5040نيوم-1-1.webp', '2025-05-01 13:49:30'),
+(9, '\"كرة القدم من أجل المستقبل\" في نيوم', 'مبادرة عالمية في نيوم تركز على التنمية المستدامة والاندماج ودعم الشباب', 'تهدف هذه المبادرة إلى إظهار دور المملكة في استخدام الرياضة للتغيير الإيجابي وربط استضافة كأس العالم برؤية المملكة للمستقبل المستدام', '5040نيوم-1-1.webp', '2025-04-29 21:06:27'),
 (10, ' فعاليات ترفيهية كبرى بالمدن المستضيفة', 'مناطق مشجعين واسعة في المدن المستضيفة. شاشات عملاقة، عروض فنية، ألعاب', 'هدف هذه الفعاليات إلى توفير تجربة ممتعة وحماسية للجماهير القادمة من جميع أنحاء العالم وخلق أجواء احتفالية مصاحبة للمباريات في المدن السعودية', '51052500962.jpg', '2025-04-29 21:07:09'),
 (11, 'الرياضات الإلكترونية المصاحبة لكأس العالم في الدرعية', 'بطولة عالمية للرياضات الإلكترونية في الدرعية بالتزامن مع كأس العالم', 'يهدف هذا الحدث إلى استغلال شعبية الرياضات الإلكترونية وربطها بفعاليات كأس العالم، وجذب جمهور جديد والتعريف بالدرعية كوجهة تاريخية حديثة', '6732__-الإلكترونية،-ا-تاريخ-قطاع-الألعاب-والرياضات-الإلكترونية__ssict_1200_800.webp', '2025-04-29 21:08:48'),
 (13, ' برنامج تطوعي واسع النطاق بمشاركة شباب سعودي وعالمي', 'برنامج تطوعي يشارك فيه شباب سعودي وعالمي في تنظيم الفعاليات', ' يهدف هذا البرنامج إلى تعزيز المشاركة المجتمعية والتبادل الثقافي بين الشباب، وتوفير تجربة قيمة للمتطوعين تساهم في تطوير مهاراتهم وبناء جسور التواصل بين الثقافات', '867inner-banner.webp', '2025-04-29 21:32:16');
@@ -196,10 +184,100 @@ INSERT INTO `event` (`id`, `port_title`, `port_desc`, `port_detail`, `ufile`, `u
 -- --------------------------------------------------------
 
 --
--- Table structure for table `review`
+-- Table structure for table `logo`
 --
 
-CREATE TABLE `review` (
+CREATE TABLE `logo` (
+  `id` int(11) NOT NULL,
+  `xfile` varchar(1000) NOT NULL,
+  `ufile` varchar(1000) NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `logo`
+--
+
+INSERT INTO `logo` (`id`, `xfile`, `ufile`, `updated_at`) VALUES
+(1, '5465logo.png', '1472logo.png', '2025-04-21 13:11:56');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `siteconfig`
+--
+
+CREATE TABLE `siteconfig` (
+  `id` int(11) NOT NULL,
+  `site_keyword` varchar(1000) NOT NULL,
+  `site_desc` varchar(500) NOT NULL,
+  `site_title` varchar(300) NOT NULL,
+  `site_about` varchar(1000) NOT NULL,
+  `site_footer` varchar(1000) NOT NULL,
+  `follow_text` varchar(1000) NOT NULL,
+  `site_url` varchar(50) NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `siteconfig`
+--
+
+INSERT INTO `siteconfig` (`id`, `site_keyword`, `site_desc`, `site_title`, `site_about`, `site_footer`, `follow_text`, `site_url`, `updated_at`) VALUES
+(1, 'Church, Marketing', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit nihil tenetur minus quidem est deserunt molestias accusamus harum ullam tempore debitis et, expedita, repellat delectus aspernatur neque itaque qui quod.', 'Vogue Website', ' Young coders can use events to coordinate timing and communication between different sprites or pieces of their story. For instance, the when _ key pressed block is an event that starts code whenever the corresponding key on the keyboard is pressed.', '© 2024 All Rights Reserved', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit nihil tenetur minus quidem est deserunt molestias.', 'http://localhost:8080/vogue/', '2025-04-20 23:44:22');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sitecontact`
+--
+
+CREATE TABLE `sitecontact` (
+  `id` int(11) NOT NULL,
+  `phone1` varchar(150) NOT NULL,
+  `phone2` varchar(150) NOT NULL,
+  `email1` varchar(100) NOT NULL,
+  `email2` varchar(100) NOT NULL,
+  `longitude` varchar(100) NOT NULL,
+  `latitude` varchar(150) NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `sitecontact`
+--
+
+INSERT INTO `sitecontact` (`id`, `phone1`, `phone2`, `email1`, `email2`, `longitude`, `latitude`, `updated_at`) VALUES
+(1, '+89 (0) 2354 5470091', '+89 (0) 2354 5470091', 'mail@company.com', 'mail@company.com', '7.099737483', '7.63734634', '2022-07-15 11:05:25');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `social`
+--
+
+CREATE TABLE `social` (
+  `id` int(11) NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `fa` varchar(150) NOT NULL,
+  `social_link` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `social`
+--
+
+INSERT INTO `social` (`id`, `name`, `fa`, `social_link`) VALUES
+(1, 'Facebook', 'fa-facebook', 'https://facebook.com/faithyemi'),
+(2, 'Instagram', 'fa-instagram', 'https://instagram.com/faith_awolu');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `testimony`
+--
+
+CREATE TABLE `testimony` (
   `id` int(11) NOT NULL,
   `message` varchar(300) NOT NULL,
   `name` varchar(150) NOT NULL,
@@ -209,31 +287,16 @@ CREATE TABLE `review` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `review`
+-- Dumping data for table `testimony`
 --
 
-INSERT INTO `review` (`id`, `message`, `name`, `position`, `ufile`, `updated_at`) VALUES
+INSERT INTO `testimony` (`id`, `message`, `name`, `position`, `ufile`, `updated_at`) VALUES
 (7, 'تجربة كأس العالم في السعودية كانت استثنائية بكل المقاييس. التنظيم كان على مستوى عالمي، والروح الرياضية بين الجماهير كانت رائعة. المملكة قدمت استضافة مميزة، والفعاليات كانت تليق بحجم الحدث', 'فهد السبيعي', 'مشجع رياضي', '680c806321955.jpg', '2025-04-26 06:42:43'),
 (9, 'كأس العالم في السعودية كان لحظة تاريخية. المملكة أظهرت للعالم قدرتها على تنظيم أكبر الأحداث الرياضية. كل شيء كان منظم بدقة، والشعب السعودي كان مضيافًا، والاحتفالات كانت ممتعة للغاية', 'نورة الحربي', ' إعلامية', '680c8233c748b.jpg', '2025-04-26 06:50:27'),
 (10, 'كلما أتذكر كأس العالم في السعودية، أتذكر كيف كانت المملكة فخورة باستضافة هذا الحدث الكبير. من الملاعب الحديثة إلى التقنيات المتقدمة، كل شيء كان مرتب بشكل يعكس تطور كبرى مدن المملكة.', 'عبد الله القحطاني', 'مهندس', '680c826f26179.jpg', '2025-04-26 06:51:27'),
 (11, 'كلما أتذكر كأس العالم في السعودية، أتذكر كيف كانت المملكة فخورة باستضافة هذا الحدث الكبير. من الملاعب الحديثة إلى التقنيات المتقدمة، كل شيء كان مرتب بشكل يعكس تطور كبرى مدن المملكة.', 'عبد الله القحطاني', 'مهندس', '680c8274a25b8.jpg', '2025-04-26 06:51:32'),
 (12, 'الرياضة في السعودية أظهرت لنا جانبًا جديدًا من حب الوطن والإنجازات. كأس العالم في السعودية ما كان مجرد مباراة، كان مناسبة لترسيخ مكانة المملكة في قلب العالم الرياضي. كنا فخورين بكل التفاصيل', 'سارة الزهراني', 'طالبّة', '680c828d66256.jpg', '2025-04-26 06:51:57'),
-(13, 'كأس العالم في السعودية كان نقطة تحول كبيرة في مسيرة الرياضة المحلية. رؤية المملكة 2030 حققت نجاحًا كبيرًا، وتنظيم كأس العالم في بلادنا كان بمثابة خطوة عملاقة نحو مستقبل مشرق للرياضة.', 'يوسف المالكي', 'رجل أعمال', '680c82a96ea8c.jpg', '2025-04-26 06:52:25'),
-(21, 'الرياضة في السعودية أظهرت لنا جانبًا جديدًا من حب الوطن والإنجازات. كأس العالم في السعودية ما كان مجرد مباراة، كان مناسبة لترسيخ مكانة المملكة في قلب العالم الرياضي. كنا فخورين بكل التفاصيل', 'فهد مكين', 'محلل نظم', '6815294f1279a.jpg', '2025-05-02 20:21:35');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `transfer`
---
-
-CREATE TABLE `transfer` (
-  `transfer_id` int(11) NOT NULL,
-  `type` enum('car','bus','train','') NOT NULL,
-  `price` decimal(10,0) NOT NULL,
-  `capacity` int(11) NOT NULL,
-  `availability` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+(13, 'كأس العالم في السعودية كان نقطة تحول كبيرة في مسيرة الرياضة المحلية. رؤية المملكة 2030 حققت نجاحًا كبيرًا، وتنظيم كأس العالم في بلادنا كان بمثابة خطوة عملاقة نحو مستقبل مشرق للرياضة.', 'يوسف المالكي', 'رجل أعمال', '680c82a96ea8c.jpg', '2025-04-26 06:52:25');
 
 -- --------------------------------------------------------
 
@@ -245,49 +308,17 @@ CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
   `full_name` varchar(255) DEFAULT NULL,
   `email` varchar(191) DEFAULT NULL,
-  `password` text DEFAULT NULL,
-  `role` varchar(255) NOT NULL DEFAULT 'user'
+  `password` text DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `full_name`, `email`, `password`, `role`) VALUES
-(6, 'فهد علي', 'ifhadii@edu.sa', '$2y$10$L5w.bHu3VlM1IcJPDg5BOuJIpFT61b0Lp5otQgmvufAc.W3ych/Fi', 'user'),
-(8, 'fahad', 'admin@fa.com', '$2y$10$QGlBkDJBuQ4qqUN4DGDB0eNM0E6qA9IvUoMmu3pmsRp6R7XUN442W', 'user'),
-(10, 'fahad1', 'fahad1@s.com', '$2y$10$Sl4coYM9.ft05wgz3C0dHuWSPWwfZcEZEs2rsrahxw7SxYeGBzJMO', 'user'),
-(12, 'fahad ali', 'ifhadii@one.sa', '$2y$10$80Xwq/8I2imFhS0PPAKe/.H5aDI4Uic4AcEl7XKll1ysxyYSSJKUS', 'admin'),
-(14, 'أحمد محمد', 'ahmed.admin@gmail.com', '$2y$10$9I3YbLpNxVZQwQWkDvJQwO7XmRkz0fY1hG2uK9nLl3BvJ5T6yH7dS', 'admin'),
-(15, 'سارة خالد', 'sara.admin@gmail.com', '$2y$10$2Tk7mV9sRrN1XpF5qH8rE.1LbYc3M9dW2uJ4nKl5vB6yH7fD8gS', 'admin'),
-(16, 'علي حسن', 'ali.admin@gmail.com', '$2y$10$7Nm8lK9jRtF3XwD2vH5sE.4MbYc6N9eW2uJ4nKl5vB6yH7fD8gS', 'admin'),
-(17, 'نورة عبدالله', 'nora.admin@gmail.com', '$2y$10$3Pq4rK9tYuI2XwE1vH5sD.5NcYf7M9eW2uJ4nKl5vB6yH7fD8gS', 'admin'),
-(18, 'محمد سعيد', 'mohammed.admin@gmail.com', '$2y$10$8Lk9mN0oPqR2S3T4uV5wX.6ZcXf7M9eW2uJ4nKl5vB6yH7fD8gS', 'admin'),
-(19, 'لينا فارس', 'lina.admin@gmail.com', '$2y$10$1Qw2eR3tY4uI5oP6a7sD.9KjLmN0oP1q2R3tY4uI5oP6a7sD8f', 'admin'),
-(20, 'خالد ناصر', 'khaled.admin@gmail.com', '$2y$10$4XcV5bN6mQ7wE8rT9yU0i.1ZaXc3V4bN6mQ7wE8rT9yU0i1Z2x', 'admin'),
-(21, 'هبة راشد', 'heba.admin@gmail.com', '$2y$10$5Yd6eF8gH9iJ0kL1mN2oP.3QrS4tU5vW6xY7zA8B9C0D1E2F3G', 'admin'),
-(22, 'طارق وليد', 'tariq.admin@gmail.com', '$2y$10$6Zf7gH8iJ9kL0mN1oP2qR.4Ss5tU6vW7xY8zA9B0C1D2E3F4G', 'admin'),
-(23, 'ياسمين كمال', 'yasmin.admin@gmail.com', '$2y$10$7Ag8hB9iC0D1E2F3G4H5j.6KkL7mN8oP9qR0sT1uV2wX3yZ4a', 'admin'),
-(24, 'محمود علي', 'mahmoud.user@gmail.com', '$2y$10$Sl4coYM9.ft05wgz3C0dHuWSPWwfZcEZEs2rsrahxw7SxYeGBzJMO', 'user'),
-(25, 'سلمى أحمد', 'salma.user@gmail.com', '$2y$10$80Xwq/8I2imFhS0PPAKe/.H5aDI4Uic4AcEl7XKll1ysxyYSSJKUS', 'user'),
-(26, 'يوسف خالد', 'yousef.user@gmail.com', '$2y$10$L5w.bHu3VlM1IcJPDg5BOuJIpFT61b0Lp5otQgmvufAc.W3ych/Fi', 'user'),
-(27, 'أميرة محمد', 'amira.user@gmail.com', '$2y$10$QGlBkDJBuQ4qqUN4DGDB0eNM0E6qA9IvUoMmu3pmsRp6R7XUN442W', 'user'),
-(28, 'نادر سامي', 'nader.user@gmail.com', '$2y$10$Sl4coYM9.ft05wgz3C0dHuWSPWwfZcEZEs2rsrahxw7SxYeGBzJMO', 'user'),
-(29, 'ريم فاروق', 'reem.user@gmail.com', '$2y$10$80Xwq/8I2imFhS0PPAKe/.H5aDI4Uic4AcEl7XKll1ysxyYSSJKUS', 'user'),
-(30, 'وسام نبيل', 'wessam.user@gmail.com', '$2y$10$L5w.bHu3VlM1IcJPDg5BOuJIpFT61b0Lp5otQgmvufAc.W3ych/Fi', 'user'),
-(31, 'هديل عمر', 'hadeel.user@gmail.com', '$2y$10$QGlBkDJBuQ4qqUN4DGDB0eNM0E6qA9IvUoMmu3pmsRp6R7XUN442W', 'user'),
-(32, 'باسل وائل', 'basel.user@gmail.com', '$2y$10$Sl4coYM9.ft05wgz3C0dHuWSPWwfZcEZEs2rsrahxw7SxYeGBzJMO', 'user'),
-(33, 'دانا رامي', 'dana.user@gmail.com', '$2y$10$80Xwq/8I2imFhS0PPAKe/.H5aDI4Uic4AcEl7XKll1ysxyYSSJKUS', 'user');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `visitor`
---
-
-CREATE TABLE `visitor` (
-  `session_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `users` (`user_id`, `full_name`, `email`, `password`) VALUES
+(6, 'فهد علي', 'ifhadii@edu.sa', '$2y$10$L5w.bHu3VlM1IcJPDg5BOuJIpFT61b0Lp5otQgmvufAc.W3ych/Fi'),
+(8, 'fahad', 'admin@fa.com', '$2y$10$QGlBkDJBuQ4qqUN4DGDB0eNM0E6qA9IvUoMmu3pmsRp6R7XUN442W'),
+(10, 'fahad1', 'fahad1@s.com', '$2y$10$Sl4coYM9.ft05wgz3C0dHuWSPWwfZcEZEs2rsrahxw7SxYeGBzJMO');
 
 --
 -- Indexes for dumped tables
@@ -327,9 +358,33 @@ ALTER TABLE `event`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `review`
+-- Indexes for table `logo`
 --
-ALTER TABLE `review`
+ALTER TABLE `logo`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `siteconfig`
+--
+ALTER TABLE `siteconfig`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sitecontact`
+--
+ALTER TABLE `sitecontact`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `social`
+--
+ALTER TABLE `social`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `testimony`
+--
+ALTER TABLE `testimony`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -347,43 +402,61 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `city`
 --
 ALTER TABLE `city`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT for table `city_cards`
 --
 ALTER TABLE `city_cards`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT for table `city_hotels`
 --
 ALTER TABLE `city_hotels`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT for table `review`
+-- AUTO_INCREMENT for table `logo`
 --
-ALTER TABLE `review`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+ALTER TABLE `logo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `sitecontact`
+--
+ALTER TABLE `sitecontact`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `social`
+--
+ALTER TABLE `social`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `testimony`
+--
+ALTER TABLE `testimony`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables

@@ -4,7 +4,7 @@ include "sidebar.php";
 
 
 // Fetch all admins
-$admin_query = "SELECT * FROM admin";
+$admin_query = "SELECT * FROM users WHERE role = 'admin'";
 $admin_result = mysqli_query($con, $admin_query);
 
 
@@ -16,7 +16,7 @@ if ($_SESSION['role'] !== 'admin') {
 
 
 // Fetch all users
-$user_query = "SELECT * FROM users";
+$user_query = "SELECT * FROM users WHERE role = 'user'";
 $user_result = mysqli_query($con, $user_query);
 ?>
 
@@ -46,9 +46,9 @@ $user_result = mysqli_query($con, $user_query);
                                 <?php
 if (mysqli_num_rows($admin_result) > 0) {
     while ($admin = mysqli_fetch_assoc($admin_result)) {
-        echo "<tr id='row-admin-{$admin['id']}'>";
-        echo "<td>{$admin['id']}</td>";
-        echo "<td>{$admin['username']}</td>";
+        echo "<tr id='row-admin-{$admin['user_id']}'>";
+        echo "<td>{$admin['user_id']}</td>";
+        echo "<td>{$admin['full_name']}</td>";
         echo "<td>{$admin['email']}</td>";
         echo "<td>
             <div class='dropdown d-inline-block'>
@@ -57,12 +57,12 @@ if (mysqli_num_rows($admin_result) > 0) {
                 </button>
                 <ul class='dropdown-menu dropdown-menu-start'>
                     <li>
-                        <a href='edit_users.php?id={$admin['id']}&table=admin' class='dropdown-item'>
+                        <a href='edit_users.php?id={$admin['user_id']}&table=admin' class='dropdown-item'>
                             <i class='ri-pencil-fill align-bottom me-2 text-muted'></i> تعديل
                         </a>
                     </li>
                     <li>
-                        <a href='javascript:void(0);' class='dropdown-item text-danger' onclick='deleteUser({$admin['id']}, \"admin\")'>
+                        <a href='javascript:void(0);' class='dropdown-item text-danger' onclick='deleteUser({$admin['user_id']}, \"admin\")'>
                             <i class='ri-delete-bin-fill align-bottom me-2'></i> حذف
                         </a>
                     </li>
