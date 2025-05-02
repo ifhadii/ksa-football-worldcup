@@ -112,7 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"])) {
   <div class="auth-page-wrapper py-5 d-flex justify-content-center align-items-center min-vh-100">
     <div class="bg-overlay"></div>
     <div class="auth-page-content overflow-hidden pt-lg-5">
-      <div class="container">
+      <div class="container  d-flex justify-content-center align-items-center">
         <!-- <div class="row"> -->
           <!-- <div class="col-lg-12"> -->
             <!-- <div class="card overflow-hidden"> -->
@@ -121,7 +121,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"])) {
                   <!-- <div class="p-lg-5 p-4 auth-one-bg h-100"> -->
                     <!-- <div class="bg-overlay"></div> -->
                     <!-- <div class="position-relative h-100 d-flex flex-column"> -->
-                      <div class="mb-4">
+                      <div class="">
                         <h3>
                         </h3>
                       <?php
@@ -135,38 +135,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"])) {
                       <!-- </div> -->
                     <!-- </div> -->
                   <!-- </div> -->
-                </div>
-                <!-- <div class="col-lg-6"> -->
-                  <div class="card p-lg-5 p-4">
-                    <div>
-                      <h5 class="text-primary">مرحباً بك مجدداً</h5>
-                      <p class="text-muted">سجل دخولك للوحة التحكم</p>
-                    </div>
+                  
+                  <!-- <div class="col-lg-6"> -->
+              </div>
 
-                    <div class="mt-4">
-                    <?php if (isset($errormsg)) { echo $errormsg; } ?>
-                      <form class="user" method="POST">
-                        <div class="mb-3">
-                          <label for="email" class="form-label">البريد الإلكتروني</label>
-                          <input type="email" class="form-control" id="email" name="email" placeholder="أدخل البريد الإلكتروني" required>
-                        </div>
+  <div class="card w-50">
+  <div class="card-header bg-success py-3">
+    <h3 class="text-primary text-center font-weight-bold">أهلا بالإداري</h5>
+    <h4 class="text-white text-center mb-0 font-weight-bold">سجل دخولك للوحة التحكم</h5>
+  </div>
+  <div class="card-body">
+    <div class="px-4">
+      <?php if (isset($errormsg)) { echo $errormsg; } ?>
+      <form class="user" method="POST">
+        <div class="mb-3">
+          <label for="email" class="form-label">البريد الإلكتروني</label>
+          <input type="email" class="form-control" id="email" name="email" placeholder="أدخل البريد الإلكتروني" required>
+        </div>
 
-                        <div class="mb-3">
-                          <label class="form-label" for="password-input">كلمة المرور</label>
-                          <div class="position-relative auth-pass-inputgroup mb-3">
-                            <input type="password" class="form-control pe-5" name="password" placeholder="أدخل كلمة المرور" id="password-input" required>
-                            <button class="btn btn-link position-absolute end-30 top-50 text-decoration-none text-muted" type="button" id="password-addon">
-                              <i class="ri-eye-fill align-middle"></i>
-                            </button>
-                          </div>
-                        </div>
+        <div class="mb-3">
+          <label class="form-label" for="password-input">كلمة المرور</label>
+          <div class="position-relative auth-pass-inputgroup mb-3">
+            <input type="password" class="form-control pe-5" name="password" placeholder="أدخل كلمة المرور" id="password-input" required>
+            <button class="btn btn-link position-absolute end-30 top-50 text-decoration-none text-muted" type="button" id="password-addon">
+              <i class="ri-eye-fill align-middle"></i>
+            </button>
+          </div>
+        </div>
 
-                        <div class="mt-4">
-                          <button class="btn btn-success w-100" type="submit">تسجيل الدخول</button>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
+        <div class="mt-4">
+          <button class="btn btn-success w-100" type="submit">تسجيل الدخول</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
                 <!-- </div> -->
               <!-- </div> -->
             <!-- </div> -->
@@ -190,8 +196,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"])) {
           </div>
         </div>
       </div>
+    </div>
     </footer>
-  </div>
 
   <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/libs/simplebar/simplebar.min.js"></script>
