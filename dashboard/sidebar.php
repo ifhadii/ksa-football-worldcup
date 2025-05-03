@@ -39,22 +39,6 @@ $full_name = $_SESSION["full_name"];
         </li>
 
         <li class="nav-item">
-          <a class="nav-link menu-link" href="#sidebarCity" data-bs-toggle="collapse" role="button" aria-expanded="false">
-            <i class="ri-checkbox-multiple-line"></i> <span>إدارة المدن</span>
-          </a>
-          <div class="menu-dropdown collapse" id="sidebarCity">
-            <ul class="nav nav-sm flex-column">
-              <li class="nav-item">
-                <a href="createcity" class="nav-link">إضافة مدينة</a>
-              </li>
-              <li class="nav-item">
-                <a href="city" class="nav-link">قائمة المدن</a>
-              </li>
-            </ul>
-          </div>
-        </li>
-
-        <li class="nav-item">
           <a class="nav-link menu-link" href="#sidebarEvent" data-bs-toggle="collapse" role="button" aria-expanded="false">
             <i class="ri-rhythm-fill"></i> <span>إدارة الفعاليات</span>
           </a>
