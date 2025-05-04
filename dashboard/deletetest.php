@@ -32,7 +32,7 @@ $id = (int)$_POST['id'];
 
 try {
     // Check if testimony exists and get image filename
-    $stmt = $con->prepare("SELECT ufile FROM testimony WHERE id = ?");
+    $stmt = $con->prepare("SELECT ufile FROM review WHERE id = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -46,7 +46,7 @@ try {
     $image_file = $testimony['ufile'];
     
     // Delete the testimony record
-    $delete_stmt = $con->prepare("DELETE FROM testimony WHERE id = ?");
+    $delete_stmt = $con->prepare("DELETE FROM review WHERE id = ?");
     $delete_stmt->bind_param("i", $id);
     
     if ($delete_stmt->execute()) {

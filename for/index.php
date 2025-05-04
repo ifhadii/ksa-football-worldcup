@@ -281,7 +281,7 @@ include "header.php";
         <div class="row">
 
             <?php
-            $qs = "SELECT * FROM city  ORDER BY id ASC LIMIT 6";
+            $qs = "SELECT * FROM city  ORDER BY id ASC";
             $r1 = mysqli_query($con, $qs);
 
             while ($rod = mysqli_fetch_array($r1)) {
@@ -328,7 +328,7 @@ include "header.php";
             <div class="col-12">
                 <div class="owl-carousel testimonial-carousel">
                     <?php
-                    $q = "SELECT * FROM event ORDER BY id ASC LIMIT 6";
+                    $q = "SELECT * FROM event ORDER BY id ASC";
                     $r123 = mysqli_query($con, $q);
                     while ($ro = mysqli_fetch_array($r123)) {
                         $id = $ro['id'];
@@ -478,9 +478,6 @@ function showImage(imageSrc) {
 
 
 
-
-
-
 <section id="review" class="section review-area ptb_100" style="background-color: #1a1a2e;">
     <div class="container">
         <div class="row justify-content-center">
@@ -497,7 +494,7 @@ function showImage(imageSrc) {
             <div class="col-12">
                 <div class="owl-carousel testimonial-carousel">
                     <?php
-                    $q = "SELECT * FROM review ORDER BY id DESC LIMIT 6";
+                    $q = "SELECT * FROM review ORDER BY id ASC";
                     $r123 = mysqli_query($con, $q);
                     while ($ro = mysqli_fetch_array($r123)) {
                         $name = $ro['name'];

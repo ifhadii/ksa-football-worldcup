@@ -44,6 +44,33 @@ $username = $_SESSION["full_name"];
 
 <!-- Mirrored from themesbrand.com/velzon/html/default/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 24 Jun 2022 20:35:42 GMT -->
 <head>
+    <style>
+.btn-link {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #4CAF50; /* Green */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+}
+
+.btn-link:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-link:active {
+  background-color: #3e8e41;
+  transform: translateY(0);
+  box-shadow: none;
+}
+    </style>
     <meta charset="utf-8" />
     <title>Dashboard KSAWC</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -118,16 +145,21 @@ $username = $_SESSION["full_name"];
                             </div>
                         </div>
                         <div class="me-1 header-item d-none d-sm-flex">
-                            <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
+                            <!-- <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
                                 data-toggle="fullscreen">
                                 <i class='bx bx-fullscreen fs-22'></i>
-                            </button>
+                            </button> -->
+                                <a href="http://localhost/Project/for/index.php" class="btn ml-lg-auto btn-primary text-white">
+                                <strong>
+                                    صفحة الموقع الرئيسية
+                                </strong>    
+                                </a>
                         </div>
                         <div class="me-1 header-item d-none d-sm-flex">
-                            <button type="button"
+                            <!-- <button type="button"
                                 class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle light-dark-mode">
                                 <i class='bx bx-moon fs-22'></i>
-                            </button>
+                            </button> -->
                         </div>
                         <div class="dropdown me-sm-3 header-item topbar-user">
                             <button type="button" class="btn" id="page-header-user-dropdown" data-bs-toggle="dropdown"

@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $check = getimagesize($_FILES["ufile"]["tmp_name"]);
     if ($check !== false) {
         if (move_uploaded_file($_FILES["ufile"]["tmp_name"], $target_path)) {
-            $query = "INSERT INTO testimony (name, position, message, ufile) 
+            $query = "INSERT INTO review (name, position, message, ufile) 
                       VALUES ('$name', '$position', '$message', '$new_filename')";
             
             if (mysqli_query($con, $query)) {
