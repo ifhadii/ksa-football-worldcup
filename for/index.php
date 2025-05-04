@@ -1,17 +1,17 @@
 <?php
-// Enable error reporting for debugging
+// تمكين الإبلاغ عن الأخطاء لأغراض التصحيح
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Start session at the very beginning
+// بدء الجلسة في البداية
 session_start();
 
-// Include database connection
+// تضمين اتصال قاعدة البيانات
 include "z_db.php";
 
 $msg = "";
 
-// Process form submissions
+// معالجة إرسال النموذج
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $action = $_POST['action'] ?? '';
     
@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['email'] = $user['email'];
             $_SESSION['role'] = $user['role'];
             
-            // Redirect to home page
+            // إعادة التوجيه إلى الصفحة الرئيسية
             header("Location: index.php");
             exit();
         } else {
@@ -44,32 +44,46 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $password = $_POST['password'];
         $confirm_password = $_POST['confirm_password'];
         
-        if ($password !== $confirm_password) {
-            $msg = "❌ كلمة المرور وتأكيدها غير متطابقتين.";
+        // التحقق من كلمة المرور
+        if (strlen($password) < 8) {
+            $msg = "❌ كلمة المرور يجب أن تتكون من 8 أحرف أو أرقام على الأقل";
+        } elseif ($password !== $confirm_password) {
+            $msg = "❌ كلمة المرور وتأكيدها غير متطابقتين";
         } else {
-            $hash = password_hash($password, PASSWORD_DEFAULT);
-            $stmt = $con->prepare("INSERT INTO users (full_name, email, password) VALUES (?, ?, ?)");
-            $stmt->bind_param("sss", $full_name, $email, $hash);
+            // التحقق مما إذا كان البريد الإلكتروني مسجل بالفعل
+            $stmt = $con->prepare("SELECT email FROM users WHERE email = ?");
+            $stmt->bind_param("s", $email);
+            $stmt->execute();
+            $stmt->store_result();
             
-            if ($stmt->execute()) {
-                $new_user_id = $stmt->insert_id;
-                $_SESSION['user_id'] = $new_user_id;
-                $_SESSION['full_name'] = $full_name;
-                $_SESSION['email'] = $email;
-                $_SESSION['role'] = 'user';
-                
-                header("Location: index.php");
-                exit();
+            if ($stmt->num_rows > 0) {
+                $msg = "❌ هذا البريد الإلكتروني مسجل بالفعل";
             } else {
-                $msg = "❌ حدث خطأ أثناء إنشاء الحساب: " . $con->error;
+                $hash = password_hash($password, PASSWORD_DEFAULT);
+                $stmt = $con->prepare("INSERT INTO users (full_name, email, password) VALUES (?, ?, ?)");
+                $stmt->bind_param("sss", $full_name, $email, $hash);
+                
+                if ($stmt->execute()) {
+                    $new_user_id = $stmt->insert_id;
+                    $_SESSION['user_id'] = $new_user_id;
+                    $_SESSION['full_name'] = $full_name;
+                    $_SESSION['email'] = $email;
+                    $_SESSION['role'] = 'user';
+                    
+                    header("Location: index.php");
+                    exit();
+                } else {
+                    $msg = "❌ حدث خطأ أثناء إنشاء الحساب: " . $con->error;
+                }
             }
         }
     }
 }
 
-// Include header after all processing
+// تضمين الهيدر بعد كل المعالجة
 include "header.php";
 ?>
+
 <div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content" style="direction: rtl;">
@@ -216,7 +230,7 @@ include "header.php";
             </div>
             
         </div>
-    </div>
+    </div>ب
     <div class="shape shape-bottom">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none" fill="#FFFFFF">
             <path class="shape-fill" d="M421.9,6.5c22.6-2.5,51.5,0.4,75.5,5.3c23.6,4.9,70.9,23.5,100.5,35.7c75.8,32.2,133.7,44.5,192.6,49.7

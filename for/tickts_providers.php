@@ -1,5 +1,4 @@
 
-<?php include "header.php";?>
 <?php
 // worldcup2034_ticket_providers.php - مواقع بيع تذاكر كأس العالم 2034
 
@@ -184,7 +183,7 @@ $other_sites = array(
     <div class="container">
         <div class="worldcup-banner">
             <h3>كأس العالم FIFA 2034 - السعودية</h3>
-            <p>احجز تذكرتك الآن لأكبر حدث كروي في العالم</p>
+            <p class="text-white">احجز تذكرتك الآن لأكبر حدث كروي في العالم</p>
         </div>
 
         <div class="row">
